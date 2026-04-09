@@ -77,6 +77,7 @@
       position: sticky;
       top: 14px;
       z-index: 20;
+      overflow: hidden;
     }
 
     .brand {
@@ -100,6 +101,7 @@
       gap: 8px;
       flex-wrap: wrap;
       justify-content: flex-end;
+      min-width: 0;
     }
 
     .nav button {
@@ -108,6 +110,7 @@
       background: transparent;
       color: var(--muted);
       transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
     }
 
     .nav button.active,
@@ -1183,17 +1186,35 @@
     @media (max-width: 720px) {
       .app-shell {
         padding-inline: 14px;
+        padding-bottom: 48px;
       }
 
       .topbar {
-        border-radius: 24px;
-        padding: 16px;
-        align-items: flex-start;
+        border-radius: 26px;
+        padding: 14px;
+        align-items: stretch;
+        gap: 12px;
+        top: 10px;
       }
 
       .nav {
         width: 100%;
         justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav button {
+        flex: 0 0 auto;
+        padding: 11px 14px;
       }
 
       .hero-card,
@@ -1206,8 +1227,137 @@
         border-radius: 22px;
       }
 
+      .panel-header,
+      .study-top,
+      .result-head,
+      .summary-item,
+      .session-outcome-item,
+      .source-item,
+      .weak-item,
+      .word-row {
+        align-items: flex-start;
+      }
+
+      .panel-header,
+      .study-top,
+      .result-head,
+      .summary-item,
+      .session-outcome-item,
+      .word-row {
+        flex-direction: column;
+      }
+
       h1 {
         max-width: none;
+        font-size: clamp(26px, 8vw, 36px);
+      }
+
+      .hero-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-actions,
+      .toolbar,
+      .search-row,
+      .progress-filter {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions > *,
+      .toolbar > *,
+      .search-row > *,
+      .progress-filter > * {
+        width: 100%;
+      }
+
+      .search-panel input[type="search"],
+      .progress-filter input[type="search"],
+      .select,
+      .button-primary,
+      .button-secondary,
+      .button-ghost,
+      .small-button {
+        width: 100%;
+      }
+
+      .mode-row,
+      .pill-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filter-bar {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      .study-shell {
+        gap: 14px;
+      }
+
+      .study-card {
+        min-height: auto;
+      }
+
+      .study-question {
+        font-size: clamp(24px, 10vw, 36px);
+      }
+
+      .feedback,
+      .study-prompt,
+      .summary-block,
+      .doc-sidebar,
+      .doc-card {
+        padding: 16px;
+      }
+
+      .doc-layout {
+        gap: 14px;
+      }
+
+      .doc-sidebar {
+        max-height: none;
+      }
+
+      .toc-list {
+        max-height: 220px;
+      }
+
+      .doc-content {
+        font-size: 15px;
+        line-height: 1.76;
+      }
+
+      .doc-content table,
+      .doc-content thead,
+      .doc-content tbody,
+      .doc-content tr,
+      .doc-content th,
+      .doc-content td {
+        display: block;
+      }
+
+      .doc-content table {
+        border-radius: 18px;
+      }
+
+      .doc-content thead {
+        display: none;
+      }
+
+      .doc-content tr {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(19, 32, 24, 0.08);
+      }
+
+      .doc-content tr:last-child {
+        border-bottom: 0;
+      }
+
+      .doc-content td {
+        border-bottom: 0;
+        padding: 8px 12px;
       }
 
       .stats-grid,
@@ -1221,6 +1371,53 @@
 
       .cards {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .app-shell {
+        padding-inline: 12px;
+      }
+
+      .brand-title {
+        font-size: 16px;
+      }
+
+      .hero-strip,
+      .mode-row,
+      .pill-row {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-card,
+      .hero-mini,
+      .chip,
+      .summary-stat,
+      .meta-tile,
+      .feedback-pill {
+        padding-inline: 14px;
+      }
+
+      .source-item,
+      .weak-item,
+      .word-row,
+      .summary-item,
+      .session-outcome-item,
+      .result-card {
+        padding: 12px 14px;
+      }
+
+      .field {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .result-card h3 {
+        font-size: 20px;
+      }
+
+      .study-word-meta {
+        gap: 10px;
       }
     }
   </style>
