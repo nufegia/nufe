@@ -1,0 +1,3313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NUFE 语言训练台</title>
+  <style>
+    :root {
+      --bg: #f3efe6;
+      --bg-strong: #e8dfd0;
+      --panel: rgba(255, 251, 244, 0.92);
+      --panel-strong: #fffdf8;
+      --ink: #132018;
+      --muted: #617063;
+      --line: rgba(19, 32, 24, 0.1);
+      --accent: #1e7a55;
+      --accent-strong: #14563c;
+      --accent-soft: rgba(30, 122, 85, 0.14);
+      --danger: #a14a36;
+      --danger-soft: rgba(161, 74, 54, 0.12);
+      --gold: #d8a542;
+      --shadow: 0 18px 48px rgba(27, 34, 24, 0.09);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Space Grotesk", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(216, 165, 66, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(30, 122, 85, 0.2), transparent 30%),
+        linear-gradient(180deg, #fbf7f0 0%, var(--bg) 52%, #ebe2d4 100%);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app-shell {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 22px 18px 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 251, 244, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(19, 32, 24, 0.06);
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav button {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav button.active,
+    .nav button:hover {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    main {
+      margin-top: 22px;
+    }
+
+    .view {
+      display: none;
+      animation: fade-up 0.3s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-card,
+    .panel,
+    .metric-card,
+    .search-panel,
+    .study-card,
+    .summary-card,
+    .progress-card,
+    .result-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+      background: var(--panel);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      max-width: none;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 8px;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 0;
+    }
+
+    .hero-strip {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .hero-mini {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero-mini strong {
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    #portal-view .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .hero-note {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .button-primary,
+    .button-secondary,
+    .button-ghost,
+    .choice-button,
+    .small-button {
+      border-radius: 16px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+    }
+
+    .button-primary {
+      padding: 14px 18px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 12px 20px rgba(30, 122, 85, 0.22);
+    }
+
+    .button-primary:hover,
+    .button-secondary:hover,
+    .small-button:hover,
+    .choice-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink);
+      font-weight: 700;
+      border: 1px solid var(--line);
+    }
+
+    .button-ghost {
+      padding: 10px 12px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    .small-button {
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .small-button.active {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border-color: rgba(30, 122, 85, 0.25);
+    }
+
+    .button-primary:disabled,
+    .button-secondary:disabled,
+    .button-ghost:disabled,
+    .small-button:disabled,
+    .choice-button:disabled {
+      opacity: 0.58;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric-card {
+      padding: 16px 18px;
+      display: grid;
+      gap: 6px;
+      border-radius: 20px;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .metric-value {
+      font-size: clamp(24px, 3.2vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .metric-hint {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .grid-two {
+      margin-top: 18px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    }
+
+    .portal-stack {
+      margin-top: 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .portal-stack .stats-grid,
+    .portal-stack .grid-two {
+      margin-top: 0;
+    }
+
+    .source-list,
+    .chip-list,
+    .weak-list,
+    .word-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .source-item,
+    .weak-item,
+    .word-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
+    .source-item label {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .source-item input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+    }
+
+    .source-meta {
+      display: grid;
+      gap: 3px;
+    }
+
+    .source-name,
+    .word-main {
+      font-weight: 700;
+    }
+
+    .source-desc,
+    .weak-meta,
+    .word-sub,
+    .status-line,
+    .tiny {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .chip-list {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .chip {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 4px;
+    }
+
+    .chip strong {
+      font-size: 18px;
+    }
+
+    .weekly-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .search-layout,
+    .study-layout,
+    .progress-layout {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .search-panel {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .search-row,
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .mode-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search-panel input[type="search"],
+    .progress-filter input[type="search"],
+    .select {
+      flex: 1 1 240px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .filter-bar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
+    .filter-select-wrap {
+      position: relative;
+    }
+
+    .filter-select-wrap::after {
+      content: "▾";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 13px;
+    }
+
+    .filter-bar input[type="search"],
+    .filter-bar .select {
+      width: 100%;
+      min-width: 0;
+      border-radius: 14px;
+      background: rgba(255, 253, 248, 0.92);
+    }
+
+    .filter-bar .select {
+      appearance: none;
+      padding-right: 40px;
+    }
+
+    .search-panel input[type="search"]:focus,
+    .progress-filter input[type="search"]:focus,
+    .select:focus {
+      border-color: rgba(30, 122, 85, 0.4);
+      box-shadow: 0 0 0 4px rgba(30, 122, 85, 0.12);
+    }
+
+    .search-meta,
+    .study-meta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    #dictionary-view .cards {
+      grid-template-columns: 1fr;
+    }
+
+    .result-card {
+      padding: 14px 18px;
+      display: grid;
+      gap: 10px;
+      border-radius: var(--radius-lg);
+      min-height: auto;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .result-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(19, 32, 24, 0.1);
+    }
+
+    .result-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .result-head > div {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .result-card h3 {
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .result-translation {
+      min-width: 0;
+      padding-bottom: 2px;
+    }
+
+    .result-translation-text {
+      min-width: 0;
+      font-size: 16px;
+      line-height: 1.55;
+      font-weight: 600;
+      color: #213027;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .result-meta {
+      display: grid;
+      gap: 8px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
+    .word-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(19, 32, 24, 0.06);
+      color: #334237;
+      font-size: 11px;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .field {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #213027;
+    }
+
+    .field span {
+      color: var(--muted);
+      margin-right: 0;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .field > div {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      color: rgba(33, 48, 39, 0.9);
+    }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(19, 32, 24, 0.12);
+    }
+
+    .study-shell {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+      align-items: start;
+    }
+
+    .study-card {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      min-height: 540px;
+      align-content: start;
+    }
+
+    .study-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .progress-track {
+      width: min(100%, 280px);
+      height: 10px;
+      background: rgba(19, 32, 24, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), #48a171);
+      border-radius: 999px;
+      transition: width 0.26s ease;
+    }
+
+    .study-prompt {
+      display: grid;
+      gap: 10px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.58);
+      border-radius: 22px;
+      border: 1px solid rgba(19, 32, 24, 0.07);
+    }
+
+    .study-mode {
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .study-question {
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      word-break: break-word;
+    }
+
+    .choice-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .finish-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .choice-button {
+      width: 100%;
+      padding: 16px 18px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      min-height: 64px;
+      font-weight: 600;
+    }
+
+    .choice-button.correct {
+      background: rgba(30, 122, 85, 0.14);
+      border-color: rgba(30, 122, 85, 0.35);
+      color: var(--accent-strong);
+    }
+
+    .choice-button.wrong {
+      background: rgba(161, 74, 54, 0.12);
+      border-color: rgba(161, 74, 54, 0.3);
+      color: var(--danger);
+    }
+
+    .feedback {
+      min-height: 72px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      color: #243329;
+      line-height: 1.65;
+    }
+
+    .feedback.success {
+      background: rgba(30, 122, 85, 0.12);
+      border-color: rgba(30, 122, 85, 0.18);
+    }
+
+    .feedback.error {
+      background: rgba(161, 74, 54, 0.11);
+      border-color: rgba(161, 74, 54, 0.18);
+    }
+
+    .feedback-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feedback-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .feedback-pill {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 4px;
+    }
+
+    .feedback-pill strong {
+      font-size: 15px;
+    }
+
+    .study-word-meta {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .meta-tile {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 5px;
+    }
+
+    .meta-tile strong {
+      font-size: 18px;
+    }
+
+    .session-banner {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(216, 165, 66, 0.16), rgba(30, 122, 85, 0.12));
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 5px;
+    }
+
+    .session-banner strong {
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .session-outcome-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .session-outcome-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      color: #243329;
+    }
+
+    .summary-block {
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .summary-stat {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 4px;
+    }
+
+    .summary-stat strong {
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
+    .summary-card,
+    .progress-card {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .doc-layout {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(260px, 0.32fr) minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .doc-sidebar,
+    .doc-card {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .doc-sidebar {
+      position: sticky;
+      top: 92px;
+      max-height: calc(100vh - 112px);
+      overflow: hidden;
+      align-content: start;
+      grid-template-rows: auto auto minmax(0, 1fr);
+    }
+
+    .doc-card {
+      overflow: hidden;
+    }
+
+    .doc-status {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .toc-list {
+      display: grid;
+      gap: 4px;
+      min-height: 0;
+      max-height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding-right: 6px;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 2px 0;
+      color: #425348;
+      text-decoration: none;
+      line-height: 1.55;
+      transition: color 0.18s ease;
+    }
+
+    .toc-link:hover {
+      color: var(--accent-strong);
+    }
+
+    .toc-link.level-2 {
+      margin-left: 8px;
+    }
+
+    .toc-link.level-3 {
+      margin-left: 16px;
+      font-size: 13px;
+    }
+
+    .toc-link.level-4 {
+      margin-left: 24px;
+      font-size: 13px;
+    }
+
+    .toc-link.level-5 {
+      margin-left: 32px;
+      font-size: 12px;
+      color: #5a6a60;
+    }
+
+    .doc-content {
+      line-height: 1.82;
+      color: #203027;
+    }
+
+    .doc-content h1,
+    .doc-content h2,
+    .doc-content h3,
+    .doc-content h4,
+    .doc-content h5 {
+      scroll-margin-top: 90px;
+    }
+
+    .doc-content h1 {
+      margin-bottom: 18px;
+      font-size: clamp(28px, 4vw, 40px);
+    }
+
+    .doc-content h2 {
+      margin-top: 28px;
+      margin-bottom: 12px;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .doc-content h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .doc-content h4 {
+      margin-top: 18px;
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #31443a;
+    }
+
+    .doc-content h5 {
+      margin-top: 16px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #4b5d53;
+    }
+
+    .doc-content p,
+    .doc-content ul,
+    .doc-content ol,
+    .doc-content blockquote,
+    .doc-content table {
+      margin: 0 0 14px;
+    }
+
+    .doc-content ul,
+    .doc-content ol {
+      padding-left: 22px;
+    }
+
+    .doc-content li + li {
+      margin-top: 6px;
+    }
+
+    .doc-content blockquote {
+      padding: 12px 14px;
+      border-left: 4px solid rgba(30, 122, 85, 0.28);
+      background: rgba(30, 122, 85, 0.08);
+      border-radius: 0 16px 16px 0;
+      color: #2b3f33;
+    }
+
+    .doc-content code {
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: rgba(19, 32, 24, 0.08);
+      font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
+      font-size: 0.95em;
+    }
+
+    .doc-content strong {
+      font-weight: 700;
+    }
+
+    .doc-content table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
+    .doc-content th,
+    .doc-content td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(19, 32, 24, 0.08);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .doc-content th {
+      background: rgba(19, 32, 24, 0.05);
+      font-size: 13px;
+    }
+
+    .doc-content tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .doc-empty {
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px dashed rgba(19, 32, 24, 0.12);
+      color: var(--muted);
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(216, 165, 66, 0.16);
+      color: #7f5a12;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .summary-metrics {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .summary-metrics .chip {
+      min-height: 96px;
+    }
+
+    .progress-filter {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .study-shell,
+      .doc-layout,
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #dictionary-view .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .result-head > div {
+        align-items: flex-start;
+      }
+
+      .doc-sidebar {
+        position: static;
+      }
+
+      .hero-strip,
+      .filter-bar,
+      .weekly-grid,
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .app-shell {
+        padding-inline: 14px;
+      }
+
+      .topbar {
+        border-radius: 24px;
+        padding: 16px;
+        align-items: flex-start;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero-card,
+      .panel,
+      .search-panel,
+      .study-card,
+      .summary-card,
+      .progress-card {
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .stats-grid,
+      .weekly-grid,
+      .summary-metrics,
+      .summary-grid,
+      .feedback-grid,
+      .study-word-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-title">NUFE 语言训练台</div>
+      </div>
+      <nav class="nav" aria-label="主导航">
+        <button class="active" data-view-target="portal">主页</button>
+        <button data-view-target="dictionary">词典</button>
+        <button data-view-target="grammar">语法</button>
+        <button data-view-target="study">背词</button>
+        <button data-view-target="progress">进度</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="portal-view" class="view active" aria-labelledby="portal-title">
+        <div class="hero">
+            <section class="hero-card">
+              <div class="panel-header">
+                <div>
+                  <h1 id="portal-title">开始今天的训练</h1>
+                </div>
+                <div id="today-badge" class="score-badge">加载中</div>
+              </div>
+              <div class="hero-strip">
+                <div class="hero-mini">
+                  <span class="tiny">新词</span>
+                  <strong id="stat-new-count">0</strong>
+                </div>
+                <div class="hero-mini">
+                  <span class="tiny">待复习</span>
+                  <strong id="stat-due-count">0</strong>
+                </div>
+                <div class="hero-mini">
+                  <span class="tiny">学习中</span>
+                  <strong id="stat-learning-count">0</strong>
+                </div>
+                <div class="hero-mini">
+                  <span class="tiny">已掌握</span>
+                  <strong id="stat-mastered-count">0</strong>
+                </div>
+                <div class="hero-mini">
+                  <span class="tiny">危险遗忘</span>
+                  <strong id="stat-danger-count">0</strong>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <button id="start-study-primary" class="button-primary">开始今日训练</button>
+                <button id="go-dictionary-primary" class="button-secondary">进入词典</button>
+              </div>
+            </section>
+        </div>
+
+        <div class="portal-stack">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">最近 7 天</div>
+              </div>
+            </div>
+            <div class="weekly-grid">
+              <div class="chip">
+                <span class="tiny">作答题数</span>
+                <strong id="weekly-answers-count">0</strong>
+              </div>
+              <div class="chip">
+                <span class="tiny">正确率</span>
+                <strong id="weekly-accuracy">0%</strong>
+              </div>
+              <div class="chip">
+                <span class="tiny">练习词数</span>
+                <strong id="weekly-words-count">0</strong>
+              </div>
+              <div class="chip">
+                <span class="tiny">新增掌握</span>
+                <strong id="weekly-mastered-count">0</strong>
+              </div>
+            </div>
+          </section>
+
+          <div class="grid-two">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">词库配置</div>
+              </div>
+              <button id="clear-progress-button" class="button-ghost" type="button">清空学习情况</button>
+            </div>
+            <div id="source-list" class="source-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">最近薄弱词</div>
+              </div>
+            </div>
+            <div id="weak-list" class="weak-list"></div>
+          </section>
+        </div>
+        </div>
+      </section>
+
+      <section id="dictionary-view" class="view" aria-labelledby="dictionary-title">
+        <div class="search-layout">
+          <section class="search-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title" id="dictionary-title">NUFE 词典</div>
+              </div>
+            </div>
+            <div class="search-row">
+              <input id="search" type="search" placeholder="输入 nufe 词 / 中文 / 翻译 / 例句…" autocomplete="off" />
+            </div>
+            <div class="toolbar">
+              <button id="search-random-button" class="button-secondary">随机看看</button>
+            </div>
+            <div class="search-meta">
+              <div id="status">正在加载词库…</div>
+              <div id="count"></div>
+            </div>
+          </section>
+
+          <section id="results" class="cards" aria-live="polite"></section>
+          <div id="empty" class="empty hidden">暂无匹配结果。</div>
+        </div>
+      </section>
+
+      <section id="grammar-view" class="view" aria-labelledby="grammar-title">
+        <div class="doc-layout">
+          <aside class="summary-card doc-sidebar">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">文档导航</div>
+              </div>
+            </div>
+            <div id="grammar-status" class="doc-status">正在加载语法文档…</div>
+            <div id="grammar-toc" class="toc-list"></div>
+          </aside>
+
+          <section class="summary-card doc-card">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title" id="grammar-title">Nufe 语法</div>
+              </div>
+            </div>
+            <article id="grammar-content" class="doc-content" aria-live="polite">
+              <div class="doc-empty">正在加载语法文档…</div>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section id="study-view" class="view" aria-labelledby="study-title">
+        <div class="study-layout">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title" id="study-title">背词训练</div>
+              </div>
+            </div>
+            <div class="toolbar">
+              <button id="study-start-button" class="button-primary">开始本轮训练</button>
+              <button id="study-end-button" class="button-secondary" disabled>结束本轮</button>
+              <button id="study-refresh-button" class="button-ghost">刷新今日任务</button>
+            </div>
+            <div class="mode-row">
+              <button class="small-button active" data-study-mode="today">今日任务</button>
+              <button class="small-button" data-study-mode="wrong">错词重练</button>
+              <button class="small-button" data-study-mode="danger">高风险词</button>
+            </div>
+            <div class="study-meta">
+              <div id="study-headline">今天还没有开始训练。</div>
+              <div id="study-subline"></div>
+            </div>
+          </div>
+
+          <div class="study-shell">
+            <article class="study-card" id="study-main-card">
+              <div class="study-top">
+                <div>
+                  <div class="metric-label">本轮进度</div>
+                  <div class="tiny" id="study-progress-text">未开始</div>
+                </div>
+                <div class="progress-track">
+                  <div id="study-progress-fill" class="progress-fill"></div>
+                </div>
+              </div>
+
+              <div class="study-word-meta">
+                <div class="meta-tile">
+                  <span class="tiny">当前词状态</span>
+                  <strong id="study-word-stage">待开始</strong>
+                  <span class="tiny" id="study-word-stage-note"></span>
+                </div>
+                <div class="meta-tile">
+                  <span class="tiny">当前熟练度</span>
+                  <strong id="study-word-mastery">0</strong>
+                  <span class="tiny" id="study-word-mastery-note"></span>
+                </div>
+                <div class="meta-tile">
+                  <span class="tiny">下次复习</span>
+                  <strong id="study-word-next-review">未安排</strong>
+                  <span class="tiny" id="study-word-next-note"></span>
+                </div>
+              </div>
+
+              <div class="study-prompt">
+                <div class="study-mode" id="study-mode-label">准备开始</div>
+                <div class="study-question" id="study-question">开始训练</div>
+              </div>
+
+              <div id="choice-list" class="choice-list"></div>
+
+              <div id="study-feedback" class="feedback">
+                <div class="feedback-title">准备开始</div>
+                <div>点击开始。</div>
+                <div class="feedback-grid">
+                  <div class="feedback-pill">
+                    <span class="tiny">待复习</span>
+                    <strong id="feedback-due-count">0</strong>
+                  </div>
+                  <div class="feedback-pill">
+                    <span class="tiny">正确率</span>
+                    <strong id="feedback-accuracy">0%</strong>
+                  </div>
+                  <div class="feedback-pill">
+                    <span class="tiny">连击</span>
+                    <strong id="feedback-streak">0</strong>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <aside class="summary-card">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">本轮状态</div>
+                </div>
+              </div>
+              <div class="summary-metrics">
+                <div class="chip">
+                  <span class="tiny">连击</span>
+                  <strong id="session-streak">0</strong>
+                </div>
+                <div class="chip">
+                  <span class="tiny">正确率</span>
+                  <strong id="session-accuracy">0%</strong>
+                </div>
+                <div class="chip">
+                  <span class="tiny">已完成</span>
+                  <strong id="session-complete">0</strong>
+                </div>
+                <div class="chip">
+                  <span class="tiny">待回流</span>
+                  <strong id="session-repeats">0</strong>
+                </div>
+              </div>
+              <div class="chip">
+                <span class="tiny">提示</span>
+                <strong id="session-tip">开始训练</strong>
+              </div>
+              <div class="session-banner">
+                <span class="tiny">状态</span>
+                <strong id="session-rhythm">稳定推进中</strong>
+                <span class="tiny" id="session-rhythm-note"></span>
+              </div>
+              <div>
+                <div class="tiny" style="margin-bottom:8px;">最近作答</div>
+                <div id="session-outcome-list" class="session-outcome-list">
+                  <div class="session-outcome-item">
+                    <span>暂无记录</span>
+                  </div>
+                </div>
+              </div>
+              <div id="session-summary-box" class="feedback hidden"></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="progress-view" class="view" aria-labelledby="progress-title">
+        <div class="progress-layout">
+          <section class="progress-card">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title" id="progress-title">词库与学习进度</div>
+              </div>
+            </div>
+            <div class="progress-filter">
+              <div class="filter-bar">
+                <input id="progress-search" type="search" placeholder="搜索词或中文…" autocomplete="off" />
+                <div class="filter-select-wrap">
+                  <select id="progress-state-filter" class="select">
+                    <option value="all">全部状态</option>
+                    <option value="new">新词</option>
+                    <option value="learning">学习中</option>
+                    <option value="review">待复习</option>
+                    <option value="mastered">已掌握</option>
+                    <option value="danger">危险遗忘</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="pill-row">
+              <button class="small-button active" data-progress-source="enabled">当前启用词库</button>
+              <button class="small-button" data-progress-source="all">全部词库</button>
+            </div>
+            <div id="word-list" class="word-list"></div>
+            <div id="word-empty" class="empty hidden">当前筛选条件下没有词条。</div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    const GRAMMAR_DOC_PATH = "nufe 语法/nufe 语法.md";
+    const SOURCE_FILES = [
+      { path: "nufe 词库/主要词库.csv", source: "主要词库", description: "核心词汇", enabledByDefault: true },
+      { path: "nufe 词库/特殊词库.csv", source: "特殊词库", description: "专名与扩展词", enabledByDefault: false },
+      { path: "nufe 词库/数词库.csv", source: "数词库", description: "数制相关词", enabledByDefault: false }
+    ];
+    const DEFAULT_ENABLED_SOURCES = SOURCE_FILES.filter(file => file.enabledByDefault).map(file => file.source);
+    const COLUMN_ALIASES = {
+      word: ["词", "单词", "词语", "数元"],
+      className: ["类", "词类", "类别"],
+      translation: ["翻译", "释义", "中文", "含义"],
+      description: ["描述", "说明", "注释"],
+      example: ["例句", "示例", "例子"],
+      note: ["补充", "备注", "附注", "说明"]
+    };
+
+    const VIEW_IDS = ["portal", "dictionary", "grammar", "study", "progress"];
+    const QUESTION_MODES = ["zh-to-word", "word-to-zh"];
+    const REVIEW_INTERVALS_MS = [
+      8 * 60 * 1000,
+      12 * 60 * 60 * 1000,
+      1 * 24 * 60 * 60 * 1000,
+      3 * 24 * 60 * 60 * 1000,
+      7 * 24 * 60 * 60 * 1000,
+      14 * 24 * 60 * 60 * 1000,
+      30 * 24 * 60 * 60 * 1000
+    ];
+
+    const DB_NAME = "nufe-vocab-trainer";
+    const DB_VERSION = 1;
+    const PROGRESS_STORE = "progress";
+    const SETTINGS_STORE = "settings";
+    const SETTINGS_KEY = "user-settings";
+
+    const state = {
+      items: [],
+      filteredDictionaryItems: [],
+      progressMap: new Map(),
+      settings: {
+        enabledSources: DEFAULT_ENABLED_SOURCES.slice(),
+        dailyNewLimit: 10,
+        dailyReviewLimit: 20,
+        questionModes: QUESTION_MODES.slice()
+      },
+      studyMode: "today",
+      currentView: "portal",
+      progressSourceMode: "enabled",
+      session: null,
+      ready: false
+    };
+
+    const dom = {
+      navButtons: [...document.querySelectorAll("[data-view-target]")],
+      views: Object.fromEntries(VIEW_IDS.map(view => [view, document.getElementById(`${view}-view`)])),
+      sourceList: document.getElementById("source-list"),
+      weakList: document.getElementById("weak-list"),
+      weeklyAnswersCount: document.getElementById("weekly-answers-count"),
+      weeklyAccuracy: document.getElementById("weekly-accuracy"),
+      weeklyWordsCount: document.getElementById("weekly-words-count"),
+      weeklyMasteredCount: document.getElementById("weekly-mastered-count"),
+      statNewCount: document.getElementById("stat-new-count"),
+      statDueCount: document.getElementById("stat-due-count"),
+      statLearningCount: document.getElementById("stat-learning-count"),
+      statMasteredCount: document.getElementById("stat-mastered-count"),
+      statDangerCount: document.getElementById("stat-danger-count"),
+      todayBadge: document.getElementById("today-badge"),
+      search: document.getElementById("search"),
+      searchRandomButton: document.getElementById("search-random-button"),
+      results: document.getElementById("results"),
+      status: document.getElementById("status"),
+      count: document.getElementById("count"),
+      empty: document.getElementById("empty"),
+      clearProgressButton: document.getElementById("clear-progress-button"),
+      startStudyPrimary: document.getElementById("start-study-primary"),
+      goDictionaryPrimary: document.getElementById("go-dictionary-primary"),
+      studyStartButton: document.getElementById("study-start-button"),
+      studyEndButton: document.getElementById("study-end-button"),
+      studyRefreshButton: document.getElementById("study-refresh-button"),
+      studyModeButtons: [...document.querySelectorAll("[data-study-mode]")],
+      studyHeadline: document.getElementById("study-headline"),
+      studySubline: document.getElementById("study-subline"),
+      studyModeLabel: document.getElementById("study-mode-label"),
+      studyQuestion: document.getElementById("study-question"),
+      studyWordStage: document.getElementById("study-word-stage"),
+      studyWordStageNote: document.getElementById("study-word-stage-note"),
+      studyWordMastery: document.getElementById("study-word-mastery"),
+      studyWordMasteryNote: document.getElementById("study-word-mastery-note"),
+      studyWordNextReview: document.getElementById("study-word-next-review"),
+      studyWordNextNote: document.getElementById("study-word-next-note"),
+      feedbackDueCount: document.getElementById("feedback-due-count"),
+      feedbackAccuracy: document.getElementById("feedback-accuracy"),
+      feedbackStreak: document.getElementById("feedback-streak"),
+      choiceList: document.getElementById("choice-list"),
+      studyFeedback: document.getElementById("study-feedback"),
+      studyProgressText: document.getElementById("study-progress-text"),
+      studyProgressFill: document.getElementById("study-progress-fill"),
+      sessionStreak: document.getElementById("session-streak"),
+      sessionAccuracy: document.getElementById("session-accuracy"),
+      sessionComplete: document.getElementById("session-complete"),
+      sessionRepeats: document.getElementById("session-repeats"),
+      sessionTip: document.getElementById("session-tip"),
+      sessionRhythm: document.getElementById("session-rhythm"),
+      sessionRhythmNote: document.getElementById("session-rhythm-note"),
+      sessionOutcomeList: document.getElementById("session-outcome-list"),
+      sessionSummaryBox: document.getElementById("session-summary-box"),
+      grammarStatus: document.getElementById("grammar-status"),
+      grammarToc: document.getElementById("grammar-toc"),
+      grammarContent: document.getElementById("grammar-content"),
+      progressSearch: document.getElementById("progress-search"),
+      progressStateFilter: document.getElementById("progress-state-filter"),
+      progressSourceButtons: [...document.querySelectorAll("[data-progress-source]")],
+      wordList: document.getElementById("word-list"),
+      wordEmpty: document.getElementById("word-empty")
+    };
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+      let i = 0;
+      text = text.replace(/^\uFEFF/, "");
+
+      while (i < text.length) {
+        const ch = text[i];
+        if (inQuotes) {
+          if (ch === '"') {
+            if (text[i + 1] === '"') {
+              field += '"';
+              i++;
+            } else {
+              inQuotes = false;
+            }
+          } else {
+            field += ch;
+          }
+        } else {
+          if (ch === '"') {
+            inQuotes = true;
+          } else if (ch === ",") {
+            row.push(field);
+            field = "";
+          } else if (ch === "\n") {
+            row.push(field);
+            rows.push(row);
+            row = [];
+            field = "";
+          } else if (ch !== "\r") {
+            field += ch;
+          }
+        }
+        i++;
+      }
+      if (field.length > 0 || row.length > 0) {
+        row.push(field);
+        rows.push(row);
+      }
+      return rows;
+    }
+
+    function makeWordId(source, word, translation) {
+      return [source.trim(), word.trim(), translation.trim()].join("::");
+    }
+
+    function resolveColumnIndex(headers, aliases) {
+      for (const alias of aliases) {
+        if (headers[alias] != null) return headers[alias];
+      }
+      return -1;
+    }
+
+    function readCell(row, index) {
+      if (index < 0) return "";
+      return (row[index] || "").trim();
+    }
+
+    async function loadAllWords() {
+      const items = [];
+      for (const file of SOURCE_FILES) {
+        const requestUrl = `${encodeURI(file.path)}?t=${Date.now()}`;
+        const res = await fetch(requestUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error(`加载失败: ${file.path}`);
+        const text = await res.text();
+        const rows = parseCSV(text);
+        const headers = rows.shift() || [];
+        const index = Object.fromEntries(headers.map((header, i) => [header.trim(), i]));
+        const columnIndex = {
+          word: resolveColumnIndex(index, COLUMN_ALIASES.word),
+          className: resolveColumnIndex(index, COLUMN_ALIASES.className),
+          translation: resolveColumnIndex(index, COLUMN_ALIASES.translation),
+          description: resolveColumnIndex(index, COLUMN_ALIASES.description),
+          example: resolveColumnIndex(index, COLUMN_ALIASES.example),
+          note: resolveColumnIndex(index, COLUMN_ALIASES.note)
+        };
+
+        for (const row of rows) {
+          if (!row.length) continue;
+          const word = readCell(row, columnIndex.word);
+          const translation = readCell(row, columnIndex.translation);
+          const item = {
+            id: makeWordId(file.source, word, translation),
+            word,
+            class: readCell(row, columnIndex.className),
+            translation,
+            description: readCell(row, columnIndex.description),
+            example: readCell(row, columnIndex.example),
+            note: readCell(row, columnIndex.note),
+            source: file.source
+          };
+          if (item.word) items.push(item);
+        }
+      }
+      return items;
+    }
+
+    function tokenize(query) {
+      return query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    }
+
+    function scoreText(text, token) {
+      if (!text) return 0;
+      const candidate = text.toLowerCase();
+      if (candidate === token) return 80;
+      if (candidate.startsWith(token)) return 56;
+      if (candidate.includes(token)) return 28;
+      return 0;
+    }
+
+    function scoreItem(item, tokens) {
+      if (!tokens.length) return 0;
+      let total = 0;
+      for (const token of tokens) {
+        const wordScore = scoreText(item.word, token);
+        const translationScore = scoreText(item.translation, token);
+      const descriptionScore = scoreText(item.description, token) * 0.6;
+      const noteScore = scoreText(item.note, token) * 0.45;
+      const exampleScore = scoreText(item.example, token) * 0.5;
+      const classScore = scoreText(item.class, token) * 0.7;
+      const best = Math.max(wordScore > 0 ? wordScore + 44 : 0, translationScore, descriptionScore, noteScore, exampleScore, classScore);
+        if (best === 0) return 0;
+        total += best;
+      }
+      return total;
+    }
+
+    function sample(list, size) {
+      const copy = list.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy.slice(0, Math.min(size, copy.length));
+    }
+
+    function escapeHtml(text) {
+      return String(text ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function slugify(text) {
+      return String(text || "")
+        .toLowerCase()
+        .trim()
+        .replace(/<[^>]+>/g, "")
+        .replace(/[^\p{L}\p{N}\s-]/gu, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "") || "section";
+    }
+
+    function renderInlineMarkdown(text) {
+      let html = escapeHtml(text || "");
+      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+      html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+      return html;
+    }
+
+    function parseTableRow(line) {
+      return line
+        .trim()
+        .replace(/^\|/, "")
+        .replace(/\|$/, "")
+        .split("|")
+        .map(cell => cell.trim());
+    }
+
+    function isTableSeparator(line) {
+      return /^\s*\|?[\s:-]+(?:\|[\s:-]+)+\|?\s*$/.test(line);
+    }
+
+    function collectMarkdownHeadings(markdown) {
+      const slugCount = new Map();
+      const headings = [];
+      for (const rawLine of markdown.split(/\r?\n/)) {
+        const match = rawLine.match(/^(#{1,5})\s+(.+)$/);
+        if (!match) continue;
+        const level = match[1].length;
+        const text = match[2].trim();
+        const base = slugify(text);
+        const count = slugCount.get(base) || 0;
+        slugCount.set(base, count + 1);
+        headings.push({
+          level,
+          text,
+          id: count ? `${base}-${count + 1}` : base
+        });
+      }
+      return headings;
+    }
+
+    function renderToc(headings) {
+      if (!headings.length) {
+        return '<div class="doc-empty">文档里没有可导航的标题。</div>';
+      }
+      return headings.map(heading => `
+        <a class="toc-link level-${heading.level}" href="#${escapeHtml(heading.id)}">${escapeHtml(heading.text)}</a>
+      `).join("");
+    }
+
+    function bindGrammarTocScrollLock() {
+      if (!dom.grammarToc) return;
+      dom.grammarToc.addEventListener("wheel", event => {
+        const el = event.currentTarget;
+        const delta = event.deltaY;
+        const canScroll = el.scrollHeight > el.clientHeight;
+        if (!canScroll) return;
+
+        const atTop = el.scrollTop <= 0;
+        const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+        const goingUp = delta < 0;
+        const goingDown = delta > 0;
+
+        if ((goingUp && !atTop) || (goingDown && !atBottom)) {
+          event.preventDefault();
+          event.stopPropagation();
+          el.scrollTop += delta;
+        }
+      }, { passive: false });
+    }
+
+    function renderMarkdown(markdown) {
+      const headings = collectMarkdownHeadings(markdown);
+      const headingLookup = headings.slice();
+      const lines = markdown.replace(/\r/g, "").split("\n");
+      const html = [];
+      let paragraph = [];
+      let listType = null;
+      let tableBuffer = [];
+
+      function flushParagraph() {
+        if (!paragraph.length) return;
+        html.push(`<p>${paragraph.map(line => renderInlineMarkdown(line)).join("<br />")}</p>`);
+        paragraph = [];
+      }
+
+      function flushList() {
+        if (!listType) return;
+        html.push(`</${listType}>`);
+        listType = null;
+      }
+
+      function flushTable() {
+        if (!tableBuffer.length) return;
+        const rows = tableBuffer.slice();
+        tableBuffer = [];
+        if (rows.length >= 2 && isTableSeparator(rows[1])) {
+          const headerCells = parseTableRow(rows[0]);
+          const bodyRows = rows.slice(2);
+          html.push("<table><thead><tr>");
+          headerCells.forEach(cell => html.push(`<th>${renderInlineMarkdown(cell)}</th>`));
+          html.push("</tr></thead><tbody>");
+          bodyRows.forEach(row => {
+            const cells = parseTableRow(row);
+            html.push("<tr>");
+            cells.forEach(cell => html.push(`<td>${renderInlineMarkdown(cell)}</td>`));
+            html.push("</tr>");
+          });
+          html.push("</tbody></table>");
+        } else {
+          rows.forEach(row => paragraph.push(row));
+        }
+      }
+
+      for (const rawLine of lines) {
+        const line = rawLine.trimEnd();
+        const trimmed = line.trim();
+
+        if (trimmed.startsWith("|")) {
+          flushParagraph();
+          flushList();
+          tableBuffer.push(trimmed);
+          continue;
+        }
+
+        flushTable();
+
+        if (!trimmed) {
+          flushParagraph();
+          flushList();
+          continue;
+        }
+
+        if (trimmed === "[TOC]") {
+          flushParagraph();
+          flushList();
+          html.push(`<div class="summary-block">${renderToc(headings)}</div>`);
+          continue;
+        }
+
+        const headingMatch = trimmed.match(/^(#{1,5})\s+(.+)$/);
+        if (headingMatch) {
+          flushParagraph();
+          flushList();
+          const heading = headingLookup.shift();
+          const level = headingMatch[1].length;
+          html.push(`<h${level} id="${escapeHtml(heading ? heading.id : slugify(headingMatch[2]))}">${renderInlineMarkdown(headingMatch[2].trim())}</h${level}>`);
+          continue;
+        }
+
+        const quoteMatch = trimmed.match(/^>\s?(.*)$/);
+        if (quoteMatch) {
+          flushParagraph();
+          flushList();
+          html.push(`<blockquote>${renderInlineMarkdown(quoteMatch[1])}</blockquote>`);
+          continue;
+        }
+
+        const orderedMatch = trimmed.match(/^\d+\.\s+(.+)$/);
+        if (orderedMatch) {
+          flushParagraph();
+          if (listType !== "ol") {
+            flushList();
+            listType = "ol";
+            html.push("<ol>");
+          }
+          html.push(`<li>${renderInlineMarkdown(orderedMatch[1])}</li>`);
+          continue;
+        }
+
+        const unorderedMatch = trimmed.match(/^-\s+(.+)$/);
+        if (unorderedMatch) {
+          flushParagraph();
+          if (listType !== "ul") {
+            flushList();
+            listType = "ul";
+            html.push("<ul>");
+          }
+          html.push(`<li>${renderInlineMarkdown(unorderedMatch[1])}</li>`);
+          continue;
+        }
+
+        paragraph.push(trimmed);
+      }
+
+      flushTable();
+      flushParagraph();
+      flushList();
+
+      return {
+        headings,
+        html: html.join("")
+      };
+    }
+
+    async function loadGrammarDocument() {
+      const requestUrl = `${encodeURI(GRAMMAR_DOC_PATH)}?t=${Date.now()}`;
+      const res = await fetch(requestUrl, { cache: "no-store" });
+      if (!res.ok) throw new Error(`加载失败: ${GRAMMAR_DOC_PATH}`);
+      const markdown = await res.text();
+      const rendered = renderMarkdown(markdown.replace(/^\uFEFF/, ""));
+      dom.grammarStatus.textContent = `已加载：${GRAMMAR_DOC_PATH}`;
+      dom.grammarToc.innerHTML = renderToc(rendered.headings);
+      dom.grammarContent.innerHTML = rendered.html || '<div class="doc-empty">文档没有可显示的内容。</div>';
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function getDefaultProgress(itemId) {
+      return {
+        wordId: itemId,
+        state: "new",
+        mastery: 0,
+        stability: 0,
+        difficulty: 5,
+        reviewLevel: 0,
+        correctCount: 0,
+        wrongCount: 0,
+        streak: 0,
+        seenCount: 0,
+        lastReviewedAt: null,
+        nextReviewAt: null,
+        lastOutcome: null,
+        lastResponseMs: null,
+        avgResponseMs: null,
+        history: []
+      };
+    }
+
+    function getProgress(itemId) {
+      return state.progressMap.get(itemId) || getDefaultProgress(itemId);
+    }
+
+    function openDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        request.onupgradeneeded = event => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains(PROGRESS_STORE)) {
+            db.createObjectStore(PROGRESS_STORE, { keyPath: "wordId" });
+          }
+          if (!db.objectStoreNames.contains(SETTINGS_STORE)) {
+            db.createObjectStore(SETTINGS_STORE, { keyPath: "key" });
+          }
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async function withStore(storeName, mode, handler) {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, mode);
+        const store = tx.objectStore(storeName);
+        const result = handler(store, tx);
+        tx.oncomplete = () => {
+          db.close();
+          resolve(result);
+        };
+        tx.onerror = () => {
+          db.close();
+          reject(tx.error);
+        };
+        tx.onabort = () => {
+          db.close();
+          reject(tx.error);
+        };
+      });
+    }
+
+    async function loadSettings() {
+      return withStore(SETTINGS_STORE, "readonly", store => {
+        return new Promise(resolve => {
+          const request = store.get(SETTINGS_KEY);
+          request.onsuccess = () => resolve(request.result ? request.result.value : null);
+          request.onerror = () => resolve(null);
+        });
+      });
+    }
+
+    async function saveSettings() {
+      const payload = { key: SETTINGS_KEY, value: state.settings };
+      await withStore(SETTINGS_STORE, "readwrite", store => {
+        store.put(payload);
+      });
+    }
+
+    async function loadProgressMap() {
+      const records = await withStore(PROGRESS_STORE, "readonly", store => {
+        return new Promise(resolve => {
+          const request = store.getAll();
+          request.onsuccess = () => resolve(request.result || []);
+          request.onerror = () => resolve([]);
+        });
+      });
+      state.progressMap = new Map(records.map(record => [record.wordId, record]));
+    }
+
+    async function saveProgress(progress) {
+      state.progressMap.set(progress.wordId, progress);
+      await withStore(PROGRESS_STORE, "readwrite", store => {
+        store.put(progress);
+      });
+    }
+
+    async function clearAllProgress() {
+      await withStore(PROGRESS_STORE, "readwrite", store => {
+        store.clear();
+      });
+      state.progressMap = new Map();
+      state.session = null;
+    }
+
+    function toDateTime(timestamp) {
+      if (!timestamp) return "未安排";
+      return new Date(timestamp).toLocaleString("zh-CN", {
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function getEnabledSources() {
+      const validSources = state.settings.enabledSources.filter(source => SOURCE_FILES.some(file => file.source === source));
+      return validSources.length ? validSources : DEFAULT_ENABLED_SOURCES.slice();
+    }
+
+    function getEnabledItems() {
+      const enabled = new Set(getEnabledSources());
+      return state.items.filter(item => enabled.has(item.source));
+    }
+
+    function getProgressState(progress) {
+      if (progress.mastery >= 85 && progress.reviewLevel >= 4) return "mastered";
+      if (progress.nextReviewAt && progress.nextReviewAt <= Date.now()) return "review";
+      if (progress.correctCount > 0 || progress.wrongCount > 0) return "learning";
+      return "new";
+    }
+
+    function isDangerWord(progress) {
+      return progress.wrongCount >= 2 || (progress.mastery < 40 && progress.seenCount >= 2);
+    }
+
+    function getDashboardStats() {
+      let fresh = 0;
+      let due = 0;
+      let learning = 0;
+      let mastered = 0;
+      let danger = 0;
+      const now = Date.now();
+      const enabledItems = getEnabledItems();
+      for (const item of enabledItems) {
+        const progress = getProgress(item.id);
+        const status = getProgressState(progress);
+        if (status === "new") fresh++;
+        if (progress.nextReviewAt && progress.nextReviewAt <= now) due++;
+        if (status === "learning") learning++;
+        if (status === "mastered") mastered++;
+        if (isDangerWord(progress)) danger++;
+      }
+      const introducedToday = countTodayNewlySeen(enabledItems);
+      const dailyNewRemaining = Math.max(0, state.settings.dailyNewLimit - introducedToday);
+      return { fresh, due, learning, mastered, danger, dailyNewRemaining, enabledCount: enabledItems.length };
+    }
+
+    function getWeeklyStats() {
+      const enabledItems = getEnabledItems();
+      const since = Date.now() - 6 * 24 * 60 * 60 * 1000;
+      let answers = 0;
+      let correct = 0;
+      const wordIds = new Set();
+      let mastered = 0;
+
+      for (const item of enabledItems) {
+        const progress = getProgress(item.id);
+        for (const entry of progress.history || []) {
+          if (entry.type !== "answer" || entry.at < since) continue;
+          answers++;
+          wordIds.add(item.id);
+          if (entry.outcome !== "wrong") correct++;
+          if (entry.outcome !== "wrong" && getProgressState(progress) === "mastered") {
+            mastered++;
+            break;
+          }
+        }
+      }
+
+      return {
+        answers,
+        accuracy: answers ? Math.round((correct / answers) * 100) : 0,
+        words: wordIds.size,
+        mastered
+      };
+    }
+
+    function getWrongRetryItems(limit = 20) {
+      return getEnabledItems()
+        .map(item => ({ item, progress: getProgress(item.id) }))
+        .filter(({ progress }) => progress.wrongCount > 0)
+        .sort((a, b) => {
+          const lastWrongA = [...(a.progress.history || [])].reverse().find(entry => entry.outcome === "wrong")?.at || 0;
+          const lastWrongB = [...(b.progress.history || [])].reverse().find(entry => entry.outcome === "wrong")?.at || 0;
+          return lastWrongB - lastWrongA || b.progress.wrongCount - a.progress.wrongCount;
+        })
+        .slice(0, limit)
+        .map(({ item }) => item);
+    }
+
+    function getDangerItems(limit = 20) {
+      return getEnabledItems()
+        .map(item => ({ item, progress: getProgress(item.id) }))
+        .filter(({ progress }) => isDangerWord(progress))
+        .sort((a, b) => b.progress.wrongCount - a.progress.wrongCount || a.progress.mastery - b.progress.mastery)
+        .slice(0, limit)
+        .map(({ item }) => item);
+    }
+
+    function formatSourceSummary() {
+      const enabled = getEnabledSources();
+      if (!enabled.length) return "未启用";
+      return enabled.join("、");
+    }
+
+    function difficultyLabel(progress) {
+      if (!progress.seenCount) return "新词";
+      if (progress.reviewLevel >= 4 && progress.mastery >= 85) return "巩固完成";
+      if (progress.nextReviewAt && progress.nextReviewAt <= Date.now()) return "到期复习";
+      if (progress.wrongCount > progress.correctCount) return "高风险词";
+      return "学习中";
+    }
+
+    function sessionRhythmText(session) {
+      if (!session || !session.answers.length) {
+        return { title: "稳定推进中", note: "" };
+      }
+      const lastThree = session.answers.slice(-3);
+      const wrongCount = lastThree.filter(entry => !entry.correct).length;
+      if (wrongCount >= 2) {
+        return { title: "需要回看", note: "" };
+      }
+      if (session.streak >= 4) {
+        return { title: "连击中", note: "" };
+      }
+      if (lastThree.every(entry => entry.outcome === "fast")) {
+        return { title: "节奏很好", note: "" };
+      }
+      return { title: "进行中", note: "" };
+    }
+
+    function outcomeLabel(outcome) {
+      if (outcome === "fast") return "答对且快";
+      if (outcome === "hesitant") return "答对但慢";
+      return "答错";
+    }
+
+    function renderStudyFeedback(title, body, kind = "", details = []) {
+      dom.studyFeedback.className = `feedback${kind ? ` ${kind}` : ""}`;
+      const detailGrid = details.length ? `
+        <div class="feedback-grid">
+          ${details.map(detail => `
+            <div class="feedback-pill">
+              <span class="tiny">${escapeHtml(detail.label)}</span>
+              <strong>${escapeHtml(detail.value)}</strong>
+            </div>
+          `).join("")}
+        </div>
+      ` : "";
+      dom.studyFeedback.innerHTML = `
+        <div class="feedback-title">${escapeHtml(title)}</div>
+        <div>${escapeHtml(body)}</div>
+        ${detailGrid}
+      `;
+    }
+
+    function renderSessionOutcomeList() {
+      if (!state.session || !state.session.answers.length) {
+        dom.sessionOutcomeList.innerHTML = `
+          <div class="session-outcome-item">
+            <span>暂无记录</span>
+          </div>
+        `;
+        return;
+      }
+
+      const recent = state.session.answers.slice(-4).reverse();
+      dom.sessionOutcomeList.innerHTML = recent.map(entry => {
+        const item = state.items.find(word => word.id === entry.itemId);
+        const label = outcomeLabel(entry.outcome);
+        const meta = item ? `${item.word} · ${item.translation || "暂无翻译"}` : "未知词";
+        return `
+          <div class="session-outcome-item">
+            <span>${escapeHtml(meta)}</span>
+            <span class="tiny">${escapeHtml(label)}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function getSessionSummaryData(answers) {
+      const uniqueIds = [...new Set(answers.map(entry => entry.itemId))];
+      const fastCount = answers.filter(entry => entry.outcome === "fast").length;
+      const slowCorrectCount = answers.filter(entry => entry.outcome === "hesitant").length;
+      const wrongEntries = answers.filter(entry => !entry.correct);
+      const reviewLaterCount = wrongEntries.length;
+      const weakItems = wrongEntries.slice(-5).map(entry => {
+        const item = state.items.find(word => word.id === entry.itemId);
+        return item ? `${item.word} · ${item.translation || "暂无翻译"}` : "未知词";
+      });
+      return { uniqueIds, fastCount, slowCorrectCount, reviewLaterCount, weakItems };
+    }
+
+    function countTodayNewlySeen(items) {
+      const todayKey = new Date().toDateString();
+      let count = 0;
+      for (const item of items) {
+        const progress = getProgress(item.id);
+        if (!progress.history || !progress.history.length) continue;
+        const firstSeen = progress.history.find(entry => entry.type === "answer");
+        if (firstSeen && new Date(firstSeen.at).toDateString() === todayKey && progress.correctCount + progress.wrongCount > 0) {
+          count++;
+        }
+      }
+      return count;
+    }
+
+    function renderPortal() {
+      const stats = getDashboardStats();
+      const weekly = getWeeklyStats();
+      dom.statNewCount.textContent = String(stats.fresh);
+      dom.statDueCount.textContent = String(stats.due);
+      dom.statLearningCount.textContent = String(stats.learning);
+      dom.statMasteredCount.textContent = String(stats.mastered);
+      dom.statDangerCount.textContent = String(stats.danger);
+      dom.weeklyAnswersCount.textContent = String(weekly.answers);
+      dom.weeklyAccuracy.textContent = `${weekly.accuracy}%`;
+      dom.weeklyWordsCount.textContent = String(weekly.words);
+      dom.weeklyMasteredCount.textContent = String(weekly.mastered);
+      dom.todayBadge.textContent = stats.due > 0 ? `今日优先复习 ${stats.due} 词` : "今日复习已清空";
+
+      dom.sourceList.innerHTML = SOURCE_FILES.map(file => {
+        const checked = getEnabledSources().includes(file.source) ? "checked" : "";
+        return `
+          <div class="source-item">
+            <label>
+              <input type="checkbox" data-source-toggle="${escapeHtml(file.source)}" ${checked} />
+              <div class="source-meta">
+                <div class="source-name">${escapeHtml(file.source)}</div>
+                <div class="source-desc">${escapeHtml(file.description)}</div>
+              </div>
+            </label>
+          </div>
+        `;
+      }).join("");
+
+      const weakItems = getEnabledItems()
+        .map(item => ({ item, progress: getProgress(item.id) }))
+        .filter(({ progress }) => isDangerWord(progress))
+        .sort((a, b) => b.progress.wrongCount - a.progress.wrongCount || a.progress.mastery - b.progress.mastery)
+        .slice(0, 5);
+
+      dom.weakList.innerHTML = weakItems.length ? weakItems.map(({ item, progress }) => `
+        <div class="weak-item">
+          <div>
+            <div class="word-main">${escapeHtml(item.word)}</div>
+            <div class="weak-meta">${escapeHtml(item.translation || "暂无翻译")} · 错误 ${progress.wrongCount} 次 · 熟练度 ${Math.round(progress.mastery)}</div>
+          </div>
+          <button class="small-button" data-focus-word="${escapeHtml(item.id)}">去处理</button>
+        </div>
+      `).join("") : `<div class="empty">暂无薄弱词</div>`;
+
+      bindPortalInteractions();
+      renderStudyHeadline();
+    }
+
+    function bindPortalInteractions() {
+      for (const input of document.querySelectorAll("[data-source-toggle]")) {
+        input.addEventListener("change", async event => {
+          const source = event.target.getAttribute("data-source-toggle");
+          const enabled = new Set(getEnabledSources());
+          if (event.target.checked) {
+            enabled.add(source);
+          } else {
+            enabled.delete(source);
+          }
+          if (!enabled.size) {
+            event.target.checked = true;
+            return;
+          }
+          state.settings.enabledSources = SOURCE_FILES
+            .map(file => file.source)
+            .filter(sourceName => enabled.has(sourceName));
+          await saveSettings();
+          refreshAllViews();
+        });
+      }
+
+      for (const button of document.querySelectorAll("[data-focus-word]")) {
+        button.addEventListener("click", () => {
+          const targetId = button.getAttribute("data-focus-word");
+          switchView("progress");
+          dom.progressSearch.value = "";
+          dom.progressStateFilter.value = "danger";
+          renderProgressView(targetId);
+        });
+      }
+    }
+
+    function renderDictionary(items) {
+      dom.results.innerHTML = "";
+      if (!items.length) {
+        dom.empty.classList.remove("hidden");
+        dom.count.textContent = "";
+        return;
+      }
+      dom.empty.classList.add("hidden");
+      const fragment = document.createDocumentFragment();
+      for (const item of items) {
+        const detailFields = [
+          { label: "描述", value: item.description },
+          { label: "说明", value: item.note },
+          { label: "例句", value: item.example }
+        ].filter(field => field.value && String(field.value).trim());
+        const card = document.createElement("article");
+        card.className = "result-card";
+        card.innerHTML = `
+          <div class="result-head">
+            <div>
+              <h3>${escapeHtml(item.word)}</h3>
+              <span class="word-tag">${escapeHtml(item.class || "未知类")} · ${escapeHtml(item.source)}</span>
+            </div>
+          </div>
+          ${item.translation && String(item.translation).trim() ? `
+            <div class="result-translation">
+              <div class="result-translation-text">${escapeHtml(item.translation)}</div>
+            </div>
+          ` : ""}
+          ${detailFields.length ? `
+          <div class="result-meta">
+            ${detailFields.map(field => `
+              <div class="field">
+                <span>${escapeHtml(field.label)}</span>
+                <div>${escapeHtml(field.value)}</div>
+              </div>
+            `).join("")}
+          </div>` : ""}
+        `;
+        fragment.appendChild(card);
+      }
+      dom.results.appendChild(fragment);
+      dom.count.textContent = `共 ${items.length} 条结果`;
+    }
+
+    function statusLabelFor(status) {
+      if (status === "new") return "新词";
+      if (status === "learning") return "学习中";
+      if (status === "review") return "待复习";
+      if (status === "mastered") return "已掌握";
+      if (status === "danger") return "危险遗忘";
+      return "未知";
+    }
+
+    function filterDictionaryItems() {
+      const query = dom.search.value.trim();
+      let list = state.items.slice();
+
+      if (!query) {
+        state.filteredDictionaryItems = sample(list, 18);
+        renderDictionary(state.filteredDictionaryItems);
+        dom.count.textContent = "";
+        return;
+      }
+
+      const tokens = tokenize(query);
+      list = list
+        .map(item => ({ item, score: scoreItem(item, tokens) }))
+        .filter(entry => entry.score > 0)
+        .sort((a, b) => b.score - a.score || a.item.word.length - b.item.word.length)
+        .map(entry => entry.item);
+
+      state.filteredDictionaryItems = list;
+      renderDictionary(list);
+    }
+
+    function getDueItems() {
+      const now = Date.now();
+      return getEnabledItems()
+        .filter(item => {
+          const progress = getProgress(item.id);
+          return progress.nextReviewAt && progress.nextReviewAt <= now;
+        })
+        .sort((a, b) => {
+          const pa = getProgress(a.id);
+          const pb = getProgress(b.id);
+          return (pa.nextReviewAt || 0) - (pb.nextReviewAt || 0) || pa.mastery - pb.mastery;
+        });
+    }
+
+    function getNewItemsForToday(limit) {
+      const todaySeen = new Set();
+      const todayKey = new Date().toDateString();
+      for (const item of getEnabledItems()) {
+        const progress = getProgress(item.id);
+        const seenToday = (progress.history || []).some(entry => entry.type === "answer" && new Date(entry.at).toDateString() === todayKey);
+        if (seenToday) todaySeen.add(item.id);
+      }
+      return getEnabledItems()
+        .filter(item => {
+          const progress = getProgress(item.id);
+          return !progress.seenCount && !todaySeen.has(item.id);
+        })
+        .slice(0, limit);
+    }
+
+    function buildSessionQueue(mode = state.studyMode) {
+      let dueItems = [];
+      let newItems = [];
+
+      if (mode === "today") {
+        dueItems = getDueItems().slice(0, state.settings.dailyReviewLimit);
+        newItems = getNewItemsForToday(state.settings.dailyNewLimit);
+      } else if (mode === "wrong") {
+        dueItems = getWrongRetryItems(state.settings.dailyReviewLimit);
+      } else if (mode === "danger") {
+        dueItems = getDangerItems(state.settings.dailyReviewLimit);
+      }
+
+      const queue = [];
+      let dueIndex = 0;
+      let newIndex = 0;
+
+      while (dueIndex < dueItems.length || newIndex < newItems.length) {
+        for (let i = 0; i < 3 && dueIndex < dueItems.length; i++) {
+          queue.push(dueItems[dueIndex].id);
+          dueIndex++;
+        }
+        if (newIndex < newItems.length) {
+          queue.push(newItems[newIndex].id);
+          newIndex++;
+        }
+        if (dueIndex >= dueItems.length) {
+          while (newIndex < newItems.length) {
+            queue.push(newItems[newIndex].id);
+            newIndex++;
+          }
+        }
+      }
+      return {
+        queue,
+        repeats: [],
+        answers: [],
+        pointer: 0,
+        currentQuestion: null,
+        streak: 0,
+        maxStreak: 0,
+        completed: 0,
+        reviewSeedCount: dueItems.length,
+        newSeedCount: newItems.length,
+        mode
+      };
+    }
+
+    function getPoolForQuestion(correctItem) {
+      const enabledItems = getEnabledItems();
+      const sameSource = enabledItems.filter(item => item.source === correctItem.source && item.id !== correctItem.id);
+      return (sameSource.length >= 8 ? sameSource : enabledItems.filter(item => item.id !== correctItem.id)).slice();
+    }
+
+    function makeQuestion(itemId) {
+      const item = state.items.find(entry => entry.id === itemId);
+      if (!item) return null;
+      const mode = state.settings.questionModes[Math.floor(Math.random() * state.settings.questionModes.length)];
+      const pool = sample(getPoolForQuestion(item), 20);
+      const distractors = [];
+
+      for (const candidate of pool) {
+        if (mode === "zh-to-word") {
+          if (candidate.word !== item.word) distractors.push(candidate.word);
+        } else {
+          if (candidate.translation !== item.translation) distractors.push(candidate.translation || candidate.word);
+        }
+        if (distractors.length >= 3) break;
+      }
+
+      while (distractors.length < 3) {
+        distractors.push(`备选 ${distractors.length + 1}`);
+      }
+
+      const correctAnswer = mode === "zh-to-word" ? item.word : (item.translation || item.word);
+      const prompt = mode === "zh-to-word" ? (item.translation || item.description || item.word) : item.word;
+      const options = sample([correctAnswer, ...distractors], 4);
+
+      return {
+        itemId,
+        mode,
+        prompt,
+        item,
+        options,
+        correctAnswer,
+        startedAt: Date.now()
+      };
+    }
+
+    function renderStudyHeadline(message) {
+      const stats = getDashboardStats();
+      if (message) {
+        dom.studyHeadline.textContent = message;
+      } else if (state.studyMode === "wrong") {
+        dom.studyHeadline.textContent = `错词重练 ${getWrongRetryItems().length} 词`;
+      } else if (state.studyMode === "danger") {
+        dom.studyHeadline.textContent = `高风险词 ${getDangerItems().length} 词`;
+      } else {
+        dom.studyHeadline.textContent = stats.due > 0
+          ? `今天有 ${stats.due} 个待复习`
+          : `今天新增 ${stats.dailyNewRemaining} 个新词`;
+      }
+      dom.studySubline.textContent = "";
+    }
+
+    function renderStudyIdle() {
+      dom.choiceList.className = "choice-list";
+      dom.studyModeLabel.textContent = "准备开始";
+      dom.studyQuestion.textContent = "开始训练";
+      dom.studyWordStage.textContent = "待开始";
+      dom.studyWordStageNote.textContent = "";
+      dom.studyWordMastery.textContent = "0";
+      dom.studyWordMasteryNote.textContent = "";
+      dom.studyWordNextReview.textContent = "未安排";
+      dom.studyWordNextNote.textContent = "";
+      dom.choiceList.innerHTML = "";
+      renderStudyFeedback(
+        "准备开始",
+        "点击开始。",
+        "",
+        [
+          { label: "待复习", value: String(getDashboardStats().due) },
+          { label: "正确率", value: "0%" },
+          { label: "连击", value: "0" }
+        ]
+      );
+      dom.studyProgressText.textContent = "未开始";
+      dom.studyProgressFill.style.width = "0%";
+      dom.sessionStreak.textContent = "0";
+      dom.sessionAccuracy.textContent = "0%";
+      dom.sessionComplete.textContent = "0";
+      dom.sessionRepeats.textContent = "0";
+      dom.sessionTip.textContent = "开始训练";
+      dom.sessionRhythm.textContent = "稳定推进中";
+      dom.sessionRhythmNote.textContent = "";
+      dom.feedbackDueCount.textContent = String(getDashboardStats().due);
+      dom.feedbackAccuracy.textContent = "0%";
+      dom.feedbackStreak.textContent = "0";
+      renderSessionOutcomeList();
+      dom.sessionSummaryBox.classList.add("hidden");
+      dom.sessionSummaryBox.textContent = "";
+      dom.studyEndButton.disabled = true;
+    }
+
+    function renderCurrentQuestion() {
+      if (!state.session) {
+        renderStudyIdle();
+        return;
+      }
+
+      const currentId = state.session.queue[state.session.pointer];
+      if (!currentId) {
+        finishSession();
+        return;
+      }
+
+      const question = makeQuestion(currentId);
+      if (!question) {
+        finishSession();
+        return;
+      }
+      state.session.currentQuestion = question;
+      dom.choiceList.className = "choice-list";
+
+      const progress = getProgress(question.itemId);
+      dom.studyModeLabel.textContent = question.mode === "zh-to-word" ? "看中文选词" : "看词选中文";
+      dom.studyQuestion.textContent = question.prompt;
+      dom.studyWordStage.textContent = difficultyLabel(progress);
+      dom.studyWordStageNote.textContent = `${question.item.word} · ${question.item.source} · ${question.item.class || "未知类"}`;
+      dom.studyWordMastery.textContent = String(Math.round(progress.mastery));
+      dom.studyWordMasteryNote.textContent = progress.seenCount
+        ? `平均反应 ${progress.avgResponseMs ? `${(progress.avgResponseMs / 1000).toFixed(1)}s` : "—"}`
+        : "首次出现";
+      dom.studyWordNextReview.textContent = toDateTime(progress.nextReviewAt);
+      dom.studyWordNextNote.textContent = progress.nextReviewAt
+        ? ""
+        : "";
+      dom.choiceList.innerHTML = question.options.map(option => `
+        <button class="choice-button" data-choice="${escapeHtml(option)}">
+          <span>${escapeHtml(option)}</span>
+          <span class="tiny">${question.mode === "zh-to-word" ? "选词" : "选义"}</span>
+        </button>
+      `).join("");
+      renderStudyFeedback(
+        progress.seenCount ? "进入本题" : "新词入场",
+        progress.seenCount
+          ? `${question.item.word} · 上次复习 ${toDateTime(progress.lastReviewedAt)}`
+          : `${question.item.word} · 首次练习`,
+        "",
+        [
+          { label: "题型", value: question.mode === "zh-to-word" ? "中译词" : "词译中" },
+          { label: "当前阶段", value: difficultyLabel(progress) },
+          { label: "平均反应", value: progress.avgResponseMs ? `${(progress.avgResponseMs / 1000).toFixed(1)}s` : "—" }
+        ]
+      );
+      const total = state.session.queue.length;
+      const completed = state.session.completed;
+      dom.studyProgressText.textContent = `第 ${completed + 1} / ${Math.max(total, 1)} 题`;
+      dom.studyProgressFill.style.width = `${Math.min(100, (completed / Math.max(total, 1)) * 100)}%`;
+      dom.sessionStreak.textContent = String(state.session.streak);
+      dom.sessionComplete.textContent = String(state.session.completed);
+      dom.sessionRepeats.textContent = String(state.session.repeats.length);
+      const rhythm = sessionRhythmText(state.session);
+      dom.sessionRhythm.textContent = rhythm.title;
+      dom.sessionRhythmNote.textContent = rhythm.note;
+      renderSessionOutcomeList();
+      dom.studyEndButton.disabled = false;
+
+      for (const button of dom.choiceList.querySelectorAll("[data-choice]")) {
+        button.addEventListener("click", event => answerCurrentQuestion(event.currentTarget.getAttribute("data-choice")));
+      }
+    }
+
+    function getResponseQuality(isCorrect, elapsedMs) {
+      if (!isCorrect) {
+        return { bucket: "wrong", score: 0, pace: "wrong" };
+      }
+      if (elapsedMs <= 1800) {
+        return { bucket: "fast", score: 1, pace: "very_fast" };
+      }
+      if (elapsedMs <= 3200) {
+        return { bucket: "fast", score: 0.82, pace: "fast" };
+      }
+      if (elapsedMs <= 5000) {
+        return { bucket: "hesitant", score: 0.62, pace: "steady" };
+      }
+      if (elapsedMs <= 8000) {
+        return { bucket: "hesitant", score: 0.42, pace: "slow" };
+      }
+      return { bucket: "hesitant", score: 0.24, pace: "very_slow" };
+    }
+
+    function getNextIntervalMs(reviewLevel, stability, qualityScore, seenCount) {
+      const base = REVIEW_INTERVALS_MS[reviewLevel] || REVIEW_INTERVALS_MS[REVIEW_INTERVALS_MS.length - 1];
+      const stabilityBoost = 1 + Math.max(0, stability) * 0.03;
+      const qualityModifier = 0.7 + qualityScore * 0.42;
+      const noveltyModifier = seenCount <= 2 ? 0.82 : 1;
+      return Math.round(base * stabilityBoost * qualityModifier * noveltyModifier);
+    }
+
+    function computeNextReview(progress, responseQuality, elapsedMs) {
+      let reviewLevel = progress.reviewLevel || 0;
+      let mastery = progress.mastery;
+      let stability = progress.stability;
+      let difficulty = progress.difficulty;
+      let stateName = "learning";
+
+      if (responseQuality.bucket === "wrong") {
+        reviewLevel = Math.max(reviewLevel - (progress.reviewLevel >= 2 ? 2 : 1), 0);
+        mastery = clamp(mastery - (progress.mastery >= 60 ? 20 : 14), 0, 100);
+        stability = clamp(stability - 1.1, 0, 10);
+        difficulty = clamp(difficulty + 0.9, 1, 10);
+        stateName = "learning";
+        return {
+          reviewLevel,
+          mastery,
+          stability,
+          difficulty,
+          nextReviewAt: Date.now() + REVIEW_INTERVALS_MS[0],
+          state: stateName
+        };
+      }
+
+      const qualityScore = responseQuality.score;
+      const speedPenalty = clamp((elapsedMs - 2200) / 5000, 0, 1);
+      const masteryGain = 4 + qualityScore * 10 - speedPenalty * 2.5 - difficulty * 0.12;
+      const stabilityGain = 0.2 + qualityScore * 0.9 - speedPenalty * 0.18;
+      const difficultyDrop = 0.08 + qualityScore * 0.24;
+
+      reviewLevel = Math.min(
+        REVIEW_INTERVALS_MS.length - 1,
+        reviewLevel + (qualityScore >= 0.78 ? 1 : 0) + (progress.streak >= 2 && qualityScore >= 0.58 ? 1 : 0)
+      );
+      if (progress.reviewLevel === 0) {
+        reviewLevel = Math.max(reviewLevel, 1);
+      }
+      mastery = clamp(mastery + masteryGain, 0, 100);
+      stability = clamp(stability + stabilityGain, 0, 10);
+      difficulty = clamp(difficulty - difficultyDrop, 1, 10);
+
+      stateName = reviewLevel >= 4 && mastery >= 85 ? "mastered" : (reviewLevel >= 1 ? "review" : "learning");
+      return {
+        reviewLevel,
+        mastery,
+        stability,
+        difficulty,
+        nextReviewAt: Date.now() + getNextIntervalMs(reviewLevel, stability, qualityScore, progress.seenCount + 1),
+        state: stateName
+      };
+    }
+
+    async function answerCurrentQuestion(answer) {
+      if (!state.session || !state.session.currentQuestion) return;
+      const question = state.session.currentQuestion;
+      const item = question.item;
+      const isCorrect = answer === question.correctAnswer;
+      const elapsedMs = Date.now() - question.startedAt;
+      const responseQuality = getResponseQuality(isCorrect, elapsedMs);
+      const outcome = responseQuality.bucket;
+      const progress = { ...getProgress(question.itemId) };
+      const update = computeNextReview(progress, responseQuality, elapsedMs);
+
+      progress.correctCount += isCorrect ? 1 : 0;
+      progress.wrongCount += isCorrect ? 0 : 1;
+      progress.streak = isCorrect ? progress.streak + 1 : 0;
+      progress.seenCount += 1;
+      progress.lastReviewedAt = Date.now();
+      progress.lastOutcome = outcome;
+      progress.lastResponseMs = elapsedMs;
+      progress.avgResponseMs = progress.avgResponseMs == null
+        ? elapsedMs
+        : Math.round(progress.avgResponseMs * 0.75 + elapsedMs * 0.25);
+      progress.mastery = update.mastery;
+      progress.stability = update.stability;
+      progress.difficulty = update.difficulty;
+      progress.reviewLevel = update.reviewLevel;
+      progress.state = update.state;
+      progress.nextReviewAt = update.nextReviewAt;
+      progress.history = [...(progress.history || []), {
+        type: "answer",
+        at: progress.lastReviewedAt,
+        outcome,
+        elapsedMs
+      }].slice(-20);
+
+      await saveProgress(progress);
+
+      state.session.answers.push({ itemId: question.itemId, correct: isCorrect, outcome, elapsedMs });
+      state.session.completed += 1;
+      state.session.streak = isCorrect ? state.session.streak + 1 : 0;
+      state.session.maxStreak = Math.max(state.session.maxStreak, state.session.streak);
+
+      const choiceButtons = [...dom.choiceList.querySelectorAll("[data-choice]")];
+      for (const button of choiceButtons) {
+        const choice = button.getAttribute("data-choice");
+        button.disabled = true;
+        if (choice === question.correctAnswer) button.classList.add("correct");
+        if (!isCorrect && choice === answer) button.classList.add("wrong");
+      }
+
+      if (!isCorrect || getProgress(question.itemId).seenCount <= 1) {
+        queueRepeat(question.itemId, !isCorrect);
+      }
+
+      const accuracy = state.session.answers.filter(entry => entry.correct).length / Math.max(state.session.answers.length, 1);
+      dom.sessionAccuracy.textContent = `${Math.round(accuracy * 100)}%`;
+      dom.sessionStreak.textContent = String(state.session.streak);
+      dom.sessionComplete.textContent = String(state.session.completed);
+      dom.sessionRepeats.textContent = String(state.session.repeats.length);
+      dom.feedbackDueCount.textContent = String(getDashboardStats().due);
+      dom.feedbackAccuracy.textContent = `${Math.round(accuracy * 100)}%`;
+      dom.feedbackStreak.textContent = String(state.session.streak);
+
+      const nextText = outcome === "wrong"
+        ? "本词会在今天稍后重新出现。"
+        : `下次复习时间约为 ${toDateTime(progress.nextReviewAt)}。`;
+      const responseSeconds = `${(elapsedMs / 1000).toFixed(1)}s`;
+
+      renderStudyFeedback(
+        isCorrect ? outcomeLabel(outcome) : "答错了",
+        isCorrect
+          ? `${item.word} 的熟练度提升到 ${Math.round(progress.mastery)}。${nextText}`
+          : `正确答案是“${question.correctAnswer}”。${item.word} 将进入更密集的复习循环。${nextText}`,
+        isCorrect ? "success" : "error",
+        [
+          { label: "当前词", value: item.word },
+          { label: "熟练度", value: String(Math.round(progress.mastery)) },
+          { label: "反应时", value: responseSeconds },
+          { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
+        ]
+      );
+
+      dom.studyWordStage.textContent = difficultyLabel(progress);
+      dom.studyWordStageNote.textContent = isCorrect
+        ? (outcome === "fast" ? "检索稳定" : "检索偏慢")
+        : "需要回看";
+      dom.studyWordMastery.textContent = String(Math.round(progress.mastery));
+      dom.studyWordMasteryNote.textContent = `平均反应 ${(progress.avgResponseMs / 1000).toFixed(1)}s`;
+      dom.studyWordNextReview.textContent = outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt);
+      dom.studyWordNextNote.textContent = `本次反应 ${responseSeconds}`;
+
+      dom.sessionTip.textContent = isCorrect
+        ? (state.session.streak >= 3 ? `连击 ${state.session.streak}` : "继续")
+        : "已回流";
+      const rhythm = sessionRhythmText(state.session);
+      dom.sessionRhythm.textContent = rhythm.title;
+      dom.sessionRhythmNote.textContent = rhythm.note;
+      renderSessionOutcomeList();
+
+      state.session.pointer += 1;
+      state.session.currentQuestion = null;
+      dom.studyProgressFill.style.width = `${Math.min(100, (state.session.completed / Math.max(state.session.queue.length, 1)) * 100)}%`;
+
+      const delayMs = isCorrect ? 850 : 2000;
+      window.setTimeout(() => {
+        renderPortal();
+        renderProgressView();
+        renderCurrentQuestion();
+      }, delayMs);
+    }
+
+    function queueRepeat(itemId, highPriority) {
+      if (!state.session) return;
+      if (state.session.queue.slice(state.session.pointer + 1).includes(itemId)) return;
+      const insertAt = Math.min(
+        state.session.queue.length,
+        state.session.pointer + (highPriority ? 2 : 4)
+      );
+      state.session.queue.splice(insertAt, 0, itemId);
+      state.session.repeats.push(itemId);
+    }
+
+    function startSession() {
+      const enabledItems = getEnabledItems();
+      if (!enabledItems.length) {
+        renderStudyFeedback("无法开始训练", "当前没有启用任何词库，请先在门户首页勾选一个词库。", "error");
+        return;
+      }
+
+      state.session = buildSessionQueue();
+      if (!state.session.queue.length) {
+        const emptyText = state.studyMode === "wrong"
+          ? "当前没有需要重练的错词。"
+          : state.studyMode === "danger"
+            ? "当前没有高风险词。"
+            : "今天没有新的练习。";
+        renderStudyFeedback("当前没有练习", emptyText);
+        dom.studyQuestion.textContent = "今日任务已完成。";
+        dom.studyModeLabel.textContent = "训练结束";
+        dom.studyWordStage.textContent = "无待练词";
+        dom.studyWordStageNote.textContent = "";
+        dom.studyWordMastery.textContent = "0";
+        dom.studyWordMasteryNote.textContent = "";
+        dom.studyWordNextReview.textContent = "已清空";
+        dom.studyWordNextNote.textContent = "";
+        dom.choiceList.innerHTML = "";
+        dom.sessionSummaryBox.classList.remove("hidden");
+        dom.sessionSummaryBox.textContent = "";
+        return;
+      }
+
+      dom.sessionSummaryBox.classList.add("hidden");
+      dom.sessionSummaryBox.textContent = "";
+      const modeMessage = state.studyMode === "today"
+        ? `本轮 ${state.session.queue.length} 题`
+        : state.studyMode === "wrong"
+          ? `错词重练 ${state.session.queue.length} 题`
+          : `高风险词 ${state.session.queue.length} 题`;
+      renderStudyHeadline(modeMessage);
+      renderCurrentQuestion();
+    }
+
+    function finishSession() {
+      if (!state.session) return;
+      const answers = state.session.answers;
+      const total = answers.length;
+      const correct = answers.filter(entry => entry.correct).length;
+      const accuracy = total ? Math.round((correct / total) * 100) : 0;
+      const newMastered = answers.filter(entry => {
+        const progress = getProgress(entry.itemId);
+        return getProgressState(progress) === "mastered";
+      }).length;
+      const summaryData = getSessionSummaryData(answers);
+      const weak = summaryData.weakItems;
+
+      dom.studyModeLabel.textContent = "本轮完成";
+      dom.studyQuestion.textContent = total ? "这一轮已经结束" : "本轮没有可练习的词";
+      dom.studyWordStage.textContent = total ? "本轮结束" : "暂无词";
+      dom.studyWordStageNote.textContent = total ? `最长连击 ${state.session.maxStreak} 次` : "";
+      dom.studyWordMastery.textContent = String(newMastered);
+      dom.studyWordMasteryNote.textContent = "新增掌握";
+      dom.studyWordNextReview.textContent = weak.length ? "需回看" : "已完成";
+      dom.studyWordNextNote.textContent = "";
+      dom.choiceList.className = "choice-list finish-actions";
+      dom.choiceList.innerHTML = `
+        <button class="button-primary" id="study-restart-button">再来一轮</button>
+        ${weak.length ? `<button class="button-secondary" id="study-retry-wrong-button">重练错词</button>` : ""}
+        <button class="button-secondary" id="study-back-home-button">返回主页</button>
+      `;
+      renderStudyFeedback(
+        "本轮完成",
+        `完成 ${total} 题，正确率 ${accuracy}%`,
+        "",
+        [
+          { label: "完成题数", value: String(total) },
+          { label: "正确率", value: `${accuracy}%` },
+          { label: "最长连击", value: String(state.session.maxStreak) }
+        ]
+      );
+      dom.studyProgressText.textContent = total ? `${total} / ${total} 题` : "0 / 0 题";
+      dom.studyProgressFill.style.width = "100%";
+      dom.studyEndButton.disabled = true;
+      dom.sessionSummaryBox.classList.remove("hidden");
+      dom.sessionSummaryBox.innerHTML = `
+        <div class="summary-block">
+          <div class="feedback-title">本轮结果</div>
+          <div class="summary-grid">
+            <div class="summary-stat">
+              <span class="tiny">完成题数</span>
+              <strong>${total}</strong>
+            </div>
+            <div class="summary-stat">
+              <span class="tiny">正确率</span>
+              <strong>${accuracy}%</strong>
+            </div>
+            <div class="summary-stat">
+              <span class="tiny">最长连击</span>
+              <strong>${state.session.maxStreak}</strong>
+            </div>
+            <div class="summary-stat">
+              <span class="tiny">新增掌握</span>
+              <strong>${newMastered}</strong>
+            </div>
+          </div>
+        </div>
+        <div class="summary-block">
+          <div class="feedback-title">记忆结果</div>
+          <div class="summary-grid">
+            <div class="summary-stat">
+              <span class="tiny">实际练习词</span>
+              <strong>${summaryData.uniqueIds.length}</strong>
+            </div>
+            <div class="summary-stat">
+              <span class="tiny">快速答对</span>
+              <strong>${summaryData.fastCount}</strong>
+            </div>
+            <div class="summary-stat">
+              <span class="tiny">答对但慢</span>
+              <strong>${summaryData.slowCorrectCount}</strong>
+            </div>
+            <div class="summary-stat">
+              <span class="tiny">待回看</span>
+              <strong>${summaryData.reviewLaterCount}</strong>
+            </div>
+          </div>
+        </div>
+        <div class="summary-block">
+          <div class="feedback-title">需要回看的词</div>
+          ${weak.length ? `
+            <div class="summary-list">
+              ${weak.map(item => `
+                <div class="summary-item">
+                  <span>${escapeHtml(item)}</span>
+                  <span class="tiny">回看</span>
+                </div>
+              `).join("")}
+            </div>
+          ` : `<div>这一轮没有错词。</div>`}
+        </div>
+      `;
+
+      document.getElementById("study-restart-button").addEventListener("click", startSession);
+      if (weak.length) {
+        document.getElementById("study-retry-wrong-button").addEventListener("click", () => {
+          state.studyMode = "wrong";
+          updateStudyModeButtons();
+          startSession();
+        });
+      }
+      document.getElementById("study-back-home-button").addEventListener("click", () => switchView("portal"));
+      dom.sessionRhythm.textContent = weak.length ? "有待回看" : "已完成";
+      dom.sessionRhythmNote.textContent = "";
+      renderSessionOutcomeList();
+
+      state.session = null;
+      renderPortal();
+      renderProgressView();
+      renderStudyHeadline("本轮已结束");
+    }
+
+    function getProgressItems() {
+      const pool = state.progressSourceMode === "enabled" ? getEnabledItems() : state.items;
+      const query = dom.progressSearch.value.trim().toLowerCase();
+      const filter = dom.progressStateFilter.value;
+
+      return pool.filter(item => {
+        const progress = getProgress(item.id);
+        const status = filter === "danger" ? (isDangerWord(progress) ? "danger" : "safe") : getProgressState(progress);
+        const matchesFilter = filter === "all" || status === filter;
+        const matchesQuery = !query || [item.word, item.translation, item.description, item.note, item.source]
+          .filter(Boolean)
+          .some(text => text.toLowerCase().includes(query));
+        return matchesFilter && matchesQuery;
+      }).sort((a, b) => {
+        const pa = getProgress(a.id);
+        const pb = getProgress(b.id);
+        return (pb.seenCount - pa.seenCount) || ((pb.wrongCount - pa.wrongCount)) || (a.word.localeCompare(b.word));
+      });
+    }
+
+    function renderProgressView(focusWordId) {
+      const items = getProgressItems().slice(0, 120);
+      dom.wordList.innerHTML = "";
+      if (!items.length) {
+        dom.wordEmpty.classList.remove("hidden");
+        return;
+      }
+      dom.wordEmpty.classList.add("hidden");
+
+      for (const item of items) {
+        const progress = getProgress(item.id);
+        const status = isDangerWord(progress) ? "danger" : getProgressState(progress);
+        const row = document.createElement("div");
+        row.className = "word-row";
+        if (focusWordId && focusWordId === item.id) {
+          row.style.outline = "2px solid rgba(30, 122, 85, 0.38)";
+        }
+        row.innerHTML = `
+          <div>
+            <div class="word-main">${escapeHtml(item.word)} <span class="tiny">· ${escapeHtml(item.source)}</span></div>
+            <div class="word-sub">${escapeHtml(item.translation || "暂无翻译")}</div>
+            <div class="status-line">${statusLabelFor(status)} · 熟练度 ${Math.round(progress.mastery)} · 正确 ${progress.correctCount} / 错误 ${progress.wrongCount} · 下次 ${toDateTime(progress.nextReviewAt)}</div>
+          </div>
+          <div class="pill-row">
+            <button class="small-button" data-manual-state="${escapeHtml(item.id)}|hard">重学</button>
+            <button class="small-button" data-manual-state="${escapeHtml(item.id)}|known">认识</button>
+          </div>
+        `;
+        dom.wordList.appendChild(row);
+      }
+
+      for (const button of dom.wordList.querySelectorAll("[data-manual-state]")) {
+        button.addEventListener("click", async event => {
+          const [wordId, action] = event.currentTarget.getAttribute("data-manual-state").split("|");
+          const progress = { ...getProgress(wordId) };
+          if (action === "hard") {
+            progress.mastery = 15;
+            progress.reviewLevel = 0;
+            progress.state = "learning";
+            progress.nextReviewAt = Date.now() + REVIEW_INTERVALS_MS[0];
+          } else {
+            progress.mastery = 88;
+            progress.reviewLevel = 4;
+            progress.state = "mastered";
+            progress.nextReviewAt = Date.now() + REVIEW_INTERVALS_MS[4];
+          }
+          progress.history = [...(progress.history || []), { type: "manual", at: Date.now(), action }].slice(-20);
+          await saveProgress(progress);
+          refreshAllViews();
+        });
+      }
+    }
+
+    function switchView(viewName) {
+      state.currentView = viewName;
+      for (const view of VIEW_IDS) {
+        dom.views[view].classList.toggle("active", view === viewName);
+      }
+      for (const button of dom.navButtons) {
+        button.classList.toggle("active", button.getAttribute("data-view-target") === viewName);
+      }
+      if (viewName === "dictionary") {
+        dom.search.focus({ preventScroll: true });
+      }
+    }
+
+    function updateStudyModeButtons() {
+      dom.studyModeButtons.forEach(button => {
+        button.classList.toggle("active", button.getAttribute("data-study-mode") === state.studyMode);
+      });
+    }
+
+    function refreshAllViews() {
+      renderPortal();
+      filterDictionaryItems();
+      renderProgressView();
+      renderStudyHeadline();
+      updateStudyModeButtons();
+    }
+
+    function bindEvents() {
+      bindGrammarTocScrollLock();
+
+      dom.navButtons.forEach(button => {
+        button.addEventListener("click", () => switchView(button.getAttribute("data-view-target")));
+      });
+
+      dom.clearProgressButton.addEventListener("click", async () => {
+        const confirmed = window.confirm("确认清空全部学习情况吗？这会删除当前的学习进度、作答历史和复习安排。");
+        if (!confirmed) return;
+
+        try {
+          await clearAllProgress();
+          refreshAllViews();
+          renderStudyIdle();
+          dom.status.textContent = `词库已加载：${state.items.length} 条`;
+        } catch (error) {
+          console.error(error);
+          window.alert("清空学习情况失败，请稍后重试。");
+        }
+      });
+
+      dom.startStudyPrimary.addEventListener("click", () => {
+        state.studyMode = "today";
+        updateStudyModeButtons();
+        switchView("study");
+        startSession();
+      });
+
+      dom.goDictionaryPrimary.addEventListener("click", () => switchView("dictionary"));
+      dom.searchRandomButton.addEventListener("click", () => {
+        dom.search.value = "";
+        filterDictionaryItems();
+      });
+      dom.search.addEventListener("input", filterDictionaryItems);
+      dom.studyStartButton.addEventListener("click", startSession);
+      dom.studyEndButton.addEventListener("click", finishSession);
+      dom.studyRefreshButton.addEventListener("click", () => {
+        renderStudyHeadline("今日任务已刷新");
+        if (!state.session) renderStudyIdle();
+      });
+      dom.studyModeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          state.studyMode = button.getAttribute("data-study-mode");
+          updateStudyModeButtons();
+          renderStudyHeadline();
+          if (!state.session) {
+            renderStudyIdle();
+          }
+        });
+      });
+      dom.progressSearch.addEventListener("input", () => renderProgressView());
+      dom.progressStateFilter.addEventListener("change", () => renderProgressView());
+
+      dom.progressSourceButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          state.progressSourceMode = button.getAttribute("data-progress-source");
+          dom.progressSourceButtons.forEach(candidate => candidate.classList.toggle("active", candidate === button));
+          renderProgressView();
+        });
+      });
+    }
+
+    async function initialize() {
+      bindEvents();
+      renderStudyIdle();
+      dom.status.textContent = "正在加载词库…";
+      dom.grammarStatus.textContent = "正在加载语法文档…";
+
+      try {
+        const [items, savedSettings] = await Promise.all([loadAllWords(), loadSettings()]);
+        state.items = items;
+        if (savedSettings) {
+          state.settings = {
+            ...state.settings,
+            ...savedSettings,
+            enabledSources: (savedSettings.enabledSources || []).filter(source => SOURCE_FILES.some(file => file.source === source)).length
+              ? savedSettings.enabledSources.filter(source => SOURCE_FILES.some(file => file.source === source))
+              : DEFAULT_ENABLED_SOURCES.slice()
+          };
+        }
+        await loadProgressMap();
+        state.ready = true;
+        dom.status.textContent = `词库已加载：${items.length} 条`;
+        refreshAllViews();
+      } catch (error) {
+        dom.status.textContent = "词库加载失败，请确认 CSV 路径和浏览器环境。";
+        dom.studyFeedback.className = "feedback error";
+        dom.studyFeedback.textContent = "初始化失败，当前无法开始训练。";
+        console.error(error);
+      }
+
+      try {
+        await loadGrammarDocument();
+      } catch (error) {
+        dom.grammarStatus.textContent = "语法文档加载失败。";
+        dom.grammarToc.innerHTML = "";
+        dom.grammarContent.innerHTML = `<div class="doc-empty">无法读取 ${escapeHtml(GRAMMAR_DOC_PATH)}，请确认文件路径与浏览器环境。</div>`;
+        console.error(error);
+      }
+    }
+
+    initialize();
+  </script>
+</body>
+</html>
