@@ -477,15 +477,19 @@
       flex-wrap: wrap;
     }
 
-    .search-panel input[type="search"],
-    .progress-filter input[type="search"],
-    .select {
+      .search-panel input[type="search"],
+      .progress-filter input[type="search"],
+      .select {
       flex: 1 1 240px;
+      min-width: 0;
       padding: 14px 16px;
+      min-height: 54px;
       border-radius: 16px;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.82);
       color: var(--ink);
+      appearance: none;
+      -webkit-appearance: none;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
@@ -1287,6 +1291,32 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      #dictionary-view .search-panel {
+        gap: 14px;
+      }
+
+      #dictionary-view .search-row {
+        gap: 0;
+      }
+
+      #dictionary-view .search-panel input[type="search"] {
+        flex: 0 0 auto;
+        min-height: 52px;
+        height: 52px;
+        padding: 0 16px;
+        border-radius: 18px;
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      #dictionary-view .toolbar {
+        gap: 10px;
+      }
+
+      #dictionary-view .button-secondary {
+        min-height: 52px;
+      }
+
       .filter-bar {
         grid-template-columns: 1fr;
         padding: 10px;
@@ -1556,7 +1586,7 @@
           <aside class="summary-card doc-sidebar">
             <div class="panel-header">
               <div>
-                <div class="panel-title">文档导航</div>
+                <div class="panel-title">目录</div>
               </div>
             </div>
             <div id="grammar-status" class="doc-status">正在加载语法文档…</div>
@@ -2216,7 +2246,8 @@
       if (!res.ok) throw new Error(`加载失败: ${GRAMMAR_DOC_PATH}`);
       const markdown = await res.text();
       const rendered = renderMarkdown(markdown.replace(/^\uFEFF/, ""));
-      dom.grammarStatus.textContent = `已加载：${GRAMMAR_DOC_PATH}`;
+      dom.grammarStatus.textContent = "";
+      dom.grammarStatus.classList.add("hidden");
       dom.grammarToc.innerHTML = renderToc(rendered.headings);
       dom.grammarContent.innerHTML = rendered.html || '<div class="doc-empty">文档没有可显示的内容。</div>';
     }
@@ -3470,6 +3501,7 @@
       renderStudyIdle();
       dom.status.textContent = "正在加载词库…";
       dom.grammarStatus.textContent = "正在加载语法文档…";
+      dom.grammarStatus.classList.remove("hidden");
 
       try {
         const [items, savedSettings] = await Promise.all([loadAllWords(), loadSettings()]);
@@ -3498,6 +3530,7 @@
         await loadGrammarDocument();
       } catch (error) {
         dom.grammarStatus.textContent = "语法文档加载失败。";
+        dom.grammarStatus.classList.remove("hidden");
         dom.grammarToc.innerHTML = "";
         dom.grammarContent.innerHTML = `<div class="doc-empty">无法读取 ${escapeHtml(GRAMMAR_DOC_PATH)}，请确认文件路径与浏览器环境。</div>`;
         console.error(error);

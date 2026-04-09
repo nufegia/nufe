@@ -1,0 +1,394 @@
+{"id":"000001","zh":"我想回家。","en":"I want to go home.","nufe":"mi lew bu mi dili.","sense":"home.safe_harbor","gloss":"mi=I; lew=want; bu=go; mi dili=my place of belonging","tags":["desire","motion","home"]}
+{"id":"000002","zh":"我想回家。","en":"I want to go home.","nufe":"mi lew bu mi zifo.","sense":"home.dwelling","gloss":"mi=I; lew=want; bu=go; mi zifo=my dwelling","tags":["desire","motion","home"]}
+{"id":"000003","zh":"你是我的孩子，你是神的孩子，你是你自己的孩子。","en":"You are my child, you are God's child, and you are your own child.","nufe":"ti ne mi gela, ti ne ho gela, ti ne ti fe gela.","sense":null,"gloss":"ti=you; ne=be; mi gela=my child; ho gela=God's child; ti fe gela=your own child","tags":["identity","parallel","spiritual"]}
+{"id":"000004","zh":"应该切碎我的身体，应当把灯放在太阳上。","en":"My body should be cut into pieces, and the lamp should be placed on the sun.","nufe":"mi matemi to be kopa. lawpa to ko ia mipe supa.","sense":null,"gloss":"mi matemi=my body; to=should; be kopa=be cut into pieces; lawpa=lamp; ko=place; ia mipe supa=on the sun","tags":["obligation","body","placement","sun"]}
+{"id":"000005","zh":"我应当去。","en":"I should go.","nufe":"mi to bu.","sense":null,"gloss":"mi=I; to=should; bu=go","tags":["obligation","motion"]}
+{"id":"000006","zh":"你应当说。","en":"You should speak.","nufe":"ti to toli.","sense":null,"gloss":"ti=you; to=should; toli=speak","tags":["obligation","speech"]}
+{"id":"000007","zh":"灯应当在家里。","en":"The lamp should be in the home.","nufe":"lawpa to da zifo.","sense":null,"gloss":"lawpa=lamp; to=should; da=be at; zifo=home/dwelling","tags":["obligation","location","home"]}
+{"id":"000008","zh":"我把灯放在家里。","en":"I put the lamp in the home.","nufe":"mi ko lawpa ia zifo.","sense":null,"gloss":"mi=I; ko=place/put; lawpa=lamp; ia zifo=in the home","tags":["placement","home"]}
+{"id":"000009","zh":"灯在家里。","en":"The lamp is in the home.","nufe":"lawpa da zifo.","sense":null,"gloss":"lawpa=lamp; da=be at; zifo=home/dwelling","tags":["location","home"]}
+{"id":"000010","zh":"水在建筑下面。","en":"Water is below the building.","nufe":"lu da dow iwfa.","sense":null,"gloss":"lu=water; da=be at; dow=building; iwfa=below","tags":["location","spatial"]}
+{"id":"000011","zh":"那东西在我左边。","en":"That thing is on my left.","nufe":"ziepa da mi siwta.","sense":null,"gloss":"ziepa=that thing; da=be at; mi=me; siwta=left side","tags":["location","spatial","left-right"]}
+{"id":"000012","zh":"那东西在我右边。","en":"That thing is on my right.","nufe":"ziepa da mi deka.","sense":null,"gloss":"ziepa=that thing; da=be at; mi=me; deka=right side","tags":["location","spatial","left-right"]}
+{"id":"000013","zh":"门在我前面。","en":"The door is in front of me.","nufe":"dua da mi awta.","sense":null,"gloss":"dua=door; da=be at; mi=me; awta=front","tags":["location","spatial","front-back"]}
+{"id":"000014","zh":"他在我后面。","en":"He is behind me.","nufe":"gi da mi posa.","sense":null,"gloss":"gi=he/she/it; da=be at; mi=me; posa=behind","tags":["location","spatial","front-back"]}
+{"id":"000015","zh":"这个东西存在。","en":"This thing exists.","nufe":"ze pa pale.","sense":"pa.entity.general","gloss":"ze=this; pa=thing/entity; pale=exist","tags":["seed","entity","focus-pa"]}
+{"id":"000016","zh":"这个东西是好的。","en":"This thing is good.","nufe":"ze pa ne bo pa.","sense":"pa.entity.general","gloss":"ze=this; pa=thing/entity; ne=be; bo=good; pa=property nominalizer/entity","tags":["seed","entity","focus-pa"]}
+{"id":"000017","zh":"我看这个东西。","en":"I see this thing.","nufe":"mi viofa ze pa.","sense":"pa.entity.general","gloss":"mi=I; viofa=see; ze=this; pa=thing/entity","tags":["seed","entity","focus-pa"]}
+{"id":"000018","zh":"行动是好的。","en":"Action is good.","nufe":"fax ne bo pa.","sense":"fa.action.nominalized","gloss":"fax=action as entity/nominalized action; ne=be; bo=good; pa=property nominalizer/entity","tags":["seed","action","focus-fa"]}
+{"id":"000019","zh":"这个行动存在。","en":"This action exists.","nufe":"ze fax pale.","sense":"fa.action.nominalized","gloss":"ze=this; fax=action as entity/nominalized action; pale=exist","tags":["seed","action","focus-fa"]}
+{"id":"000020","zh":"我知道这个行动。","en":"I know this action.","nufe":"mi qe ze fax.","sense":"fa.action.nominalized","gloss":"mi=I; qe=know; ze=this; fax=action as entity/nominalized action","tags":["seed","action","focus-fa"]}
+{"id":"000021","zh":"性质是好的。","en":"A quality is good.","nufe":"max ne bo pa.","sense":"ma.property.nominalized","gloss":"max=quality as entity/nominalized property; ne=be; bo=good; pa=property nominalizer/entity","tags":["seed","property","focus-ma"]}
+{"id":"000022","zh":"这个性质存在。","en":"This quality exists.","nufe":"ze max pale.","sense":"ma.property.nominalized","gloss":"ze=this; max=quality as entity/nominalized property; pale=exist","tags":["seed","property","focus-ma"]}
+{"id":"000023","zh":"我知道这个性质。","en":"I know this quality.","nufe":"mi qe ze max.","sense":"ma.property.nominalized","gloss":"mi=I; qe=know; ze=this; max=quality as entity/nominalized property","tags":["seed","property","focus-ma"]}
+{"id":"000024","zh":"我存在。","en":"I exist.","nufe":"mi pale.","sense":null,"gloss":"mi=I; pale=exist","tags":["seed","existence","focus-pale"]}
+{"id":"000025","zh":"你存在。","en":"You exist.","nufe":"ti pale.","sense":null,"gloss":"ti=you; pale=exist","tags":["seed","existence","focus-pale"]}
+{"id":"000026","zh":"世界存在。","en":"The world exists.","nufe":"luw pale.","sense":null,"gloss":"luw=world; pale=exist","tags":["seed","existence","focus-pale"]}
+{"id":"000027","zh":"我学习 Nufe。","en":"I study Nufe.","nufe":"mi ro nufe.","sense":null,"gloss":"mi=I; ro=study; nufe=Nufe language/language","tags":["seed","language","focus-nufe"]}
+{"id":"000028","zh":"你说 Nufe。","en":"You speak Nufe.","nufe":"ti toli nufe.","sense":null,"gloss":"ti=you; toli=speak; nufe=Nufe language/language","tags":["seed","language","focus-nufe"]}
+{"id":"000029","zh":"Nufe 存在。","en":"Nufe exists.","nufe":"nufe pale.","sense":null,"gloss":"nufe=Nufe language/language; pale=exist","tags":["seed","language","focus-nufe"]}
+{"id":"000030","zh":"我说。","en":"I speak.","nufe":"mi toli.","sense":null,"gloss":"mi=I; toli=speak","tags":["seed","speech","focus-toli"]}
+{"id":"000031","zh":"你对我说。","en":"You speak to me.","nufe":"ti toli ia mi.","sense":null,"gloss":"ti=you; toli=speak; ia=to; mi=me","tags":["seed","speech","focus-toli"]}
+{"id":"000032","zh":"人民说。","en":"The people speak.","nufe":"gita toli.","sense":null,"gloss":"gita=people; toli=speak","tags":["seed","speech","focus-toli"]}
+{"id":"000033","zh":"水存在。","en":"Water exists.","nufe":"lu pale.","sense":null,"gloss":"lu=water; pale=exist","tags":["seed","nature","focus-lu"]}
+{"id":"000034","zh":"水在建筑下面。","en":"Water is below the building.","nufe":"lu da dow iwfa.","sense":null,"gloss":"lu=water; da=be at; dow=building; iwfa=below","tags":["seed","nature","focus-lu"]}
+{"id":"000035","zh":"我看水。","en":"I see water.","nufe":"mi viofa lu.","sense":null,"gloss":"mi=I; viofa=see; lu=water","tags":["seed","nature","focus-lu"]}
+{"id":"000036","zh":"火存在。","en":"Fire exists.","nufe":"ka pale.","sense":"ka.fire.general","gloss":"ka=fire; pale=exist","tags":["seed","nature","focus-ka"]}
+{"id":"000037","zh":"火是明亮的。","en":"Fire is bright.","nufe":"ka ne liew pa.","sense":"ka.fire.general","gloss":"ka=fire; ne=be; liew=bright; pa=property nominalizer/entity","tags":["seed","nature","focus-ka"]}
+{"id":"000038","zh":"小火存在。","en":"A small fire exists.","nufe":"si ka pale.","sense":"ka.fire.general","gloss":"si=small; ka=fire; pale=exist","tags":["seed","nature","focus-ka"]}
+{"id":"000039","zh":"火是明亮的。","en":"Fire is bright.","nufe":"ka ne liew pa.","sense":null,"gloss":"ka=fire; ne=be; liew=bright; pa=property nominalizer/entity","tags":["seed","property","focus-liew"]}
+{"id":"000040","zh":"灯是明亮的。","en":"The lamp is bright.","nufe":"lawpa ne liew pa.","sense":null,"gloss":"lawpa=lamp; ne=be; liew=bright; pa=property nominalizer/entity","tags":["seed","property","focus-liew"]}
+{"id":"000041","zh":"明亮的世界存在。","en":"A bright world exists.","nufe":"liew luw pale.","sense":null,"gloss":"liew=bright; luw=world; pale=exist","tags":["seed","property","focus-liew"]}
+{"id":"000042","zh":"我存在。","en":"I exist.","nufe":"mi pale.","sense":null,"gloss":"mi=I; pale=exist","tags":["seed","pronoun","focus-mi"]}
+{"id":"000043","zh":"我说。","en":"I speak.","nufe":"mi toli.","sense":null,"gloss":"mi=I; toli=speak","tags":["seed","pronoun","focus-mi"]}
+{"id":"000044","zh":"我爱你。","en":"I love you.","nufe":"mi mela ti.","sense":null,"gloss":"mi=I; mela=love; ti=you","tags":["seed","pronoun","focus-mi"]}
+{"id":"000045","zh":"你存在。","en":"You exist.","nufe":"ti pale.","sense":null,"gloss":"ti=you; pale=exist","tags":["seed","pronoun","focus-ti"]}
+{"id":"000046","zh":"你说。","en":"You speak.","nufe":"ti toli.","sense":null,"gloss":"ti=you; toli=speak","tags":["seed","pronoun","focus-ti"]}
+{"id":"000047","zh":"你爱我。","en":"You love me.","nufe":"ti mela mi.","sense":null,"gloss":"ti=you; mela=love; mi=me","tags":["seed","pronoun","focus-ti"]}
+{"id":"000048","zh":"神存在。","en":"God exists.","nufe":"ho pale.","sense":null,"gloss":"ho=God/the transcendent; pale=exist","tags":["seed","spiritual","focus-ho"]}
+{"id":"000049","zh":"我爱神。","en":"I love God.","nufe":"mi mela ho.","sense":null,"gloss":"mi=I; mela=love; ho=God/the transcendent","tags":["seed","spiritual","focus-ho"]}
+{"id":"000050","zh":"神爱人民。","en":"God loves the people.","nufe":"ho mela gita.","sense":null,"gloss":"ho=God/the transcendent; mela=love; gita=people","tags":["seed","spiritual","focus-ho"]}
+{"id":"000051","zh":"我吃。","en":"I eat.","nufe":"mi muo.","sense":null,"gloss":"mi=I; muo=eat","tags":["seed","action","focus-muo"]}
+{"id":"000052","zh":"你现在吃。","en":"You are eating now.","nufe":"ti aw muo.","sense":null,"gloss":"ti=you; aw=present tense; muo=eat","tags":["seed","action","focus-muo"]}
+{"id":"000053","zh":"人吃。","en":"A person eats.","nufe":"gia muo.","sense":null,"gloss":"gia=person; muo=eat","tags":["seed","action","focus-muo"]}
+{"id":"000054","zh":"我不去。","en":"I do not go.","nufe":"mi na bu.","sense":"na.negation.general","gloss":"mi=I; na=not; bu=go","tags":["seed","logic","focus-na"]}
+{"id":"000055","zh":"你不说。","en":"You do not speak.","nufe":"ti na toli.","sense":"na.negation.general","gloss":"ti=you; na=not; toli=speak","tags":["seed","logic","focus-na"]}
+{"id":"000056","zh":"火不存在。","en":"Fire does not exist.","nufe":"ka na pale.","sense":"na.negation.general","gloss":"ka=fire; na=not; pale=exist","tags":["seed","logic","focus-na"]}
+{"id":"000057","zh":"我是人。","en":"I am a person.","nufe":"mi ne gia.","sense":null,"gloss":"mi=I; ne=be; gia=person","tags":["seed","human","focus-gia"]}
+{"id":"000058","zh":"人说。","en":"A person speaks.","nufe":"gia toli.","sense":null,"gloss":"gia=person; toli=speak","tags":["seed","human","focus-gia"]}
+{"id":"000059","zh":"人能学习。","en":"A person can study.","nufe":"gia te ro.","sense":null,"gloss":"gia=person; te=can; ro=study","tags":["seed","human","focus-gia"]}
+{"id":"000060","zh":"人民存在。","en":"The people exist.","nufe":"gita pale.","sense":null,"gloss":"gita=people; pale=exist","tags":["seed","collective","focus-gita"]}
+{"id":"000061","zh":"人民说。","en":"The people speak.","nufe":"gita toli.","sense":null,"gloss":"gita=people; toli=speak","tags":["seed","collective","focus-gita"]}
+{"id":"000062","zh":"神爱人民。","en":"God loves the people.","nufe":"ho mela gita.","sense":null,"gloss":"ho=God/the transcendent; mela=love; gita=people","tags":["seed","collective","focus-gita"]}
+{"id":"000063","zh":"我是平静的。","en":"I am peaceful.","nufe":"mi ne sew pa.","sense":null,"gloss":"mi=I; ne=be; sew=peaceful; pa=property nominalizer/entity","tags":["seed","property","focus-sew"]}
+{"id":"000064","zh":"世界是平静的。","en":"The world is peaceful.","nufe":"luw ne sew pa.","sense":null,"gloss":"luw=world; ne=be; sew=peaceful; pa=property nominalizer/entity","tags":["seed","property","focus-sew"]}
+{"id":"000065","zh":"平静的人存在。","en":"A peaceful person exists.","nufe":"sew gia pale.","sense":null,"gloss":"sew=peaceful; gia=person; pale=exist","tags":["seed","property","focus-sew"]}
+{"id":"000066","zh":"世界存在。","en":"The world exists.","nufe":"luw pale.","sense":null,"gloss":"luw=world; pale=exist","tags":["seed","world","focus-luw"]}
+{"id":"000067","zh":"我爱世界。","en":"I love the world.","nufe":"mi mela luw.","sense":null,"gloss":"mi=I; mela=love; luw=world","tags":["seed","world","focus-luw"]}
+{"id":"000068","zh":"神创造世界。","en":"God creates the world.","nufe":"ho kali luw.","sense":null,"gloss":"ho=God/the transcendent; kali=create; luw=world","tags":["seed","world","focus-luw"]}
+{"id":"000069","zh":"人世存在。","en":"The human world exists.","nufe":"tisi pale.","sense":null,"gloss":"tisi=human world; pale=exist","tags":["seed","world","focus-tisi"]}
+{"id":"000070","zh":"我爱人间。","en":"I love the human world.","nufe":"mi mela tisi.","sense":null,"gloss":"mi=I; mela=love; tisi=human world","tags":["seed","world","focus-tisi"]}
+{"id":"000071","zh":"人世是平静的。","en":"The human world is peaceful.","nufe":"tisi ne sew pa.","sense":null,"gloss":"tisi=human world; ne=be; sew=peaceful; pa=property nominalizer/entity","tags":["seed","world","focus-tisi"]}
+{"id":"000072","zh":"我爱你。","en":"I love you.","nufe":"mi mela ti.","sense":null,"gloss":"mi=I; mela=love; ti=you","tags":["seed","love","focus-mela"]}
+{"id":"000073","zh":"你爱神。","en":"You love God.","nufe":"ti mela ho.","sense":null,"gloss":"ti=you; mela=love; ho=God/the transcendent","tags":["seed","love","focus-mela"]}
+{"id":"000074","zh":"人爱世界。","en":"A person loves the world.","nufe":"gia mela luw.","sense":null,"gloss":"gia=person; mela=love; luw=world","tags":["seed","love","focus-mela"]}
+{"id":"000075","zh":"我无条件地接纳你。","en":"I unconditionally receive you.","nufe":"mi nipu ti.","sense":null,"gloss":"mi=I; nipu=unconditionally receive/love; ti=you","tags":["seed","love","focus-nipu"]}
+{"id":"000076","zh":"神无条件地接纳世界。","en":"God unconditionally receives the world.","nufe":"ho nipu luw.","sense":null,"gloss":"ho=God/the transcendent; nipu=unconditionally receive/love; luw=world","tags":["seed","love","focus-nipu"]}
+{"id":"000077","zh":"人民无条件地接纳人。","en":"The people unconditionally receive a person.","nufe":"gita nipu gia.","sense":null,"gloss":"gita=people; nipu=unconditionally receive/love; gia=person","tags":["seed","love","focus-nipu"]}
+{"id":"000078","zh":"我能说。","en":"I can speak.","nufe":"mi te toli.","sense":null,"gloss":"mi=I; te=can; toli=speak","tags":["seed","ability","focus-te"]}
+{"id":"000079","zh":"你能吃。","en":"You can eat.","nufe":"ti te muo.","sense":null,"gloss":"ti=you; te=can; muo=eat","tags":["seed","ability","focus-te"]}
+{"id":"000080","zh":"人能爱。","en":"A person can love.","nufe":"gia te mela.","sense":null,"gloss":"gia=person; te=can; mela=love","tags":["seed","ability","focus-te"]}
+{"id":"000081","zh":"小火存在。","en":"A small fire exists.","nufe":"si ka pale.","sense":null,"gloss":"si=small; ka=fire; pale=exist","tags":["seed","size","focus-si"]}
+{"id":"000082","zh":"小词存在。","en":"A small word exists.","nufe":"si hepa pale.","sense":null,"gloss":"si=small; hepa=word; pale=exist","tags":["seed","size","focus-si"]}
+{"id":"000083","zh":"这个人很小。","en":"This person is small.","nufe":"ze gia ne si pa.","sense":null,"gloss":"ze=this; gia=person; ne=be; si=small; pa=property nominalizer/entity","tags":["seed","size","focus-si"]}
+{"id":"000084","zh":"大世界存在。","en":"A big world exists.","nufe":"ba luw pale.","sense":null,"gloss":"ba=big; luw=world; pale=exist","tags":["seed","size","focus-ba"]}
+{"id":"000085","zh":"大火存在。","en":"A big fire exists.","nufe":"ba ka pale.","sense":null,"gloss":"ba=big; ka=fire; pale=exist","tags":["seed","size","focus-ba"]}
+{"id":"000086","zh":"这个建筑很大。","en":"This building is big.","nufe":"ze dow ne ba pa.","sense":null,"gloss":"ze=this; dow=building; ne=be; ba=big; pa=property nominalizer/entity","tags":["seed","size","focus-ba"]}
+{"id":"000087","zh":"行动发生。","en":"Action happens.","nufe":"fa pale.","sense":null,"gloss":"fa=action; pale=exist/happen","tags":["expansion","action"]}
+{"id":"000088","zh":"我行动。","en":"I act.","nufe":"mi fa.","sense":null,"gloss":"mi=I; fa=act","tags":["expansion","action"]}
+{"id":"000089","zh":"你不行动。","en":"You do not act.","nufe":"ti na fa.","sense":null,"gloss":"ti=you; na=not; fa=act","tags":["expansion","action"]}
+{"id":"000090","zh":"这个东西有性质。","en":"This thing has a quality.","nufe":"ze pa ne ma pa.","sense":null,"gloss":"ze=this; pa=thing; ne=be; ma=quality/property; pa=property nominalizer","tags":["expansion","property"]}
+{"id":"000091","zh":"那个东西有性质。","en":"That thing has a quality.","nufe":"zie pa ne ma pa.","sense":null,"gloss":"zie=that; pa=thing; ne=be; ma=quality/property; pa=property nominalizer","tags":["expansion","property"]}
+{"id":"000092","zh":"某个东西有性质。","en":"Some thing has a quality.","nufe":"zew pa ne ma pa.","sense":null,"gloss":"zew=some; pa=thing; ne=be; ma=quality/property; pa=property nominalizer","tags":["expansion","property"]}
+{"id":"000093","zh":"寺庙存在。","en":"A temple exists.","nufe":"tewla pale.","sense":null,"gloss":"tewla=temple; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000094","zh":"神建造寺庙。","en":"God builds a temple.","nufe":"ho kali tewla.","sense":null,"gloss":"ho=God; kali=build/create; tewla=temple","tags":["expansion","spiritual"]}
+{"id":"000095","zh":"我去寺庙。","en":"I go to the temple.","nufe":"mi bu tewla.","sense":null,"gloss":"mi=I; bu=go; tewla=temple","tags":["expansion","motion"]}
+{"id":"000096","zh":"我休息。","en":"I rest.","nufe":"mi hesu.","sense":null,"gloss":"mi=I; hesu=rest","tags":["expansion","life"]}
+{"id":"000097","zh":"你现在休息。","en":"You rest now.","nufe":"ti aw hesu.","sense":null,"gloss":"ti=you; aw=present; hesu=rest","tags":["expansion","life"]}
+{"id":"000098","zh":"我不休息。","en":"I do not rest.","nufe":"mi na hesu.","sense":null,"gloss":"mi=I; na=not; hesu=rest","tags":["expansion","life"]}
+{"id":"000099","zh":"城市存在。","en":"A city exists.","nufe":"mife pale.","sense":null,"gloss":"mife=city; pale=exist","tags":["expansion","place"]}
+{"id":"000100","zh":"我在城市里。","en":"I am in the city.","nufe":"mi da mife.","sense":null,"gloss":"mi=I; da=be at; mife=city","tags":["expansion","place"]}
+{"id":"000101","zh":"你去城市。","en":"You go to the city.","nufe":"ti bu mife.","sense":null,"gloss":"ti=you; bu=go; mife=city","tags":["expansion","place"]}
+{"id":"000102","zh":"门存在。","en":"A door exists.","nufe":"dua pale.","sense":null,"gloss":"dua=door; pale=exist","tags":["expansion","place"]}
+{"id":"000103","zh":"门在家中间。","en":"The door is in the middle of the home.","nufe":"dua da zifo liw.","sense":null,"gloss":"dua=door; da=be at; zifo=house; liw=middle","tags":["expansion","place"]}
+{"id":"000104","zh":"生命存在。","en":"Life exists.","nufe":"jiw pale.","sense":null,"gloss":"jiw=life; pale=exist","tags":["expansion","life"]}
+{"id":"000105","zh":"他活着。","en":"He lives.","nufe":"gi via.","sense":null,"gloss":"gi=he/she/it; via=live","tags":["expansion","life"]}
+{"id":"000106","zh":"他死了。","en":"He dies.","nufe":"gi taw.","sense":null,"gloss":"gi=he/she/it; taw=die","tags":["expansion","life"]}
+{"id":"000107","zh":"他出生了。","en":"He is born.","nufe":"gi gew.","sense":null,"gloss":"gi=he/she/it; gew=be born","tags":["expansion","life"]}
+{"id":"000108","zh":"我修行。","en":"I practice cultivation.","nufe":"mi dewno.","sense":null,"gloss":"mi=I; dewno=cultivate/practice","tags":["expansion","spiritual"]}
+{"id":"000109","zh":"我工作。","en":"I work.","nufe":"mi lodu.","sense":null,"gloss":"mi=I; lodu=work","tags":["expansion","life"]}
+{"id":"000110","zh":"我睡觉。","en":"I sleep.","nufe":"mi suepa.","sense":null,"gloss":"mi=I; suepa=sleep","tags":["expansion","life"]}
+{"id":"000111","zh":"我醒来。","en":"I wake up.","nufe":"mi vega.","sense":null,"gloss":"mi=I; vega=wake up","tags":["expansion","life"]}
+{"id":"000112","zh":"善良的人存在。","en":"A kind person exists.","nufe":"meva gia pale.","sense":null,"gloss":"meva=kind; gia=person; pale=exist","tags":["expansion","property"]}
+{"id":"000113","zh":"什么是我？","en":"What am I?","nufe":"ha ne mi?","sense":null,"gloss":"ha=what; ne=be; mi=me","tags":["expansion","question"]}
+{"id":"000114","zh":"我确实存在。","en":"I indeed exist.","nufe":"mi pale ni.","sense":null,"gloss":"mi=I; pale=exist; ni=indeed/affirm","tags":["expansion","logic"]}
+{"id":"000115","zh":"这个消息存在。","en":"This message exists.","nufe":"ze qivo pale.","sense":null,"gloss":"ze=this; qivo=message; pale=exist","tags":["expansion","communication"]}
+{"id":"000116","zh":"我有手机。","en":"I have a phone.","nufe":"mi ge muqivo.","sense":null,"gloss":"mi=I; ge=have; muqivo=phone","tags":["expansion","object"]}
+{"id":"000117","zh":"我用手机。","en":"I use a phone.","nufe":"mi lo muqivo.","sense":null,"gloss":"mi=I; lo=use; muqivo=phone","tags":["expansion","object"]}
+{"id":"000118","zh":"工具存在。","en":"A tool exists.","nufe":"ke pale.","sense":null,"gloss":"ke=tool; pale=exist","tags":["expansion","object"]}
+{"id":"000119","zh":"我用工具。","en":"I use a tool.","nufe":"mi lo ke.","sense":null,"gloss":"mi=I; lo=use; ke=tool","tags":["expansion","object"]}
+{"id":"000120","zh":"这个存在。","en":"This exists.","nufe":"zepa pale.","sense":null,"gloss":"zepa=this thing; pale=exist","tags":["expansion","demonstrative"]}
+{"id":"000121","zh":"那个存在。","en":"That exists.","nufe":"ziepa pale.","sense":null,"gloss":"ziepa=that thing; pale=exist","tags":["expansion","demonstrative"]}
+{"id":"000122","zh":"那个人存在。","en":"That person exists.","nufe":"zie gia pale.","sense":null,"gloss":"zie=that; gia=person; pale=exist","tags":["expansion","demonstrative"]}
+{"id":"000123","zh":"某个东西存在。","en":"Some thing exists.","nufe":"zewpa pale.","sense":null,"gloss":"zewpa=some thing; pale=exist","tags":["expansion","demonstrative"]}
+{"id":"000124","zh":"某个人存在。","en":"Some person exists.","nufe":"zew gia pale.","sense":null,"gloss":"zew=some; gia=person; pale=exist","tags":["expansion","demonstrative"]}
+{"id":"000125","zh":"酒存在。","en":"Wine exists.","nufe":"kualu pale.","sense":null,"gloss":"kualu=wine; pale=exist","tags":["expansion","object"]}
+{"id":"000126","zh":"酒是迷乱的。","en":"Wine is dizzying.","nufe":"kualu ne kua pa.","sense":null,"gloss":"kualu=wine; ne=be; kua=dizzying/confused; pa=property nominalizer","tags":["expansion","property"]}
+{"id":"000127","zh":"我品尝酒。","en":"I taste wine.","nufe":"mi giofa kualu.","sense":null,"gloss":"mi=I; giofa=taste; kualu=wine","tags":["expansion","object"]}
+{"id":"000128","zh":"我在家里面。","en":"I am inside the house.","nufe":"mi da zifo niw.","sense":null,"gloss":"mi=I; da=be at; zifo=house; niw=inside","tags":["expansion","place"]}
+{"id":"000129","zh":"我在家外面。","en":"I am outside the house.","nufe":"mi da zifo nuw.","sense":null,"gloss":"mi=I; da=be at; zifo=house; nuw=outside","tags":["expansion","place"]}
+{"id":"000130","zh":"博物馆存在。","en":"A museum exists.","nufe":"musedow pale.","sense":null,"gloss":"musedow=museum building; pale=exist","tags":["expansion","place"]}
+{"id":"000131","zh":"学校存在。","en":"A school exists.","nufe":"rodow pale.","sense":null,"gloss":"rodow=school; pale=exist","tags":["expansion","place"]}
+{"id":"000132","zh":"商业存在。","en":"Trade exists.","nufe":"mowlu pale.","sense":null,"gloss":"mowlu=trade/business; pale=exist","tags":["expansion","trade"]}
+{"id":"000133","zh":"商场存在。","en":"A mall exists.","nufe":"mowludow pale.","sense":null,"gloss":"mowludow=mall; pale=exist","tags":["expansion","trade"]}
+{"id":"000134","zh":"钱存在。","en":"Money exists.","nufe":"mow pale.","sense":null,"gloss":"mow=money; pale=exist","tags":["expansion","trade"]}
+{"id":"000135","zh":"我得到钱。","en":"I get money.","nufe":"mi gaw mow.","sense":null,"gloss":"mi=I; gaw=get; mow=money","tags":["expansion","trade"]}
+{"id":"000136","zh":"我失去钱。","en":"I lose money.","nufe":"mi law mow.","sense":null,"gloss":"mi=I; law=lose; mow=money","tags":["expansion","trade"]}
+{"id":"000137","zh":"灵存在。","en":"Spirit exists.","nufe":"luho pale.","sense":null,"gloss":"luho=spirit; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000138","zh":"心存在。","en":"Mind exists.","nufe":"mew pale.","sense":null,"gloss":"mew=mind; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000139","zh":"意识体存在。","en":"The consciousness-body exists.","nufe":"mewmi pale.","sense":null,"gloss":"mewmi=consciousness-body; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000140","zh":"物体存在。","en":"Matter exists.","nufe":"mate pale.","sense":null,"gloss":"mate=matter/object; pale=exist","tags":["expansion","object"]}
+{"id":"000141","zh":"身体存在。","en":"A body exists.","nufe":"matemi pale.","sense":null,"gloss":"matemi=body; pale=exist","tags":["expansion","body"]}
+{"id":"000142","zh":"地方存在。","en":"A place exists.","nufe":"lia pale.","sense":null,"gloss":"lia=place/location; pale=exist","tags":["expansion","place"]}
+{"id":"000143","zh":"山存在。","en":"A mountain exists.","nufe":"how pale.","sense":null,"gloss":"how=mountain; pale=exist","tags":["expansion","nature"]}
+{"id":"000144","zh":"山脉存在。","en":"A mountain range exists.","nufe":"sowni pale.","sense":null,"gloss":"sowni=mountain range; pale=exist","tags":["expansion","nature"]}
+{"id":"000145","zh":"北方存在。","en":"North exists.","nufe":"palia pale.","sense":null,"gloss":"palia=north; pale=exist","tags":["expansion","direction"]}
+{"id":"000146","zh":"东方存在。","en":"East exists.","nufe":"falia pale.","sense":null,"gloss":"falia=east; pale=exist","tags":["expansion","direction"]}
+{"id":"000147","zh":"南方存在。","en":"South exists.","nufe":"malia pale.","sense":null,"gloss":"malia=south; pale=exist","tags":["expansion","direction"]}
+{"id":"000148","zh":"西方存在。","en":"West exists.","nufe":"talia pale.","sense":null,"gloss":"talia=west; pale=exist","tags":["expansion","direction"]}
+{"id":"000149","zh":"东北方存在。","en":"Northeast exists.","nufe":"pafalia pale.","sense":null,"gloss":"pafalia=northeast; pale=exist","tags":["expansion","direction"]}
+{"id":"000150","zh":"东南方存在。","en":"Southeast exists.","nufe":"famalia pale.","sense":null,"gloss":"famalia=southeast; pale=exist","tags":["expansion","direction"]}
+{"id":"000151","zh":"我是独处的。","en":"I am solitary.","nufe":"mi ne low pa.","sense":null,"gloss":"mi=I; ne=be; low=solitary; pa=property nominalizer","tags":["expansion","property"]}
+{"id":"000152","zh":"手存在。","en":"A hand exists.","nufe":"mu pale.","sense":null,"gloss":"mu=hand; pale=exist","tags":["expansion","body"]}
+{"id":"000153","zh":"我有手。","en":"I have a hand.","nufe":"mi ge mu.","sense":null,"gloss":"mi=I; ge=have; mu=hand","tags":["expansion","body"]}
+{"id":"000154","zh":"我从城市来。","en":"I come from the city.","nufe":"mi pu mife.","sense":null,"gloss":"mi=I; pu=come from; mife=city","tags":["expansion","motion"]}
+{"id":"000155","zh":"消息从手机来。","en":"The message comes from the phone.","nufe":"qivo pu muqivo.","sense":null,"gloss":"qivo=message; pu=come from; muqivo=phone","tags":["expansion","communication"]}
+{"id":"000156","zh":"风从西方来。","en":"The wind comes from the west.","nufe":"piuw pu talia.","sense":null,"gloss":"piuw=wind; pu=come from; talia=west","tags":["expansion","nature"]}
+{"id":"000157","zh":"这个东西是坏的。","en":"This thing is bad.","nufe":"ze pa ne mo pa.","sense":null,"gloss":"ze=this; pa=thing; ne=be; mo=bad; pa=property nominalizer","tags":["expansion","property"]}
+{"id":"000158","zh":"我感到坏。","en":"I feel bad.","nufe":"mi miow mo pa.","sense":null,"gloss":"mi=I; miow=feel; mo=bad; pa=property nominalizer","tags":["expansion","emotion"]}
+{"id":"000159","zh":"坏消息存在。","en":"A bad message exists.","nufe":"mo qivo pale.","sense":null,"gloss":"mo=bad; qivo=message; pale=exist","tags":["expansion","property"]}
+{"id":"000160","zh":"西南方存在。","en":"Southwest exists.","nufe":"matalia pale.","sense":null,"gloss":"matalia=southwest; pale=exist","tags":["expansion","direction"]}
+{"id":"000161","zh":"西北方存在。","en":"Northwest exists.","nufe":"tapalia pale.","sense":null,"gloss":"tapalia=northwest; pale=exist","tags":["expansion","direction"]}
+{"id":"000162","zh":"新的词存在。","en":"A new word exists.","nufe":"vi hepa pale.","sense":null,"gloss":"vi=new; hepa=word; pale=exist","tags":["expansion","property"]}
+{"id":"000163","zh":"旧房子存在。","en":"An old house exists.","nufe":"du zifo pale.","sense":null,"gloss":"du=old; zifo=house; pale=exist","tags":["expansion","property"]}
+{"id":"000164","zh":"我觉悟。","en":"I awaken spiritually.","nufe":"mi hiro.","sense":null,"gloss":"mi=I; hiro=awaken","tags":["expansion","spiritual"]}
+{"id":"000165","zh":"声音存在。","en":"Sound exists.","nufe":"mio pale.","sense":null,"gloss":"mio=sound; pale=exist","tags":["expansion","sense"]}
+{"id":"000166","zh":"视觉图像存在。","en":"A visual image exists.","nufe":"vio pale.","sense":null,"gloss":"vio=visual image; pale=exist","tags":["expansion","sense"]}
+{"id":"000167","zh":"气味存在。","en":"A smell exists.","nufe":"nio pale.","sense":null,"gloss":"nio=smell; pale=exist","tags":["expansion","sense"]}
+{"id":"000168","zh":"味道存在。","en":"A taste exists.","nufe":"gio pale.","sense":null,"gloss":"gio=taste; pale=exist","tags":["expansion","sense"]}
+{"id":"000169","zh":"触感存在。","en":"A tactile sensation exists.","nufe":"tio pale.","sense":null,"gloss":"tio=touch sensation; pale=exist","tags":["expansion","sense"]}
+{"id":"000170","zh":"观念存在。","en":"An idea exists.","nufe":"lio pale.","sense":null,"gloss":"lio=idea/proposition; pale=exist","tags":["expansion","mind"]}
+{"id":"000171","zh":"美好的声音存在。","en":"A beautiful sound exists.","nufe":"sa mio pale.","sense":null,"gloss":"sa=beautiful; mio=sound; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000172","zh":"音乐存在。","en":"Music exists.","nufe":"samio pale.","sense":null,"gloss":"samio=music; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000173","zh":"美的画面存在。","en":"A beautiful image exists.","nufe":"savio pale.","sense":null,"gloss":"savio=beautiful image; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000174","zh":"香存在。","en":"A pleasant scent exists.","nufe":"sanio pale.","sense":null,"gloss":"sanio=pleasant scent; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000175","zh":"美味存在。","en":"Deliciousness exists.","nufe":"sagio pale.","sense":null,"gloss":"sagio=delicious taste; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000176","zh":"舒适的触感存在。","en":"A comfortable touch exists.","nufe":"satio pale.","sense":null,"gloss":"satio=comfortable touch; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000177","zh":"哲学存在。","en":"Philosophy exists.","nufe":"salio pale.","sense":null,"gloss":"salio=philosophy; pale=exist","tags":["expansion","aesthetic"]}
+{"id":"000178","zh":"救赎存在。","en":"Redemption exists.","nufe":"gosu pale.","sense":null,"gloss":"gosu=redemption; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000179","zh":"主义存在。","en":"An ideology exists.","nufe":"vibo pale.","sense":null,"gloss":"vibo=ideology; pale=exist","tags":["expansion","social"]}
+{"id":"000180","zh":"我解释消息。","en":"I explain the message.","nufe":"mi de qivo.","sense":null,"gloss":"mi=I; de=explain; qivo=message","tags":["expansion","communication"]}
+{"id":"000181","zh":"系统存在。","en":"A system exists.","nufe":"siw pale.","sense":null,"gloss":"siw=system; pale=exist","tags":["expansion","system"]}
+{"id":"000182","zh":"科学存在。","en":"Science exists.","nufe":"desiw pale.","sense":null,"gloss":"desiw=science; pale=exist","tags":["expansion","system"]}
+{"id":"000183","zh":"我渴望去。","en":"I desire to go.","nufe":"mi diho bu.","sense":null,"gloss":"mi=I; diho=desire; bu=go","tags":["expansion","desire"]}
+{"id":"000184","zh":"我意图去。","en":"I intend to go.","nufe":"mi vile bu.","sense":null,"gloss":"mi=I; vile=intend; bu=go","tags":["expansion","desire"]}
+{"id":"000185","zh":"香水存在。","en":"Perfume exists.","nufe":"saniolu pale.","sense":null,"gloss":"saniolu=perfume; pale=exist","tags":["expansion","object"]}
+{"id":"000186","zh":"我觉知。","en":"I am aware.","nufe":"mi ciw.","sense":null,"gloss":"mi=I; ciw=be aware","tags":["expansion","mind"]}
+{"id":"000187","zh":"我进入房子。","en":"I enter the house.","nufe":"mi buniw zifo.","sense":null,"gloss":"mi=I; buniw=enter; zifo=house","tags":["expansion","motion"]}
+{"id":"000188","zh":"我出去房子。","en":"I go out of the house.","nufe":"mi bunuw zifo.","sense":null,"gloss":"mi=I; bunuw=go out; zifo=house","tags":["expansion","motion"]}
+{"id":"000189","zh":"电存在。","en":"Electricity exists.","nufe":"vidu pale.","sense":null,"gloss":"vidu=electricity; pale=exist","tags":["expansion","nature"]}
+{"id":"000190","zh":"力量存在。","en":"Force exists.","nufe":"muw pale.","sense":null,"gloss":"muw=force; pale=exist","tags":["expansion","nature"]}
+{"id":"000191","zh":"风存在。","en":"Wind exists.","nufe":"piuw pale.","sense":null,"gloss":"piuw=wind; pale=exist","tags":["expansion","nature"]}
+{"id":"000192","zh":"道路存在。","en":"A road exists.","nufe":"suqi pale.","sense":null,"gloss":"suqi=road/path; pale=exist","tags":["expansion","place"]}
+{"id":"000193","zh":"我喜欢音乐。","en":"I like music.","nufe":"mi fote samio.","sense":null,"gloss":"mi=I; fote=like; samio=music","tags":["expansion","emotion"]}
+{"id":"000194","zh":"我认为你存在。","en":"I think that you exist.","nufe":"mi liofa i ti pale u.","sense":null,"gloss":"mi=I; liofa=think; i...u=nominalized clause; ti pale=you exist","tags":["expansion","mind"]}
+{"id":"000195","zh":"我离弃那个。","en":"I abandon that one.","nufe":"mi zava ziepa.","sense":null,"gloss":"mi=I; zava=abandon; ziepa=that one","tags":["expansion","relation"]}
+{"id":"000196","zh":"我离开。","en":"I leave.","nufe":"mi tobi.","sense":null,"gloss":"mi=I; tobi=leave","tags":["expansion","motion"]}
+{"id":"000197","zh":"我离开你。","en":"I leave you.","nufe":"mi melu ti.","sense":null,"gloss":"mi=I; melu=leave someone; ti=you","tags":["expansion","relation"]}
+{"id":"000198","zh":"时间存在。","en":"Time exists.","nufe":"kala pale.","sense":null,"gloss":"kala=time; pale=exist","tags":["expansion","time"]}
+{"id":"000199","zh":"国家存在。","en":"A country exists.","nufe":"mepe pale.","sense":null,"gloss":"mepe=country; pale=exist","tags":["expansion","social"]}
+{"id":"000200","zh":"空间存在。","en":"Space exists.","nufe":"pata pale.","sense":null,"gloss":"pata=space; pale=exist","tags":["expansion","space"]}
+{"id":"000201","zh":"安宁存在。","en":"Deep peace exists.","nufe":"piyema pale.","sense":null,"gloss":"piyema=deep peace; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000202","zh":"我听音乐。","en":"I hear music.","nufe":"mi miofa samio.","sense":null,"gloss":"mi=I; miofa=hear; samio=music","tags":["expansion","sense"]}
+{"id":"000203","zh":"我闻香。","en":"I smell fragrance.","nufe":"mi niofa sanio.","sense":null,"gloss":"mi=I; niofa=smell; sanio=pleasant scent","tags":["expansion","sense"]}
+{"id":"000204","zh":"我摸舒适的触感。","en":"I touch a comfortable feeling.","nufe":"mi tiofa satio.","sense":null,"gloss":"mi=I; tiofa=touch; satio=comfortable touch","tags":["expansion","sense"]}
+{"id":"000205","zh":"花存在。","en":"A flower exists.","nufe":"nagu pale.","sense":null,"gloss":"nagu=flower; pale=exist","tags":["expansion","nature"]}
+{"id":"000206","zh":"天空存在。","en":"The sky exists.","nufe":"soke pale.","sense":null,"gloss":"soke=sky; pale=exist","tags":["expansion","nature"]}
+{"id":"000207","zh":"蓝花存在。","en":"A blue flower exists.","nufe":"mati nagu pale.","sense":null,"gloss":"mati=blue; nagu=flower; pale=exist","tags":["expansion","nature"]}
+{"id":"000208","zh":"我尝试学习 Nufe。","en":"I try to learn Nufe.","nufe":"mi zuva ro nufe.","sense":null,"gloss":"mi=I; zuva=try; ro=learn; nufe=Nufe","tags":["expansion","learning"]}
+{"id":"000209","zh":"商业开始。","en":"Trade begins.","nufe":"mowlu qa.","sense":null,"gloss":"mowlu=trade; qa=begin","tags":["expansion","time"]}
+{"id":"000210","zh":"商业结束。","en":"Trade ends.","nufe":"mowlu ki.","sense":null,"gloss":"mowlu=trade; ki=end","tags":["expansion","time"]}
+{"id":"000211","zh":"虚无存在。","en":"Void exists.","nufe":"vo pale.","sense":null,"gloss":"vo=void; pale=exist","tags":["expansion","spiritual"]}
+{"id":"000212","zh":"群组存在。","en":"A group exists.","nufe":"je pale.","sense":null,"gloss":"je=group; pale=exist","tags":["expansion","social"]}
+{"id":"000213","zh":"你伤害我。","en":"You hurt me.","nufe":"ti ruma mi.","sense":null,"gloss":"ti=you; ruma=hurt; mi=me","tags":["expansion","body"]}
+{"id":"000214","zh":"我受伤。","en":"I am injured.","nufe":"mi dema.","sense":null,"gloss":"mi=I; dema=be injured","tags":["expansion","body"]}
+{"id":"000215","zh":"许多人存在。","en":"Many people exist.","nufe":"ve gia pale.","sense":null,"gloss":"ve=many; gia=person; pale=exist","tags":["expansion","quantity"]}
+{"id":"000216","zh":"水是少的。","en":"Water is little.","nufe":"lu ne no pa.","sense":null,"gloss":"lu=water; ne=be; no=few/little; pa=property nominalizer","tags":["expansion","quantity"]}
+{"id":"000217","zh":"我存在啊。","en":"I exist, ah.","nufe":"mi pale a.","sense":null,"gloss":"mi=I; pale=exist; a=particle","tags":["expansion","function"]}
+{"id":"000218","zh":"你存在啊。","en":"You exist, ah.","nufe":"ti pale a.","sense":null,"gloss":"ti=you; pale=exist; a=particle","tags":["expansion","function"]}
+{"id":"000219","zh":"我存在吗？","en":"Do I exist?","nufe":"mi pale a?","sense":null,"gloss":"mi=I; pale=exist; a=question particle","tags":["expansion","function"]}
+{"id":"000220","zh":"我对你说你存在。","en":"I tell you that you exist.","nufe":"mi toli i ti pale u ia ti.","sense":null,"gloss":"mi=I; toli=say; i...u=nominalized clause; ti pale=you exist; ia=to; ti=you","tags":["expansion","function"]}
+{"id":"000221","zh":"我知道你存在。","en":"I know that you exist.","nufe":"mi qe i ti pale u.","sense":null,"gloss":"mi=I; qe=know; i...u=nominalized clause; ti pale=you exist","tags":["expansion","function"]}
+{"id":"000222","zh":"我存在是好的。","en":"My existing is good.","nufe":"i mi pale u ne bo pa.","sense":null,"gloss":"i...u=nominalized clause; mi pale=I exist; ne=be; bo=good; pa=property nominalizer","tags":["expansion","function"]}
+{"id":"000223","zh":"我和你存在。","en":"You and I exist.","nufe":"mi e ti pale.","sense":null,"gloss":"mi=I; e=and; ti=you; pale=exist","tags":["expansion","function"]}
+{"id":"000224","zh":"山和山脉存在。","en":"The mountain and the range exist.","nufe":"how e sowni pale.","sense":null,"gloss":"how=mountain; e=and; sowni=range; pale=exist","tags":["expansion","function"]}
+{"id":"000225","zh":"你爱的人存在。","en":"The person whom you love exists.","nufe":"gia o ti mela, pale.","sense":null,"gloss":"gia=person; o=postposed clause marker; ti mela=you love; pale=exist","tags":["expansion","function"]}
+{"id":"000226","zh":"我说的信息存在。","en":"The message that I say exists.","nufe":"qivo o mi toli, pale.","sense":null,"gloss":"qivo=message; o=postposed clause marker; mi toli=I speak; pale=exist","tags":["expansion","function"]}
+{"id":"000227","zh":"虽然我想要，但是我不去。","en":"Although I want to, I do not go.","nufe":"io mi lew, uo mi na bu.","sense":null,"gloss":"io...uo=although...but; mi=I; lew=want; na=not; bu=go","tags":["expansion","function"]}
+{"id":"000228","zh":"虽然我是平静的，但是我不休息。","en":"Although I am peaceful, I do not rest.","nufe":"io mi ne sew pa, uo mi na hesu.","sense":null,"gloss":"io...uo=although...but; mi=I; ne=be; sew=peaceful; pa=property nominalizer; hesu=rest","tags":["expansion","function"]}
+{"id":"000229","zh":"如果我存在，那么我会死。","en":"If I exist, then I die.","nufe":"iu mi pale, ui mi taw.","sense":null,"gloss":"iu...ui=if...then; mi=I; pale=exist; taw=die","tags":["expansion","function"]}
+{"id":"000230","zh":"如果我学习，那么我能说。","en":"If I study, then I can speak.","nufe":"iu mi ro, ui mi te toli.","sense":null,"gloss":"iu...ui=if...then; mi=I; ro=study; te=can; toli=speak","tags":["expansion","function"]}
+{"id":"000231","zh":"你或我去。","en":"You or I go.","nufe":"ti ua mi bu.","sense":null,"gloss":"ti=you; ua=or; mi=I; bu=go","tags":["expansion","function"]}
+{"id":"000232","zh":"我过去吃。","en":"I ate in the past.","nufe":"mi iw muo.","sense":null,"gloss":"mi=I; iw=past; muo=eat","tags":["expansion","function"]}
+{"id":"000233","zh":"我将来吃。","en":"I will eat.","nufe":"mi uw muo.","sense":null,"gloss":"mi=I; uw=future; muo=eat","tags":["expansion","function"]}
+{"id":"000234","zh":"我吃了。","en":"I ate.","nufe":"mi ew muo.","sense":null,"gloss":"mi=I; ew=perfective; muo=eat","tags":["expansion","function"]}
+{"id":"000235","zh":"我在吃。","en":"I am eating.","nufe":"mi ow muo.","sense":null,"gloss":"mi=I; ow=progressive; muo=eat","tags":["expansion","function"]}
+{"id":"000236","zh":"我现在已经吃了。","en":"I have eaten now.","nufe":"mi iaw muo.","sense":null,"gloss":"mi=I; iaw=present perfect; muo=eat","tags":["expansion","function"]}
+{"id":"000237","zh":"我现在正在吃。","en":"I am eating now.","nufe":"mi uaw muo.","sense":null,"gloss":"mi=I; uaw=present progressive; muo=eat","tags":["expansion","function"]}
+{"id":"000238","zh":"我当时已经吃了。","en":"I had eaten then.","nufe":"mi iew muo.","sense":null,"gloss":"mi=I; iew=past perfect; muo=eat","tags":["expansion","function"]}
+{"id":"000239","zh":"我当时正在吃。","en":"I was eating then.","nufe":"mi iow muo.","sense":null,"gloss":"mi=I; iow=past progressive; muo=eat","tags":["expansion","function"]}
+{"id":"000240","zh":"我将来会吃完。","en":"I will have eaten.","nufe":"mi uew muo.","sense":null,"gloss":"mi=I; uew=future perfect; muo=eat","tags":["expansion","function"]}
+{"id":"000241","zh":"我将来会正在吃。","en":"I will be eating.","nufe":"mi uow muo.","sense":null,"gloss":"mi=I; uow=future progressive; muo=eat","tags":["expansion","function"]}
+{"id":"000242","zh":"因为我学习，所以我能说。","en":"Because I study, I can speak.","nufe":"iuw mi ro, uiw mi te toli.","sense":null,"gloss":"iuw...uiw=because...so; mi=I; ro=study; te=can; toli=speak","tags":["expansion","function"]}
+{"id":"000243","zh":"因为我不平静，所以我休息。","en":"Because I am not peaceful, I rest.","nufe":"iuw mi ne na sew pa, uiw mi hesu.","sense":null,"gloss":"iuw...uiw=because...so; mi=I; ne=be; na=not; sew=peaceful; pa=property nominalizer; hesu=rest","tags":["expansion","function"]}
+{"id":"000244","zh":"你被我爱。","en":"You are loved by me.","nufe":"ti be mela mi.","sense":null,"gloss":"ti=you; be=passive; mela=love; mi=me","tags":["expansion","function"]}
+{"id":"000245","zh":"这个物体被你切碎。","en":"This object is cut by you.","nufe":"ze mate be kopa ti.","sense":null,"gloss":"ze=this; mate=object; be=passive; kopa=cut up; ti=you","tags":["expansion","function"]}
+{"id":"000246","zh":"你使我活着。","en":"You make me live.","nufe":"ti so i mi via u.","sense":null,"gloss":"ti=you; so=make; i...u=nominalized clause; mi via=I live","tags":["expansion","function"]}
+{"id":"000247","zh":"这个在我前面。","en":"This is in front of me.","nufe":"zepa da mi awta.","sense":null,"gloss":"zepa=this thing; da=be at; mi=me; awta=front","tags":["expansion","spatial"]}
+{"id":"000248","zh":"那个在我后面。","en":"That is behind me.","nufe":"ziepa da mi posa.","sense":null,"gloss":"ziepa=that thing; da=be at; mi=me; posa=behind","tags":["expansion","spatial"]}
+{"id":"000249","zh":"某个东西在我左边。","en":"Some thing is on my left.","nufe":"zewpa da mi siwta.","sense":null,"gloss":"zewpa=some thing; da=be at; mi=me; siwta=left","tags":["expansion","spatial"]}
+{"id":"000250","zh":"工具在建筑上面。","en":"The tool is above the building.","nufe":"ke da dow supa.","sense":null,"gloss":"ke=tool; da=be at; dow=building; supa=above","tags":["expansion","spatial"]}
+{"id":"000251","zh":"那个在我右边。","en":"That is on my right.","nufe":"ziepa da mi deka.","sense":null,"gloss":"ziepa=that thing; da=be at; mi=me; deka=right","tags":["expansion","spatial"]}
+{"id":"000252","zh":"我看太阳。","en":"I see the sun.","nufe":"mi viofa mipe.","sense":null,"gloss":"mi=I; viofa=see; mipe=sun","tags":["expansion","sense"]}
+{"id":"000253","zh":"太阳在天空中间。","en":"The sun is in the middle of the sky.","nufe":"mipe da soke liw.","sense":null,"gloss":"mipe=sun; da=be at; soke=sky; liw=middle","tags":["expansion","nature"]}
+{"id":"000254","zh":"我自身存在。","en":"My self exists.","nufe":"fe pale.","sense":null,"gloss":"fe=self; pale=exist","tags":["expansion","self"]}
+{"id":"000255","zh":"他知道我自身。","en":"He knows my self.","nufe":"gi qe fe.","sense":null,"gloss":"gi=he/she/it; qe=know; fe=self","tags":["expansion","self"]}
+{"id":"000256","zh":"消息存在。","en":"A message exists.","nufe":"qivo pale.","sense":null,"gloss":"qivo=message; pale=exist","tags":["expansion","communication"]}
+{"id":"000257","zh":"手机有信息。","en":"The phone has information.","nufe":"muqivo ge qivo.","sense":null,"gloss":"muqivo=phone; ge=have; qivo=message/info","tags":["expansion","communication"]}
+{"id":"000258","zh":"我把信息放在手机里。","en":"I put the message in the phone.","nufe":"mi ko qivo ia muqivo.","sense":null,"gloss":"mi=I; ko=put; qivo=message; ia=in/to; muqivo=phone","tags":["expansion","communication"]}
+{"id":"000259","zh":"这个灯在房子里面。","en":"This lamp is inside the house.","nufe":"ze lawpa da zifo niw.","sense":null,"gloss":"ze=this; lawpa=lamp; da=be at; zifo=house; niw=inside","tags":["expansion","spatial"]}
+{"id":"000260","zh":"某个灯在房子里面。","en":"Some lamp is inside the house.","nufe":"zew lawpa da zifo niw.","sense":null,"gloss":"zew=some; lawpa=lamp; da=be at; zifo=house; niw=inside","tags":["expansion","spatial"]}
+{"id":"000261","zh":"他是独处的。","en":"He is solitary.","nufe":"gi ne low pa.","sense":null,"gloss":"gi=he/she/it; ne=be; low=solitary; pa=property nominalizer","tags":["topup","property"]}
+{"id":"000262","zh":"这个人是独处的。","en":"This person is solitary.","nufe":"ze gia ne low pa.","sense":null,"gloss":"ze=this; gia=person; ne=be; low=solitary; pa=property nominalizer","tags":["topup","property"]}
+{"id":"000263","zh":"你想回你自己的家。","en":"You want to return to your home.","nufe":"ti lew bu ti dili.","sense":null,"gloss":"ti=you; lew=want; bu=go; ti dili=your home","tags":["topup","home"]}
+{"id":"000264","zh":"我在我自己的家。","en":"I am in my home.","nufe":"mi da mi dili.","sense":null,"gloss":"mi=I; da=be at; mi dili=my home","tags":["topup","home"]}
+{"id":"000265","zh":"生命、物体和身体存在。","en":"Life, matter, and body exist.","nufe":"jiw e mate e matemi pale.","sense":null,"gloss":"jiw=life; e=and; mate=matter; matemi=body; pale=exist","tags":["topup","body"]}
+{"id":"000266","zh":"生命是好的。","en":"Life is good.","nufe":"jiw ne bo pa.","sense":null,"gloss":"jiw=life; ne=be; bo=good; pa=property nominalizer","tags":["topup","life"]}
+{"id":"000267","zh":"我活着而且不死。","en":"I live and do not die.","nufe":"mi via e na taw.","sense":null,"gloss":"mi=I; via=live; e=and; na=not; taw=die","tags":["topup","life"]}
+{"id":"000268","zh":"他出生并活着。","en":"He is born and lives.","nufe":"gi gew e via.","sense":null,"gloss":"gi=he/she/it; gew=be born; e=and; via=live","tags":["topup","life"]}
+{"id":"000269","zh":"孩子出生。","en":"A child is born.","nufe":"gela gew.","sense":null,"gloss":"gela=child; gew=be born","tags":["topup","life"]}
+{"id":"000270","zh":"我修行并工作。","en":"I cultivate and work.","nufe":"mi dewno e lodu.","sense":null,"gloss":"mi=I; dewno=practice; e=and; lodu=work","tags":["topup","life"]}
+{"id":"000271","zh":"你修行并工作。","en":"You cultivate and work.","nufe":"ti dewno e lodu.","sense":null,"gloss":"ti=you; dewno=practice; e=and; lodu=work","tags":["topup","life"]}
+{"id":"000272","zh":"我睡觉并醒来。","en":"I sleep and wake up.","nufe":"mi suepa e vega.","sense":null,"gloss":"mi=I; suepa=sleep; e=and; vega=wake","tags":["topup","life"]}
+{"id":"000273","zh":"你睡觉并醒来。","en":"You sleep and wake up.","nufe":"ti suepa e vega.","sense":null,"gloss":"ti=you; suepa=sleep; e=and; vega=wake","tags":["topup","life"]}
+{"id":"000274","zh":"我和他都是善良的。","en":"He and I are kind.","nufe":"mi e gi ne meva pa.","sense":null,"gloss":"mi=I; e=and; gi=he/she/it; ne=be; meva=kind; pa=property nominalizer","tags":["topup","property"]}
+{"id":"000275","zh":"什么在我前面？","en":"What is in front of me?","nufe":"ha da mi awta?","sense":null,"gloss":"ha=what; da=be at; mi=me; awta=front","tags":["topup","question"]}
+{"id":"000276","zh":"什么在我后面？","en":"What is behind me?","nufe":"ha da mi posa?","sense":null,"gloss":"ha=what; da=be at; mi=me; posa=behind","tags":["topup","question"]}
+{"id":"000277","zh":"你的确存在。","en":"You indeed exist.","nufe":"ti pale ni.","sense":null,"gloss":"ti=you; pale=exist; ni=indeed","tags":["topup","logic"]}
+{"id":"000278","zh":"神确实存在。","en":"God indeed exists.","nufe":"ho pale ni.","sense":null,"gloss":"ho=God; pale=exist; ni=indeed","tags":["topup","logic"]}
+{"id":"000279","zh":"你有手并用工具。","en":"You have a hand and use a tool.","nufe":"ti ge mu. ti lo ke.","sense":null,"gloss":"ti=you; ge=have; mu=hand. ti=you; lo=use; ke=tool","tags":["topup","body"]}
+{"id":"000280","zh":"我看这个、那个和某个东西。","en":"I see this, that, and some thing.","nufe":"mi viofa zepa e ziepa e zewpa.","sense":null,"gloss":"mi=I; viofa=see; zepa=this; e=and; ziepa=that; zewpa=some thing","tags":["topup","demonstrative"]}
+{"id":"000281","zh":"那个灯在房子外面。","en":"That lamp is outside the house.","nufe":"zie lawpa da zifo nuw.","sense":null,"gloss":"zie=that; lawpa=lamp; da=be at; zifo=house; nuw=outside","tags":["topup","spatial"]}
+{"id":"000282","zh":"这个东西在房子外面。","en":"This thing is outside the house.","nufe":"ze pa da zifo nuw.","sense":null,"gloss":"ze=this; pa=thing; da=be at; zifo=house; nuw=outside","tags":["topup","spatial"]}
+{"id":"000283","zh":"我去博物馆、学校和商场。","en":"I go to the museum, school, and mall.","nufe":"mi bu musedow. mi bu rodow. mi bu mowludow.","sense":null,"gloss":"mi=I; bu=go; musedow=museum. mi=I; bu=go; rodow=school. mi=I; bu=go; mowludow=mall","tags":["topup","place"]}
+{"id":"000284","zh":"博物馆、学校和商场都在城市里。","en":"The museum, school, and mall are in the city.","nufe":"musedow e rodow e mowludow da mife.","sense":null,"gloss":"musedow=museum; e=and; rodow=school; mowludow=mall; da=be at; mife=city","tags":["topup","place"]}
+{"id":"000285","zh":"你得到钱并失去信息。","en":"You get money and lose information.","nufe":"ti gaw mow. ti law qivo.","sense":null,"gloss":"ti=you; gaw=get; mow=money. ti=you; law=lose; qivo=message/info","tags":["topup","trade"]}
+{"id":"000286","zh":"他得到信息并失去钱。","en":"He gets information and loses money.","nufe":"gi gaw qivo. gi law mow.","sense":null,"gloss":"gi=he/she/it; gaw=get; qivo=message. gi=he/she/it; law=lose; mow=money","tags":["topup","trade"]}
+{"id":"000287","zh":"灵、心和意识体存在。","en":"Spirit, mind, and consciousness-body exist.","nufe":"luho e mew e mewmi pale.","sense":null,"gloss":"luho=spirit; e=and; mew=mind; mewmi=consciousness-body; pale=exist","tags":["topup","spiritual"]}
+{"id":"000288","zh":"灵、心和意识体都是好的。","en":"Spirit, mind, and consciousness-body are good.","nufe":"luho e mew e mewmi ne bo pa.","sense":null,"gloss":"luho=spirit; e=and; mew=mind; mewmi=consciousness-body; ne=be; bo=good; pa=property nominalizer","tags":["topup","spiritual"]}
+{"id":"000289","zh":"我去地方、山和山脉。","en":"I go to the place, the mountain, and the range.","nufe":"mi bu lia. mi bu how. mi bu sowni.","sense":null,"gloss":"mi=I; bu=go; lia=place. mi=I; bu=go; how=mountain. mi=I; bu=go; sowni=range","tags":["topup","place"]}
+{"id":"000290","zh":"这个东西在地方里。","en":"This thing is at a place.","nufe":"ze pa da lia.","sense":null,"gloss":"ze=this; pa=thing; da=be at; lia=place","tags":["topup","place"]}
+{"id":"000291","zh":"北方、东方和南方存在。","en":"North, east, and south exist.","nufe":"palia e falia e malia pale.","sense":null,"gloss":"palia=north; e=and; falia=east; malia=south; pale=exist","tags":["topup","direction"]}
+{"id":"000292","zh":"我去北方、东方和南方。","en":"I go to the north, east, and south.","nufe":"mi bu palia. mi bu falia. mi bu malia.","sense":null,"gloss":"mi=I; bu=go; palia=north. mi=I; bu=go; falia=east. mi=I; bu=go; malia=south","tags":["topup","direction"]}
+{"id":"000293","zh":"东北、东南、西南和西北存在。","en":"Northeast, southeast, southwest, and northwest exist.","nufe":"pafalia e famalia e matalia e tapalia pale.","sense":null,"gloss":"pafalia=northeast; e=and; famalia=southeast; matalia=southwest; tapalia=northwest; pale=exist","tags":["topup","direction"]}
+{"id":"000294","zh":"我去东北、东南、西南和西北。","en":"I go to the northeast, southeast, southwest, and northwest.","nufe":"mi bu pafalia. mi bu famalia. mi bu matalia. mi bu tapalia.","sense":null,"gloss":"mi=I; bu=go; pafalia=northeast. mi=I; bu=go; famalia=southeast. mi=I; bu=go; matalia=southwest. mi=I; bu=go; tapalia=northwest","tags":["topup","direction"]}
+{"id":"000295","zh":"西方在天空中间。","en":"The west is in the middle of the sky.","nufe":"talia da soke liw.","sense":null,"gloss":"talia=west; da=be at; soke=sky; liw=middle","tags":["topup","direction"]}
+{"id":"000296","zh":"新的词和旧的房子存在。","en":"A new word and an old house exist.","nufe":"vi hepa e du zifo pale.","sense":null,"gloss":"vi=new; hepa=word; e=and; du=old; zifo=house; pale=exist","tags":["topup","property"]}
+{"id":"000297","zh":"新的花和旧的建筑存在。","en":"A new flower and an old building exist.","nufe":"vi nagu e du dow pale.","sense":null,"gloss":"vi=new; nagu=flower; e=and; du=old; dow=building; pale=exist","tags":["topup","property"]}
+{"id":"000298","zh":"我觉悟并觉知。","en":"I awaken and am aware.","nufe":"mi hiro. mi ciw.","sense":null,"gloss":"mi=I; hiro=awaken. mi=I; ciw=be aware","tags":["topup","mind"]}
+{"id":"000299","zh":"他觉悟并觉知。","en":"He awakens and is aware.","nufe":"gi hiro. gi ciw.","sense":null,"gloss":"gi=he/she/it; hiro=awaken. gi=he/she/it; ciw=be aware","tags":["topup","mind"]}
+{"id":"000300","zh":"声音、图像、气味、味道和触感存在。","en":"Sound, image, smell, taste, and touch exist.","nufe":"mio e vio e nio e gio e tio pale.","sense":null,"gloss":"mio=sound; e=and; vio=image; nio=smell; gio=taste; tio=touch; pale=exist","tags":["topup","sense"]}
+{"id":"000301","zh":"美的画面、香、美味、舒适触感和哲学存在。","en":"Beautiful image, pleasant scent, deliciousness, comfortable touch, and philosophy exist.","nufe":"savio e sanio e sagio e satio e salio pale.","sense":null,"gloss":"savio=beautiful image; e=and; sanio=pleasant scent; sagio=deliciousness; satio=comfortable touch; salio=philosophy; pale=exist","tags":["topup","aesthetic"]}
+{"id":"000302","zh":"美好的声音是好的。","en":"A beautiful sound is good.","nufe":"sa mio ne bo pa.","sense":null,"gloss":"sa=beautiful; mio=sound; ne=be; bo=good; pa=property nominalizer","tags":["topup","aesthetic"]}
+{"id":"000303","zh":"我思考一个观念。","en":"I think an idea.","nufe":"mi liofa lio.","sense":null,"gloss":"mi=I; liofa=think; lio=idea","tags":["topup","mind"]}
+{"id":"000304","zh":"我喜欢哲学。","en":"I like philosophy.","nufe":"mi fote salio.","sense":null,"gloss":"mi=I; fote=like; salio=philosophy","tags":["topup","mind"]}
+{"id":"000305","zh":"我喜欢救赎而不喜欢主义。","en":"I like redemption but do not like ideology.","nufe":"mi fote gosu. mi na fote vibo.","sense":null,"gloss":"mi=I; fote=like; gosu=redemption. mi=I; na=not; fote=like; vibo=ideology","tags":["topup","mind"]}
+{"id":"000306","zh":"我知道救赎和主义。","en":"I know redemption and ideology.","nufe":"mi qe gosu e vibo.","sense":null,"gloss":"mi=I; qe=know; gosu=redemption; e=and; vibo=ideology","tags":["topup","mind"]}
+{"id":"000307","zh":"你解释信息。","en":"You explain information.","nufe":"ti de qivo.","sense":null,"gloss":"ti=you; de=explain; qivo=message/info","tags":["topup","communication"]}
+{"id":"000308","zh":"科学和系统存在。","en":"Science and system exist.","nufe":"desiw e siw pale.","sense":null,"gloss":"desiw=science; e=and; siw=system; pale=exist","tags":["topup","system"]}
+{"id":"000309","zh":"我知道科学和系统。","en":"I know science and system.","nufe":"mi qe desiw e siw.","sense":null,"gloss":"mi=I; qe=know; desiw=science; e=and; siw=system","tags":["topup","system"]}
+{"id":"000310","zh":"我渴望并意图去。","en":"I desire and intend to go.","nufe":"mi diho bu. mi vile bu.","sense":null,"gloss":"mi=I; diho=desire; bu=go. mi=I; vile=intend; bu=go","tags":["topup","desire"]}
+{"id":"000311","zh":"你渴望并意图去。","en":"You desire and intend to go.","nufe":"ti diho bu. ti vile bu.","sense":null,"gloss":"ti=you; diho=desire; bu=go. ti=you; vile=intend; bu=go","tags":["topup","desire"]}
+{"id":"000312","zh":"香水是美好且蓝的。","en":"Perfume is beautiful and blue.","nufe":"saniolu ne sa pa. saniolu ne mati pa.","sense":null,"gloss":"saniolu=perfume; ne=be; sa=beautiful; pa=property nominalizer. saniolu=perfume; ne=be; mati=blue; pa=property nominalizer","tags":["topup","object"]}
+{"id":"000313","zh":"我闻香水和香。","en":"I smell perfume and fragrance.","nufe":"mi niofa saniolu e sanio.","sense":null,"gloss":"mi=I; niofa=smell; saniolu=perfume; e=and; sanio=fragrance","tags":["topup","sense"]}
+{"id":"000314","zh":"蓝花和香水存在。","en":"A blue flower and perfume exist.","nufe":"mati nagu e saniolu pale.","sense":null,"gloss":"mati=blue; nagu=flower; e=and; saniolu=perfume; pale=exist","tags":["topup","nature"]}
+{"id":"000315","zh":"我进入并出去房子。","en":"I enter and leave the house.","nufe":"mi buniw zifo. mi bunuw zifo.","sense":null,"gloss":"mi=I; buniw=enter; zifo=house. mi=I; bunuw=go out; zifo=house","tags":["topup","motion"]}
+{"id":"000316","zh":"你进入并出去房子。","en":"You enter and leave the house.","nufe":"ti buniw zifo. ti bunuw zifo.","sense":null,"gloss":"ti=you; buniw=enter; zifo=house. ti=you; bunuw=go out; zifo=house","tags":["topup","motion"]}
+{"id":"000317","zh":"电、力量和风存在。","en":"Electricity, force, and wind exist.","nufe":"vidu e muw e piuw pale.","sense":null,"gloss":"vidu=electricity; e=and; muw=force; piuw=wind; pale=exist","tags":["topup","nature"]}
+{"id":"000318","zh":"我知道电、力量和风。","en":"I know electricity, force, and wind.","nufe":"mi qe vidu e muw e piuw.","sense":null,"gloss":"mi=I; qe=know; vidu=electricity; e=and; muw=force; piuw=wind","tags":["topup","nature"]}
+{"id":"000319","zh":"道路在城市中间。","en":"The road is in the middle of the city.","nufe":"suqi da mife liw.","sense":null,"gloss":"suqi=road; da=be at; mife=city; liw=middle","tags":["topup","place"]}
+{"id":"000320","zh":"我走道路。","en":"I go on the road.","nufe":"mi bu suqi.","sense":null,"gloss":"mi=I; bu=go; suqi=road/path","tags":["topup","place"]}
+{"id":"000321","zh":"我感到好也感到坏。","en":"I feel good and bad.","nufe":"mi miow bo pa. mi miow mo pa.","sense":null,"gloss":"mi=I; miow=feel; bo=good; pa=property nominalizer. mi=I; miow=feel; mo=bad; pa=property nominalizer","tags":["topup","emotion"]}
+{"id":"000322","zh":"你感到好。","en":"You feel good.","nufe":"ti miow bo pa.","sense":null,"gloss":"ti=you; miow=feel; bo=good; pa=property nominalizer","tags":["topup","emotion"]}
+{"id":"000323","zh":"我离弃那个、离开并离开你。","en":"I abandon that one, leave, and leave you.","nufe":"mi zava ziepa. mi tobi. mi melu ti.","sense":null,"gloss":"mi=I; zava=abandon; ziepa=that one. mi=I; tobi=leave. mi=I; melu=leave someone; ti=you","tags":["topup","relation"]}
+{"id":"000324","zh":"他离弃那个、离开并离开你。","en":"He abandons that one, leaves, and leaves you.","nufe":"gi zava ziepa. gi tobi. gi melu ti.","sense":null,"gloss":"gi=he/she/it; zava=abandon; ziepa=that one. gi=he/she/it; tobi=leave. gi=he/she/it; melu=leave someone; ti=you","tags":["topup","relation"]}
+{"id":"000325","zh":"时间、空间、国家和安宁存在。","en":"Time, space, country, and deep peace exist.","nufe":"kala e pata e mepe e piyema pale.","sense":null,"gloss":"kala=time; e=and; pata=space; mepe=country; piyema=deep peace; pale=exist","tags":["topup","abstract"]}
+{"id":"000326","zh":"我知道时间、空间、国家和安宁。","en":"I know time, space, country, and deep peace.","nufe":"mi qe kala e pata e mepe e piyema.","sense":null,"gloss":"mi=I; qe=know; kala=time; e=and; pata=space; mepe=country; piyema=deep peace","tags":["topup","abstract"]}
+{"id":"000327","zh":"我听音乐、闻香、尝美味。","en":"I hear music, smell fragrance, and taste deliciousness.","nufe":"mi miofa samio. mi niofa sanio. mi giofa sagio.","sense":null,"gloss":"mi=I; miofa=hear; samio=music. mi=I; niofa=smell; sanio=fragrance. mi=I; giofa=taste; sagio=deliciousness","tags":["topup","sense"]}
+{"id":"000328","zh":"你听声音并尝味道。","en":"You hear sound and taste flavor.","nufe":"ti miofa mio. ti giofa gio.","sense":null,"gloss":"ti=you; miofa=hear; mio=sound. ti=you; giofa=taste; gio=taste","tags":["topup","sense"]}
+{"id":"000329","zh":"我摸触感和舒适触感。","en":"I touch a tactile feeling and a comfortable touch.","nufe":"mi tiofa tio e satio.","sense":null,"gloss":"mi=I; tiofa=touch; tio=tactile feeling; e=and; satio=comfortable touch","tags":["topup","sense"]}
+{"id":"000330","zh":"你摸触感。","en":"You touch a tactile feeling.","nufe":"ti tiofa tio.","sense":null,"gloss":"ti=you; tiofa=touch; tio=tactile feeling","tags":["topup","sense"]}
+{"id":"000331","zh":"我开始并结束。","en":"I begin and end.","nufe":"mi qa. mi ki.","sense":null,"gloss":"mi=I; qa=begin. mi=I; ki=end","tags":["topup","time"]}
+{"id":"000332","zh":"你开始并结束。","en":"You begin and end.","nufe":"ti qa. ti ki.","sense":null,"gloss":"ti=you; qa=begin. ti=you; ki=end","tags":["topup","time"]}
+{"id":"000333","zh":"虚无和群组存在。","en":"Void and group exist.","nufe":"vo e je pale.","sense":null,"gloss":"vo=void; e=and; je=group; pale=exist","tags":["topup","abstract"]}
+{"id":"000334","zh":"我知道虚无和群组。","en":"I know void and group.","nufe":"mi qe vo e je.","sense":null,"gloss":"mi=I; qe=know; vo=void; e=and; je=group","tags":["topup","abstract"]}
+{"id":"000335","zh":"你伤害我而我受伤。","en":"You hurt me and I am injured.","nufe":"ti ruma mi. mi dema.","sense":null,"gloss":"ti=you; ruma=hurt; mi=me. mi=I; dema=be injured","tags":["topup","body"]}
+{"id":"000336","zh":"他伤害你而你受伤。","en":"He hurts you and you are injured.","nufe":"gi ruma ti. ti dema.","sense":null,"gloss":"gi=he/she/it; ruma=hurt; ti=you. ti=you; dema=be injured","tags":["topup","body"]}
+{"id":"000337","zh":"多和少都是性质。","en":"Many and few are both properties.","nufe":"ve e no ne ma pa.","sense":null,"gloss":"ve=many; e=and; no=few; ne=be; ma=property; pa=property nominalizer","tags":["topup","quantity"]}
+{"id":"000338","zh":"许多他和少量的水存在。","en":"Many of him and little water exist.","nufe":"ve gi e no lu pale.","sense":null,"gloss":"ve=many; gi=he/she/it; e=and; no=little; lu=water; pale=exist","tags":["topup","quantity"]}
+{"id":"000339","zh":"你创造信息。","en":"You create information.","nufe":"ti kali qivo.","sense":null,"gloss":"ti=you; kali=create; qivo=information","tags":["topup","communication"]}
+{"id":"000340","zh":"我看太阳和天空。","en":"I see the sun and the sky.","nufe":"mi viofa mipe e soke.","sense":null,"gloss":"mi=I; viofa=see; mipe=sun; e=and; soke=sky","tags":["topup","nature"]}
+{"id":"000341","zh":"太阳是明亮的。","en":"The sun is bright.","nufe":"mipe ne liew pa.","sense":null,"gloss":"mipe=sun; ne=be; liew=bright; pa=property nominalizer","tags":["topup","nature"]}
+{"id":"000342","zh":"灯在建筑上面。","en":"The lamp is above the building.","nufe":"lawpa da dow supa.","sense":null,"gloss":"lawpa=lamp; da=be at; dow=building; supa=above","tags":["topup","spatial"]}
+{"id":"000343","zh":"水在建筑下面。","en":"Water is below the building.","nufe":"lu da dow iwfa.","sense":null,"gloss":"lu=water; da=be at; dow=building; iwfa=below","tags":["topup","spatial"]}
+{"id":"000344","zh":"这个在我左边。","en":"This is on my left.","nufe":"zepa da mi siwta.","sense":null,"gloss":"zepa=this; da=be at; mi=me; siwta=left","tags":["topup","spatial"]}
+{"id":"000345","zh":"这个在我右边。","en":"This is on my right.","nufe":"zepa da mi deka.","sense":null,"gloss":"zepa=this; da=be at; mi=me; deka=right","tags":["topup","spatial"]}
+{"id":"000346","zh":"这个在我前面。","en":"This is in front of me.","nufe":"zepa da mi awta.","sense":null,"gloss":"zepa=this; da=be at; mi=me; awta=front","tags":["topup","spatial"]}
+{"id":"000347","zh":"这个在我后面。","en":"This is behind me.","nufe":"zepa da mi posa.","sense":null,"gloss":"zepa=this; da=be at; mi=me; posa=behind","tags":["topup","spatial"]}
+{"id":"000348","zh":"我看美的画面。","en":"I see a beautiful image.","nufe":"mi viofa savio.","sense":null,"gloss":"mi=I; viofa=see; savio=beautiful image","tags":["topup","sense"]}
+{"id":"000349","zh":"你认为我存在。","en":"You think that I exist.","nufe":"ti liofa i mi pale u.","sense":null,"gloss":"ti=you; liofa=think; i...u=nominalized clause; mi pale=I exist","tags":["topup","function"]}
+{"id":"000350","zh":"人民学习的学校存在。","en":"The school where people study exists.","nufe":"rodow o gita ro, pale.","sense":null,"gloss":"rodow=school; o=postposed clause marker; gita ro=people study; pale=exist","tags":["topup","function"]}
+{"id":"000351","zh":"我或你或他去。","en":"I or you or he goes.","nufe":"mi ua ti ua gi bu.","sense":null,"gloss":"mi=I; ua=or; ti=you; ua=or; gi=he/she/it; bu=go","tags":["topup","function"]}
+{"id":"000352","zh":"神使他活着。","en":"God makes him live.","nufe":"ho so i gi via u.","sense":null,"gloss":"ho=God; so=make; i...u=nominalized clause; gi via=he lives","tags":["topup","function"]}
+{"id":"000353","zh":"我使你学习。","en":"I make you study.","nufe":"mi so i ti ro u.","sense":null,"gloss":"mi=I; so=make; i...u=nominalized clause; ti ro=you study","tags":["topup","function"]}
+{"id":"000354","zh":"你尝试学习 Nufe。","en":"You try to learn Nufe.","nufe":"ti zuva ro nufe.","sense":null,"gloss":"ti=you; zuva=try; ro=learn; nufe=Nufe","tags":["topup","learning"]}
+{"id":"000355","zh":"他尝试去。","en":"He tries to go.","nufe":"gi zuva bu.","sense":null,"gloss":"gi=he/she/it; zuva=try; bu=go","tags":["topup","motion"]}
+{"id":"000356","zh":"你把这个物切碎。","en":"You cut up this object.","nufe":"ti kopa ze mate.","sense":null,"gloss":"ti=you; kopa=cut up; ze=this; mate=object","tags":["topup","body"]}
+{"id":"000357","zh":"我自身是好的。","en":"My self is good.","nufe":"fe ne bo pa.","sense":null,"gloss":"fe=self; ne=be; bo=good; pa=property nominalizer","tags":["topup","self"]}
+{"id":"000358","zh":"我知道我自身。","en":"I know my self.","nufe":"mi qe fe.","sense":null,"gloss":"mi=I; qe=know; fe=self","tags":["topup","self"]}
+{"id":"000359","zh":"手机有电。","en":"The phone has electricity.","nufe":"muqivo ge vidu.","sense":null,"gloss":"muqivo=phone; ge=have; vidu=electricity","tags":["topup","object"]}
+{"id":"000360","zh":"心是迷乱的。","en":"The mind is confused.","nufe":"mew ne kua pa.","sense":null,"gloss":"mew=mind; ne=be; kua=confused; pa=property nominalizer","tags":["topup","mind"]}
+{"id":"000361","zh":"迷乱的图像存在。","en":"A confused image exists.","nufe":"kua vio pale.","sense":null,"gloss":"kua=confused; vio=image; pale=exist","tags":["topup","mind"]}
+{"id":"000362","zh":"虽然我意图，但是我不去。","en":"Although I intend to, I do not go.","nufe":"io mi vile, uo mi na bu.","sense":null,"gloss":"io...uo=although...but; mi=I; vile=intend; na=not; bu=go","tags":["topup","function"]}
+{"id":"000363","zh":"如果你存在，那么你学习。","en":"If you exist, then you study.","nufe":"iu ti pale, ui ti ro.","sense":null,"gloss":"iu...ui=if...then; ti=you; pale=exist; ro=study","tags":["topup","function"]}
+{"id":"000364","zh":"因为你学习，所以你能说。","en":"Because you study, you can speak.","nufe":"iuw ti ro, uiw ti te toli.","sense":null,"gloss":"iuw...uiw=because...so; ti=you; ro=study; te=can; toli=speak","tags":["topup","function"]}
+{"id":"000365","zh":"你现在吃。","en":"You eat now.","nufe":"ti aw muo.","sense":null,"gloss":"ti=you; aw=present; muo=eat","tags":["topup","function"]}
+{"id":"000366","zh":"你过去吃。","en":"You ate in the past.","nufe":"ti iw muo.","sense":null,"gloss":"ti=you; iw=past; muo=eat","tags":["topup","function"]}
+{"id":"000367","zh":"他过去吃。","en":"He ate in the past.","nufe":"gi iw muo.","sense":null,"gloss":"gi=he/she/it; iw=past; muo=eat","tags":["topup","function"]}
+{"id":"000368","zh":"你将来吃。","en":"You will eat.","nufe":"ti uw muo.","sense":null,"gloss":"ti=you; uw=future; muo=eat","tags":["topup","function"]}
+{"id":"000369","zh":"他将来吃。","en":"He will eat.","nufe":"gi uw muo.","sense":null,"gloss":"gi=he/she/it; uw=future; muo=eat","tags":["topup","function"]}
+{"id":"000370","zh":"你吃了。","en":"You have eaten.","nufe":"ti ew muo.","sense":null,"gloss":"ti=you; ew=perfective; muo=eat","tags":["topup","function"]}
+{"id":"000371","zh":"他吃了。","en":"He has eaten.","nufe":"gi ew muo.","sense":null,"gloss":"gi=he/she/it; ew=perfective; muo=eat","tags":["topup","function"]}
+{"id":"000372","zh":"你在吃。","en":"You are eating.","nufe":"ti ow muo.","sense":null,"gloss":"ti=you; ow=progressive; muo=eat","tags":["topup","function"]}
+{"id":"000373","zh":"他在吃。","en":"He is eating.","nufe":"gi ow muo.","sense":null,"gloss":"gi=he/she/it; ow=progressive; muo=eat","tags":["topup","function"]}
+{"id":"000374","zh":"你现在已经吃了。","en":"You have now eaten.","nufe":"ti iaw muo.","sense":null,"gloss":"ti=you; iaw=present perfect; muo=eat","tags":["topup","function"]}
+{"id":"000375","zh":"他现在已经吃了。","en":"He has now eaten.","nufe":"gi iaw muo.","sense":null,"gloss":"gi=he/she/it; iaw=present perfect; muo=eat","tags":["topup","function"]}
+{"id":"000376","zh":"你现在正在吃。","en":"You are eating now.","nufe":"ti uaw muo.","sense":null,"gloss":"ti=you; uaw=present progressive; muo=eat","tags":["topup","function"]}
+{"id":"000377","zh":"他现在正在吃。","en":"He is eating now.","nufe":"gi uaw muo.","sense":null,"gloss":"gi=he/she/it; uaw=present progressive; muo=eat","tags":["topup","function"]}
+{"id":"000378","zh":"你当时已经吃了。","en":"You had eaten then.","nufe":"ti iew muo.","sense":null,"gloss":"ti=you; iew=past perfect; muo=eat","tags":["topup","function"]}
+{"id":"000379","zh":"他当时已经吃了。","en":"He had eaten then.","nufe":"gi iew muo.","sense":null,"gloss":"gi=he/she/it; iew=past perfect; muo=eat","tags":["topup","function"]}
+{"id":"000380","zh":"你当时正在吃。","en":"You were eating then.","nufe":"ti iow muo.","sense":null,"gloss":"ti=you; iow=past progressive; muo=eat","tags":["topup","function"]}
+{"id":"000381","zh":"他当时正在吃。","en":"He was eating then.","nufe":"gi iow muo.","sense":null,"gloss":"gi=he/she/it; iow=past progressive; muo=eat","tags":["topup","function"]}
+{"id":"000382","zh":"你将来会吃完。","en":"You will have eaten.","nufe":"ti uew muo.","sense":null,"gloss":"ti=you; uew=future perfect; muo=eat","tags":["topup","function"]}
+{"id":"000383","zh":"他将来会吃完。","en":"He will have eaten.","nufe":"gi uew muo.","sense":null,"gloss":"gi=he/she/it; uew=future perfect; muo=eat","tags":["topup","function"]}
+{"id":"000384","zh":"你将来会正在吃。","en":"You will be eating.","nufe":"ti uow muo.","sense":null,"gloss":"ti=you; uow=future progressive; muo=eat","tags":["topup","function"]}
+{"id":"000385","zh":"他将来会正在吃。","en":"He will be eating.","nufe":"gi uow muo.","sense":null,"gloss":"gi=he/she/it; uow=future progressive; muo=eat","tags":["topup","function"]}
+{"id":"000386","zh":"气味和观念存在。","en":"Smell and idea exist.","nufe":"nio e lio pale.","sense":null,"gloss":"nio=smell; e=and; lio=idea; pale=exist","tags":["topup","abstract"]}
+{"id":"000387","zh":"我解释观念和气味。","en":"I explain an idea and a smell.","nufe":"mi de lio e nio.","sense":null,"gloss":"mi=I; de=explain; lio=idea; e=and; nio=smell","tags":["topup","abstract"]}
+{"id":"000388","zh":"你是善良的。","en":"You are kind.","nufe":"ti ne meva pa.","sense":null,"gloss":"ti=you; ne=be; meva=kind; pa=property nominalizer","tags":["topup","property"]}
+{"id":"000389","zh":"我通过手机说。","en":"I speak through the phone.","nufe":"mi toli ie muqivo.","sense":null,"gloss":"mi=I; toli=speak; ie=through/by way of; muqivo=phone","tags":["topup","function"]}
+{"id":"000390","zh":"你通过信息知道。","en":"You know through information.","nufe":"ti qe ie qivo.","sense":null,"gloss":"ti=you; qe=know; ie=through/by way of; qivo=information","tags":["topup","function"]}
+{"id":"000391","zh":"我通过工具工作。","en":"I work by means of a tool.","nufe":"mi lodu ie ke.","sense":null,"gloss":"mi=I; lodu=work; ie=through/by means of; ke=tool","tags":["topup","function"]}
+{"id":"000392","zh":"我为神建庙。","en":"I build a temple for God.","nufe":"mi kali tewla ue ho.","sense":null,"gloss":"mi=I; kali=build; tewla=temple; ue=for/toward; ho=God","tags":["topup","function"]}
+{"id":"000393","zh":"你为人民工作。","en":"You work for the people.","nufe":"ti lodu ue gita.","sense":null,"gloss":"ti=you; lodu=work; ue=for; gita=people","tags":["topup","function"]}
+{"id":"000394","zh":"我为家创造工具。","en":"I create a tool for the home.","nufe":"mi kali ke ue zifo.","sense":null,"gloss":"mi=I; kali=create; ke=tool; ue=for; zifo=home","tags":["topup","function"]}

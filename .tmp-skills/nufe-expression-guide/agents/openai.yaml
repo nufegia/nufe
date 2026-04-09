@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nufe 表达顾问"
+  short_description: "把中文词句、短语和表达转换成自然可说的 Nufe 说法"
+  default_prompt: "Use $nufe-expression-guide to answer how a Chinese expression should be said naturally in Nufe."
