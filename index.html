@@ -195,6 +195,32 @@
       margin-top: 0;
     }
 
+    .hero-section {
+      display: grid;
+      gap: 14px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
+    .hero-section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hero-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-section-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     .hero-strip {
       display: grid;
       gap: 12px;
@@ -359,6 +385,7 @@
       display: grid;
       gap: 16px;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: start;
     }
 
     .portal-stack {
@@ -380,35 +407,56 @@
       gap: 10px;
     }
 
+    .portal-list-panel {
+      gap: 18px;
+      align-content: start;
+    }
+
+    .portal-list-panel .panel-header {
+      align-items: flex-start;
+    }
+
+    .portal-list-panel .panel-title {
+      font-size: 17px;
+    }
+
+    .portal-list-panel .panel-subtitle {
+      margin-top: 4px;
+    }
+
     .source-item,
     .weak-item,
     .word-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.68);
+      background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(19, 32, 24, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+
+    .source-item {
+      display: block;
+      padding: 0;
     }
 
     .source-item label {
-      display: flex;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 14px;
       align-items: flex-start;
       width: 100%;
+      padding: 18px 20px;
       cursor: pointer;
     }
 
     .source-item input {
-      margin-top: 3px;
+      margin-top: 4px;
       accent-color: var(--accent);
+      transform: scale(1.15);
     }
 
     .source-meta {
       display: grid;
-      gap: 3px;
+      gap: 5px;
     }
 
     .source-name,
@@ -426,6 +474,57 @@
       line-height: 1.55;
     }
 
+    .source-name {
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .source-desc {
+      font-size: 14px;
+    }
+
+    .weak-list {
+      gap: 12px;
+    }
+
+    .weak-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 20px;
+    }
+
+    .weak-main {
+      min-width: 0;
+      display: grid;
+      gap: 6px;
+    }
+
+    .weak-item .word-main {
+      font-size: 17px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .weak-meta {
+      font-size: 14px;
+    }
+
+    .weak-action {
+      min-width: 104px;
+      min-height: 56px;
+      padding-inline: 18px;
+      align-self: start;
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
     .chip-list {
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
@@ -437,6 +536,10 @@
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 4px;
+    }
+
+    .hero-section .chip {
+      background: rgba(255, 255, 255, 0.52);
     }
 
     .chip strong {
@@ -718,7 +821,7 @@
     }
 
     .study-question {
-      font-size: clamp(30px, 5vw, 50px);
+      font-size: clamp(26px, 4.2vw, 40px);
       line-height: 1.02;
       letter-spacing: -0.04em;
       word-break: break-word;
@@ -1310,8 +1413,6 @@
       .result-head,
       .summary-item,
       .session-outcome-item,
-      .source-item,
-      .weak-item,
       .word-row {
         align-items: flex-start;
       }
@@ -1405,7 +1506,7 @@
       }
 
       .study-question {
-        font-size: clamp(24px, 10vw, 36px);
+        font-size: clamp(22px, 8vw, 30px);
       }
 
       .feedback,
@@ -1493,6 +1594,11 @@
         grid-template-columns: 1fr;
       }
 
+      .hero-section-header {
+        display: grid;
+        gap: 6px;
+      }
+
       .metric-card,
       .hero-mini,
       .chip,
@@ -1511,6 +1617,15 @@
         padding: 12px 14px;
       }
 
+      .source-item {
+        padding: 0;
+      }
+
+      .source-item label,
+      .weak-item {
+        padding: 14px;
+      }
+
       .field {
         grid-template-columns: 1fr;
         gap: 4px;
@@ -1522,6 +1637,15 @@
 
       .study-word-meta {
         gap: 10px;
+      }
+
+      .weak-item {
+        grid-template-columns: 1fr;
+      }
+
+      .weak-action {
+        width: 100%;
+        justify-self: stretch;
       }
     }
   </style>
@@ -1546,8 +1670,9 @@
         <div class="hero">
             <section class="hero-card">
               <div class="panel-header">
-                <div>
-                  <h1 id="portal-title">开始今天的训练</h1>
+                <div class="hero-copy">
+                  <h1 id="portal-title">今日训练总览</h1>
+                  <p>先看今天的状态，再开始这一轮训练。</p>
                 </div>
                 <div id="today-badge" class="score-badge">加载中</div>
               </div>
@@ -1577,51 +1702,51 @@
                 <button id="start-study-primary" class="button-primary">开始今日训练</button>
                 <button id="go-dictionary-primary" class="button-secondary">进入词典</button>
               </div>
+              <div class="hero-section">
+                <div class="hero-section-header">
+                  <div class="hero-section-title">最近 7 天</div>
+                  <div class="hero-section-note">看本周练习密度和掌握变化。</div>
+                </div>
+                <div class="weekly-grid">
+                  <div class="chip">
+                    <span class="tiny">作答题数</span>
+                    <strong id="weekly-answers-count">0</strong>
+                  </div>
+                  <div class="chip">
+                    <span class="tiny">正确率</span>
+                    <strong id="weekly-accuracy">0%</strong>
+                  </div>
+                  <div class="chip">
+                    <span class="tiny">练习词数</span>
+                    <strong id="weekly-words-count">0</strong>
+                  </div>
+                  <div class="chip">
+                    <span class="tiny">新增掌握</span>
+                    <strong id="weekly-mastered-count">0</strong>
+                  </div>
+                </div>
+              </div>
             </section>
         </div>
 
         <div class="portal-stack">
-          <section class="panel">
-            <div class="panel-header">
-              <div>
-                <div class="panel-title">最近 7 天</div>
-              </div>
-            </div>
-            <div class="weekly-grid">
-              <div class="chip">
-                <span class="tiny">作答题数</span>
-                <strong id="weekly-answers-count">0</strong>
-              </div>
-              <div class="chip">
-                <span class="tiny">正确率</span>
-                <strong id="weekly-accuracy">0%</strong>
-              </div>
-              <div class="chip">
-                <span class="tiny">练习词数</span>
-                <strong id="weekly-words-count">0</strong>
-              </div>
-              <div class="chip">
-                <span class="tiny">新增掌握</span>
-                <strong id="weekly-mastered-count">0</strong>
-              </div>
-            </div>
-          </section>
-
           <div class="grid-two">
-          <section class="panel">
+          <section class="panel portal-list-panel">
             <div class="panel-header">
               <div>
                 <div class="panel-title">词库配置</div>
+                <div class="panel-subtitle">勾选当前参与训练的词库，左侧列表保持紧凑显示。</div>
               </div>
               <button id="clear-progress-button" class="button-ghost" type="button">清空学习情况</button>
             </div>
             <div id="source-list" class="source-list"></div>
           </section>
 
-          <section class="panel">
+          <section class="panel portal-list-panel">
             <div class="panel-header">
               <div>
                 <div class="panel-title">最近薄弱词</div>
+                <div class="panel-subtitle">优先处理最近易错、熟练度偏低的词。</div>
               </div>
             </div>
             <div id="weak-list" class="weak-list"></div>
@@ -2579,7 +2704,19 @@
       return "答错";
     }
 
-    function renderStudyFeedback(title, body, kind = "", details = [], actions = [], panelHtml = "") {
+    function scrollPageToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function scrollStudyFeedbackIntoView() {
+      if (state.currentView !== "study" || !dom.studyFeedback) return;
+      window.requestAnimationFrame(() => {
+        dom.studyFeedback.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    function renderStudyFeedback(title, body, kind = "", details = [], actions = [], panelHtml = "", options = {}) {
+      const { autoScroll = false } = options;
       dom.studyFeedback.className = `feedback${kind ? ` ${kind}` : ""}`;
       const detailGrid = details.length ? `
         <div class="feedback-grid">
@@ -2605,6 +2742,7 @@
         ${panelHtml}
         ${actionRow}
       `;
+      if (autoScroll) scrollStudyFeedbackIntoView();
     }
 
     function renderSessionOutcomeList() {
@@ -2695,11 +2833,11 @@
 
       dom.weakList.innerHTML = weakItems.length ? weakItems.map(({ item, progress }) => `
         <div class="weak-item">
-          <div>
+          <div class="weak-main">
             <div class="word-main">${escapeHtml(item.word)}</div>
             <div class="weak-meta">${escapeHtml(item.translation || "暂无翻译")} · 错误 ${progress.wrongCount} 次 · 熟练度 ${Math.round(progress.mastery)}</div>
           </div>
-          <button class="small-button" data-focus-word="${escapeHtml(item.id)}">去处理</button>
+          <button class="small-button weak-action" data-focus-word="${escapeHtml(item.id)}">去处理</button>
         </div>
       `).join("") : `<div class="empty">暂无薄弱词</div>`;
 
@@ -3293,7 +3431,8 @@
         shouldPauseForReview ? [
           { id: "study-continue-button", label: "继续下一题", className: "button-primary" }
         ] : [],
-        reviewPanelHtml
+        reviewPanelHtml,
+        { autoScroll: true }
       );
 
       dom.studyWordStage.textContent = difficultyLabel(progress);
@@ -3580,6 +3719,7 @@
       for (const button of dom.navButtons) {
         button.classList.toggle("active", button.getAttribute("data-view-target") === viewName);
       }
+      scrollPageToTop();
       if (viewName === "dictionary") {
         dom.search.focus({ preventScroll: true });
       }
