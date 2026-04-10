@@ -805,6 +805,80 @@
       font-size: 15px;
     }
 
+    .feedback-actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .feedback-review {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 10px;
+    }
+
+    .feedback-review.mistake {
+      background: linear-gradient(180deg, rgba(161, 74, 54, 0.08), rgba(255, 255, 255, 0.72));
+      border-color: rgba(161, 74, 54, 0.22);
+    }
+
+    .feedback-review.first-look {
+      background: linear-gradient(180deg, rgba(216, 165, 66, 0.12), rgba(255, 255, 255, 0.74));
+      border-color: rgba(216, 165, 66, 0.28);
+    }
+
+    .feedback-review-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .feedback-review-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .feedback-review-word {
+      font-size: 28px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .feedback-review-translation {
+      font-size: 16px;
+      line-height: 1.55;
+      font-weight: 600;
+      color: #213027;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .feedback-review-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .feedback-review-details {
+      display: grid;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(19, 32, 24, 0.08);
+    }
+
     .study-word-meta {
       display: grid;
       gap: 12px;
@@ -2505,7 +2579,7 @@
       return "答错";
     }
 
-    function renderStudyFeedback(title, body, kind = "", details = []) {
+    function renderStudyFeedback(title, body, kind = "", details = [], actions = [], panelHtml = "") {
       dom.studyFeedback.className = `feedback${kind ? ` ${kind}` : ""}`;
       const detailGrid = details.length ? `
         <div class="feedback-grid">
@@ -2517,10 +2591,19 @@
           `).join("")}
         </div>
       ` : "";
+      const actionRow = actions.length ? `
+        <div class="feedback-actions">
+          ${actions.map(action => `
+            <button class="${escapeHtml(action.className || "button-secondary")}" id="${escapeHtml(action.id)}">${escapeHtml(action.label)}</button>
+          `).join("")}
+        </div>
+      ` : "";
       dom.studyFeedback.innerHTML = `
         <div class="feedback-title">${escapeHtml(title)}</div>
         <div>${escapeHtml(body)}</div>
         ${detailGrid}
+        ${panelHtml}
+        ${actionRow}
       `;
     }
 
@@ -2802,6 +2885,7 @@
         answers: [],
         pointer: 0,
         currentQuestion: null,
+        awaitingContinue: false,
         streak: 0,
         maxStreak: 0,
         completed: 0,
@@ -2869,6 +2953,7 @@
     }
 
     function renderStudyIdle() {
+      if (state.session) state.session.awaitingContinue = false;
       dom.choiceList.className = "choice-list";
       dom.studyModeLabel.textContent = "准备开始";
       dom.studyQuestion.textContent = "开始训练";
@@ -2907,6 +2992,65 @@
       dom.studyEndButton.disabled = true;
     }
 
+    function getStudyMetaNote(question) {
+      return [question.item.source, question.item.class || "未知类"].filter(Boolean).join(" · ");
+    }
+
+    function getPreAnswerFeedbackBody(question, progress) {
+      const metaNote = getStudyMetaNote(question);
+      if (!progress.seenCount) {
+        return metaNote ? `首次练习 · ${metaNote}` : "首次练习";
+      }
+      const parts = [];
+      if (progress.lastReviewedAt) {
+        parts.push(`上次复习 ${toDateTime(progress.lastReviewedAt)}`);
+      }
+      if (metaNote) parts.push(metaNote);
+      return parts.join(" · ") || "继续练习";
+    }
+
+    function buildStudyReviewPanel(item, variant = "first-look") {
+      const detailFields = [
+        { label: "描述", value: item.description },
+        { label: "说明", value: item.note },
+        { label: "例句", value: item.example }
+      ].filter(field => field.value && String(field.value).trim()).slice(0, 2);
+      const label = variant === "mistake" ? "纠错回看" : "首次认识";
+
+      return `
+        <div class="feedback-review ${escapeHtml(variant)}">
+          <div class="feedback-review-label">${escapeHtml(label)}</div>
+          <div class="feedback-review-head">
+            <div>
+              <div class="feedback-review-word">${escapeHtml(item.word)}</div>
+              ${item.translation ? `<div class="feedback-review-translation">${escapeHtml(item.translation)}</div>` : ""}
+            </div>
+            <div class="feedback-review-meta">
+              <span class="word-tag">${escapeHtml(item.class || "未知类")}</span>
+              <span class="word-tag">${escapeHtml(item.source)}</span>
+            </div>
+          </div>
+          ${detailFields.length ? `
+            <div class="feedback-review-details">
+              ${detailFields.map(field => `
+                <div class="field">
+                  <span>${escapeHtml(field.label)}</span>
+                  <div>${escapeHtml(field.value)}</div>
+                </div>
+              `).join("")}
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+
+    function advanceStudyQueue() {
+      if (state.session) state.session.awaitingContinue = false;
+      renderPortal();
+      renderProgressView();
+      renderCurrentQuestion();
+    }
+
     function renderCurrentQuestion() {
       if (!state.session) {
         renderStudyIdle();
@@ -2925,13 +3069,14 @@
         return;
       }
       state.session.currentQuestion = question;
+      state.session.awaitingContinue = false;
       dom.choiceList.className = "choice-list";
 
       const progress = getProgress(question.itemId);
       dom.studyModeLabel.textContent = question.mode === "zh-to-word" ? "看中文选词" : "看词选中文";
       dom.studyQuestion.textContent = question.prompt;
       dom.studyWordStage.textContent = difficultyLabel(progress);
-      dom.studyWordStageNote.textContent = `${question.item.word} · ${question.item.source} · ${question.item.class || "未知类"}`;
+      dom.studyWordStageNote.textContent = getStudyMetaNote(question);
       dom.studyWordMastery.textContent = String(Math.round(progress.mastery));
       dom.studyWordMasteryNote.textContent = progress.seenCount
         ? `平均反应 ${progress.avgResponseMs ? `${(progress.avgResponseMs / 1000).toFixed(1)}s` : "—"}`
@@ -2948,9 +3093,7 @@
       `).join("");
       renderStudyFeedback(
         progress.seenCount ? "进入本题" : "新词入场",
-        progress.seenCount
-          ? `${question.item.word} · 上次复习 ${toDateTime(progress.lastReviewedAt)}`
-          : `${question.item.word} · 首次练习`,
+        getPreAnswerFeedbackBody(question, progress),
         "",
         [
           { label: "题型", value: question.mode === "zh-to-word" ? "中译词" : "词译中" },
@@ -3058,11 +3201,13 @@
       if (!state.session || !state.session.currentQuestion) return;
       const question = state.session.currentQuestion;
       const item = question.item;
+      const previousProgress = getProgress(question.itemId);
+      const wasFirstExposure = previousProgress.seenCount === 0;
       const isCorrect = answer === question.correctAnswer;
       const elapsedMs = Date.now() - question.startedAt;
       const responseQuality = getResponseQuality(isCorrect, elapsedMs);
       const outcome = responseQuality.bucket;
-      const progress = { ...getProgress(question.itemId) };
+      const progress = { ...previousProgress };
       const update = computeNextReview(progress, responseQuality, elapsedMs);
 
       progress.correctCount += isCorrect ? 1 : 0;
@@ -3120,33 +3265,49 @@
         ? "本词会在今天稍后重新出现。"
         : `下次复习时间约为 ${toDateTime(progress.nextReviewAt)}。`;
       const responseSeconds = `${(elapsedMs / 1000).toFixed(1)}s`;
+      const shouldPauseForReview = !isCorrect || wasFirstExposure;
+      const reviewPanelHtml = shouldPauseForReview
+        ? buildStudyReviewPanel(item, !isCorrect ? "mistake" : "first-look")
+        : "";
+      const feedbackDetails = shouldPauseForReview
+        ? [
+            { label: question.mode === "zh-to-word" ? "正确词形" : "正确释义", value: question.correctAnswer },
+            { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
+          ]
+        : [
+            { label: "当前词", value: item.word },
+            { label: "熟练度", value: String(Math.round(progress.mastery)) },
+            { label: "反应时", value: responseSeconds },
+            { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
+          ];
 
       renderStudyFeedback(
-        isCorrect ? outcomeLabel(outcome) : "答错了",
-        isCorrect
-          ? `${item.word} 的熟练度提升到 ${Math.round(progress.mastery)}。${nextText}`
-          : `正确答案是“${question.correctAnswer}”。${item.word} 将进入更密集的复习循环。${nextText}`,
+        !isCorrect ? "答错了" : (wasFirstExposure ? "首次学习完成" : outcomeLabel(outcome)),
+        !isCorrect
+          ? `正确答案是“${question.correctAnswer}”。${item.word} 将进入更密集的复习循环。${nextText}`
+          : wasFirstExposure
+            ? `这是 ${item.word} 的第一次练习，先看一眼答案和释义，再继续。${nextText}`
+            : `${item.word} 的熟练度提升到 ${Math.round(progress.mastery)}。${nextText}`,
         isCorrect ? "success" : "error",
-        [
-          { label: "当前词", value: item.word },
-          { label: "熟练度", value: String(Math.round(progress.mastery)) },
-          { label: "反应时", value: responseSeconds },
-          { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
-        ]
+        feedbackDetails,
+        shouldPauseForReview ? [
+          { id: "study-continue-button", label: "继续下一题", className: "button-primary" }
+        ] : [],
+        reviewPanelHtml
       );
 
       dom.studyWordStage.textContent = difficultyLabel(progress);
       dom.studyWordStageNote.textContent = isCorrect
-        ? (outcome === "fast" ? "检索稳定" : "检索偏慢")
+        ? (wasFirstExposure ? "首次接触，已展示答案" : (outcome === "fast" ? "检索稳定" : "检索偏慢"))
         : "需要回看";
       dom.studyWordMastery.textContent = String(Math.round(progress.mastery));
       dom.studyWordMasteryNote.textContent = `平均反应 ${(progress.avgResponseMs / 1000).toFixed(1)}s`;
       dom.studyWordNextReview.textContent = outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt);
       dom.studyWordNextNote.textContent = `本次反应 ${responseSeconds}`;
 
-      dom.sessionTip.textContent = isCorrect
-        ? (state.session.streak >= 3 ? `连击 ${state.session.streak}` : "继续")
-        : "已回流";
+      dom.sessionTip.textContent = shouldPauseForReview
+        ? (!isCorrect ? "看完再继续" : "首次学习，确认后继续")
+        : (state.session.streak >= 3 ? `连击 ${state.session.streak}` : "继续");
       const rhythm = sessionRhythmText(state.session);
       dom.sessionRhythm.textContent = rhythm.title;
       dom.sessionRhythmNote.textContent = rhythm.note;
@@ -3156,11 +3317,16 @@
       state.session.currentQuestion = null;
       dom.studyProgressFill.style.width = `${Math.min(100, (state.session.completed / Math.max(state.session.queue.length, 1)) * 100)}%`;
 
+      if (shouldPauseForReview) {
+        state.session.awaitingContinue = true;
+        const continueButton = document.getElementById("study-continue-button");
+        if (continueButton) continueButton.addEventListener("click", advanceStudyQueue);
+        return;
+      }
+
       const delayMs = isCorrect ? 850 : 2000;
       window.setTimeout(() => {
-        renderPortal();
-        renderProgressView();
-        renderCurrentQuestion();
+        advanceStudyQueue();
       }, delayMs);
     }
 
@@ -3493,6 +3659,15 @@
           dom.progressSourceButtons.forEach(candidate => candidate.classList.toggle("active", candidate === button));
           renderProgressView();
         });
+      });
+
+      document.addEventListener("keydown", event => {
+        if (!state.session?.awaitingContinue) return;
+        const tagName = event.target?.tagName;
+        if (tagName === "INPUT" || tagName === "TEXTAREA" || tagName === "SELECT") return;
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        advanceStudyQueue();
       });
     }
 
