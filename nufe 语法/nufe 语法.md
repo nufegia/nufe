@@ -295,16 +295,16 @@ Nufe 的数根如下：
 | 9    | `qa` |
 | 0    | `la` |
 
-此外，`lia` 表示百，`lua` 表示千。
+此外，`lia` 表示百，`lie` 表示千，`liepa` 表示百万，`liefa` 表示十亿，`liema` 表示万亿。
 
 数根拼合后形成数的基本形态，称为**数元**。数元不是词。例如，123 写作 `pafama`。
 
 `cu` 表示小数点，因此 3.14 写作 `macupata`。  
 `ci` 表示分数，因此 3/14 写作 `macipata`。
 
-在数元后加后缀 `ce`，可形成基数词，用于计数，例如：`pace`“一个”，`face`“二 / 两个”，`paluace`“1000个”，`macupatace`“3.14个”，`macipatace`“14分之3个”。
+在数元后加后缀 `ce`，可形成基数词，用于计数，例如：`pace`“一个”，`face`“二 / 两个”，`paliece`“1000个”，`macupatace`“3.14个”，`macipatace`“14分之3个”。
 
-在数元后加后缀 `co`，可形成序数词，例如：`paco`“第一”，`faco`“第二”，`mahafapaco`“第三千八百二十一”，`paliaco`“第一百”，`paluaco`“第一千”。
+在数元后加后缀 `co`，可形成序数词，例如：`paco`“第一”，`faco`“第二”，`mahafapaco`“第三千八百二十一”，`paliaco`“第一百”，`palieco`“第一千”。
 
 ## 十六、外来词引入
 
