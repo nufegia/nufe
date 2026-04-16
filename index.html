@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NUFE 语言台</title>
+  <title>NUFE</title>
   <style>
     :root {
       --bg: #f3efe6;
@@ -1109,6 +1109,11 @@
       overflow: hidden;
     }
 
+    .doc-card,
+    .doc-content {
+      min-width: 0;
+    }
+
     .doc-status {
       color: var(--muted);
       font-size: 13px;
@@ -1211,6 +1216,15 @@
       margin: 0 0 14px;
     }
 
+    .doc-content p,
+    .doc-content li,
+    .doc-content blockquote,
+    .doc-content th,
+    .doc-content td {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
     .doc-content ul,
     .doc-content ol {
       padding-left: 22px;
@@ -1242,6 +1256,8 @@
 
     .doc-content table {
       width: 100%;
+      font-size: 14px;
+      line-height: 1.58;
       border-collapse: collapse;
       border-radius: 16px;
       overflow: hidden;
@@ -1251,6 +1267,7 @@
 
     .doc-content th,
     .doc-content td {
+      font-size: inherit;
       padding: 10px 12px;
       border-bottom: 1px solid rgba(19, 32, 24, 0.08);
       text-align: left;
@@ -1262,8 +1279,30 @@
       font-size: 13px;
     }
 
+    .doc-content table code {
+      font-size: inherit;
+      line-height: inherit;
+      white-space: nowrap;
+    }
+
     .doc-content tr:last-child td {
       border-bottom: 0;
+    }
+
+    .doc-table-wrap {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 0 14px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      border-radius: 18px;
+    }
+
+    .doc-table-wrap table {
+      margin-bottom: 0;
+      min-width: 100%;
     }
 
     .doc-empty {
@@ -1534,35 +1573,22 @@
         line-height: 1.76;
       }
 
-      .doc-content table,
-      .doc-content thead,
-      .doc-content tbody,
-      .doc-content tr,
-      .doc-content th,
-      .doc-content td {
-        display: block;
+      .doc-table-wrap {
+        margin-inline: 0;
       }
 
       .doc-content table {
+        width: max-content;
+        min-width: 100%;
         border-radius: 18px;
+        font-size: 13px;
+        line-height: 1.5;
       }
 
-      .doc-content thead {
-        display: none;
-      }
-
-      .doc-content tr {
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(19, 32, 24, 0.08);
-      }
-
-      .doc-content tr:last-child {
-        border-bottom: 0;
-      }
-
+      .doc-content th,
       .doc-content td {
-        border-bottom: 0;
-        padding: 8px 12px;
+        min-width: 108px;
+        padding: 9px 11px;
       }
 
       .stats-grid,
@@ -1654,7 +1680,7 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-title">NUFE 语言台</div>
+        <div class="brand-title">NUFE</div>
       </div>
       <nav class="nav" aria-label="主导航">
         <button class="active" data-view-target="portal">主页</button>
@@ -2343,7 +2369,7 @@
         if (rows.length >= 2 && isTableSeparator(rows[1])) {
           const headerCells = parseTableRow(rows[0]);
           const bodyRows = rows.slice(2);
-          html.push("<table><thead><tr>");
+          html.push('<div class="doc-table-wrap"><table><thead><tr>');
           headerCells.forEach(cell => html.push(`<th>${renderInlineMarkdown(cell)}</th>`));
           html.push("</tr></thead><tbody>");
           bodyRows.forEach(row => {
@@ -2352,7 +2378,7 @@
             cells.forEach(cell => html.push(`<td>${renderInlineMarkdown(cell)}</td>`));
             html.push("</tr>");
           });
-          html.push("</tbody></table>");
+          html.push("</tbody></table></div>");
         } else {
           rows.forEach(row => paragraph.push(row));
         }
