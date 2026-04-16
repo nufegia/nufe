@@ -8,8 +8,10 @@
     :root {
       --bg: #f3efe6;
       --bg-strong: #e8dfd0;
-      --panel: rgba(255, 251, 244, 0.92);
+      --panel: #fffdf8;
       --panel-strong: #fffdf8;
+      --surface-soft: #fbfaf6;
+      --surface-muted: #f6f3ec;
       --ink: #132018;
       --muted: #617063;
       --line: rgba(19, 32, 24, 0.1);
@@ -40,10 +42,7 @@
       min-height: 100vh;
       font-family: "Space Grotesk", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(216, 165, 66, 0.18), transparent 32%),
-        radial-gradient(circle at top right, rgba(30, 122, 85, 0.2), transparent 30%),
-        linear-gradient(180deg, #fbf7f0 0%, var(--bg) 52%, #ebe2d4 100%);
+      background: #f7f3ea;
     }
 
     button,
@@ -69,11 +68,10 @@
       justify-content: space-between;
       gap: 14px;
       padding: 14px 18px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(19, 32, 24, 0.12);
       border-radius: 999px;
-      background: rgba(255, 251, 244, 0.8);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(19, 32, 24, 0.06);
+      background: var(--panel);
+      box-shadow: none;
       position: sticky;
       top: 14px;
       z-index: 20;
@@ -81,14 +79,16 @@
     }
 
     .brand {
-      display: grid;
-      gap: 2px;
+      display: flex;
+      align-items: center;
+      min-height: 100%;
     }
 
     .brand-title {
       font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.03em;
+      line-height: 1;
     }
 
     .brand-subtitle {
@@ -230,7 +230,7 @@
     .hero-mini {
       padding: 14px 16px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.6);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 4px;
@@ -276,7 +276,7 @@
 
     .button-secondary {
       padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.78);
+      background: var(--surface-soft);
       color: var(--ink);
       font-weight: 700;
       border: 1px solid var(--line);
@@ -291,7 +291,7 @@
 
     .small-button {
       padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.8);
+      background: var(--surface-soft);
       color: var(--ink);
       border: 1px solid var(--line);
       font-weight: 600;
@@ -428,7 +428,7 @@
     .weak-item,
     .word-row {
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.72);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
     }
@@ -495,6 +495,20 @@
       padding: 18px 20px;
     }
 
+    .word-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 20px;
+    }
+
+    .word-row > :first-child {
+      min-width: 0;
+      display: grid;
+      gap: 6px;
+    }
+
     .weak-main {
       min-width: 0;
       display: grid;
@@ -532,14 +546,14 @@
     .chip {
       padding: 12px 14px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.68);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 4px;
     }
 
     .hero-section .chip {
-      background: rgba(255, 255, 255, 0.52);
+      background: var(--surface-muted);
     }
 
     .chip strong {
@@ -589,7 +603,7 @@
       min-height: 54px;
       border-radius: 16px;
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.82);
+      background: var(--surface-soft);
       color: var(--ink);
       appearance: none;
       -webkit-appearance: none;
@@ -603,7 +617,7 @@
       gap: 12px;
       padding: 12px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.68);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
     }
 
@@ -627,7 +641,7 @@
       width: 100%;
       min-width: 0;
       border-radius: 14px;
-      background: rgba(255, 253, 248, 0.92);
+      background: var(--surface-muted);
     }
 
     .filter-bar .select {
@@ -759,7 +773,7 @@
       padding: 28px;
       text-align: center;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.55);
+      background: var(--surface-soft);
       border-radius: var(--radius-lg);
       border: 1px dashed rgba(19, 32, 24, 0.12);
     }
@@ -807,7 +821,7 @@
       display: grid;
       gap: 10px;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.58);
+      background: var(--surface-soft);
       border-radius: 22px;
       border: 1px solid rgba(19, 32, 24, 0.07);
     }
@@ -840,7 +854,7 @@
       width: 100%;
       padding: 16px 18px;
       text-align: left;
-      background: rgba(255, 255, 255, 0.82);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       color: var(--ink);
       display: flex;
@@ -867,7 +881,7 @@
       min-height: 72px;
       padding: 16px 18px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.72);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       color: #243329;
       line-height: 1.65;
@@ -898,7 +912,7 @@
     .feedback-pill {
       padding: 10px 12px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.65);
+      background: var(--surface-muted);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 4px;
@@ -919,7 +933,7 @@
       margin-top: 14px;
       padding: 14px 16px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.68);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 10px;
@@ -991,7 +1005,7 @@
     .meta-tile {
       padding: 14px 16px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.62);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 5px;
@@ -1026,7 +1040,7 @@
       gap: 10px;
       padding: 10px 12px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.65);
+      background: var(--surface-muted);
       border: 1px solid rgba(19, 32, 24, 0.08);
       color: #243329;
     }
@@ -1034,7 +1048,7 @@
     .summary-block {
       padding: 18px 20px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.72);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 12px;
@@ -1049,7 +1063,7 @@
     .summary-stat {
       padding: 12px 14px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.72);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
       gap: 4px;
@@ -1071,7 +1085,7 @@
       gap: 12px;
       padding: 10px 12px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.7);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
     }
 
@@ -1261,7 +1275,7 @@
       border-collapse: collapse;
       border-radius: 16px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.66);
+      background: var(--surface-soft);
       border: 1px solid rgba(19, 32, 24, 0.08);
     }
 
@@ -1275,7 +1289,7 @@
     }
 
     .doc-content th {
-      background: rgba(19, 32, 24, 0.05);
+      background: var(--surface-muted);
       font-size: 13px;
     }
 
@@ -1308,7 +1322,7 @@
     .doc-empty {
       padding: 20px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.6);
+      background: var(--surface-soft);
       border: 1px dashed rgba(19, 32, 24, 0.12);
       color: var(--muted);
     }
@@ -1412,7 +1426,7 @@
       .topbar {
         border-radius: 26px;
         padding: 14px;
-        align-items: stretch;
+        align-items: center;
         gap: 12px;
         top: 10px;
       }
@@ -1451,8 +1465,7 @@
       .study-top,
       .result-head,
       .summary-item,
-      .session-outcome-item,
-      .word-row {
+      .session-outcome-item {
         align-items: flex-start;
       }
 
@@ -1460,9 +1473,13 @@
       .study-top,
       .result-head,
       .summary-item,
-      .session-outcome-item,
-      .word-row {
+      .session-outcome-item {
         flex-direction: column;
+      }
+
+      .word-row {
+        grid-template-columns: 1fr;
+        align-items: start;
       }
 
       h1 {
@@ -1808,7 +1825,7 @@
 
       <section id="grammar-view" class="view" aria-labelledby="grammar-title">
         <div class="doc-layout">
-          <aside class="summary-card doc-sidebar">
+          <aside class="panel doc-sidebar">
             <div class="panel-header">
               <div>
                 <div class="panel-title">目录</div>
@@ -1818,7 +1835,7 @@
             <div id="grammar-toc" class="toc-list"></div>
           </aside>
 
-          <section class="summary-card doc-card">
+          <section class="panel doc-card">
             <div class="panel-header">
               <div>
                 <div class="panel-title" id="grammar-title">Nufe 语法</div>
@@ -1912,7 +1929,7 @@
               </div>
             </article>
 
-            <aside class="summary-card">
+            <aside class="panel">
               <div class="panel-header">
                 <div>
                   <div class="panel-title">本轮状态</div>
@@ -1961,7 +1978,7 @@
 
       <section id="progress-view" class="view" aria-labelledby="progress-title">
         <div class="progress-layout">
-          <section class="progress-card">
+          <section class="panel">
             <div class="panel-header">
               <div>
                 <div class="panel-title" id="progress-title">词库与学习进度</div>
