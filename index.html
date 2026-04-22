@@ -1751,7 +1751,9 @@
               </div>
               <div class="hero-actions">
                 <button id="start-study-primary" class="button-primary">开始今日训练</button>
-                <button id="go-dictionary-primary" class="button-secondary">进入词典</button>
+                <button id="export-progress-button" class="button-secondary" type="button">导出进度</button>
+                <button id="import-progress-button" class="button-secondary" type="button">导入进度</button>
+                <input id="import-progress-file" type="file" accept="application/json,.json" hidden />
               </div>
               <div class="hero-section">
                 <div class="hero-section-header">
@@ -2095,7 +2097,9 @@
       empty: document.getElementById("empty"),
       clearProgressButton: document.getElementById("clear-progress-button"),
       startStudyPrimary: document.getElementById("start-study-primary"),
-      goDictionaryPrimary: document.getElementById("go-dictionary-primary"),
+      exportProgressButton: document.getElementById("export-progress-button"),
+      importProgressButton: document.getElementById("import-progress-button"),
+      importProgressFile: document.getElementById("import-progress-file"),
       studyStartButton: document.getElementById("study-start-button"),
       studyEndButton: document.getElementById("study-end-button"),
       studyRefreshButton: document.getElementById("study-refresh-button"),
@@ -2610,6 +2614,133 @@
       });
       state.progressMap = new Map();
       state.session = null;
+    }
+
+    function getProgressUpdatedAt(progress) {
+      const history = Array.isArray(progress.history) ? progress.history : [];
+      const lastHistoryAt = history.reduce((latest, entry) => {
+        return Math.max(latest, Number(entry && entry.at) || 0);
+      }, 0);
+      return Math.max(
+        Number(progress.lastReviewedAt) || 0,
+        Number(progress.nextReviewAt) || 0,
+        lastHistoryAt
+      );
+    }
+
+    function normalizeImportedSettings(settings) {
+      const imported = settings && typeof settings === "object" ? settings : {};
+      const enabledSources = Array.isArray(imported.enabledSources)
+        ? imported.enabledSources.filter(source => SOURCE_FILES.some(file => file.source === source))
+        : [];
+      return {
+        ...state.settings,
+        ...imported,
+        enabledSources: enabledSources.length ? enabledSources : DEFAULT_ENABLED_SOURCES.slice(),
+        dailyNewLimit: clamp(Number(imported.dailyNewLimit) || state.settings.dailyNewLimit, 1, 200),
+        sessionSize: clamp(Number(imported.sessionSize) || state.settings.sessionSize, 5, 200)
+      };
+    }
+
+    function normalizeImportedProgress(records) {
+      if (!Array.isArray(records)) {
+        throw new Error("进度数据缺少 progress 数组。");
+      }
+
+      const validWordIds = new Set(state.items.map(item => item.id));
+      const result = new Map();
+      for (const record of records) {
+        if (!record || typeof record !== "object" || typeof record.wordId !== "string") continue;
+        if (validWordIds.size && !validWordIds.has(record.wordId)) continue;
+        const progress = {
+          ...getDefaultProgress(record.wordId),
+          ...record,
+          wordId: record.wordId,
+          history: Array.isArray(record.history) ? record.history.slice(-200) : []
+        };
+        const current = result.get(progress.wordId);
+        if (!current || getProgressUpdatedAt(progress) >= getProgressUpdatedAt(current)) {
+          result.set(progress.wordId, progress);
+        }
+      }
+      return [...result.values()];
+    }
+
+    async function replaceStoredData(settings, progressRecords) {
+      const db = await openDatabase();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction([SETTINGS_STORE, PROGRESS_STORE], "readwrite");
+        const settingsStore = tx.objectStore(SETTINGS_STORE);
+        const progressStore = tx.objectStore(PROGRESS_STORE);
+
+        settingsStore.put({ key: SETTINGS_KEY, value: settings });
+        progressStore.clear();
+        for (const progress of progressRecords) {
+          progressStore.put(progress);
+        }
+
+        tx.oncomplete = () => {
+          db.close();
+          resolve();
+        };
+        tx.onerror = () => {
+          db.close();
+          reject(tx.error);
+        };
+        tx.onabort = () => {
+          db.close();
+          reject(tx.error);
+        };
+      });
+    }
+
+    async function exportProgressData() {
+      const progress = await withStore(PROGRESS_STORE, "readonly", store => {
+        return new Promise(resolve => {
+          const request = store.getAll();
+          request.onsuccess = () => resolve(request.result || []);
+          request.onerror = () => resolve([]);
+        });
+      });
+      const payload = {
+        app: "nufe-vocab-trainer",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        settings: state.settings,
+        progress
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      const date = new Date().toISOString().slice(0, 10);
+      anchor.href = url;
+      anchor.download = `nufe-progress-${date}.json`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    async function importProgressData(file) {
+      const text = await file.text();
+      const payload = JSON.parse(text);
+      if (!payload || payload.app !== "nufe-vocab-trainer" || !Array.isArray(payload.progress)) {
+        throw new Error("这不是有效的 NUFE 学习进度 JSON。");
+      }
+
+      const settings = normalizeImportedSettings(payload.settings);
+      const progressRecords = normalizeImportedProgress(payload.progress);
+      const confirmed = window.confirm(`将导入 ${progressRecords.length} 条学习进度，并覆盖当前设备上的本地进度。继续吗？`);
+      if (!confirmed) return false;
+
+      await replaceStoredData(settings, progressRecords);
+      state.settings = settings;
+      state.progressMap = new Map(progressRecords.map(progress => [progress.wordId, progress]));
+      state.session = null;
+      refreshAllViews();
+      renderStudyIdle();
+      dom.status.textContent = `已导入学习进度：${progressRecords.length} 条`;
+      return true;
     }
 
     function toDateTime(timestamp) {
@@ -3819,7 +3950,35 @@
         startSession();
       });
 
-      dom.goDictionaryPrimary.addEventListener("click", () => switchView("dictionary"));
+      dom.exportProgressButton.addEventListener("click", async () => {
+        try {
+          await exportProgressData();
+          dom.status.textContent = "学习进度已导出为 JSON 文件。";
+        } catch (error) {
+          console.error(error);
+          window.alert("导出进度失败，请稍后重试。");
+        }
+      });
+
+      dom.importProgressButton.addEventListener("click", () => {
+        dom.importProgressFile.value = "";
+        dom.importProgressFile.click();
+      });
+
+      dom.importProgressFile.addEventListener("change", async () => {
+        const file = dom.importProgressFile.files && dom.importProgressFile.files[0];
+        if (!file) return;
+
+        try {
+          await importProgressData(file);
+        } catch (error) {
+          console.error(error);
+          window.alert(error.message || "导入进度失败，请确认 JSON 文件格式。");
+        } finally {
+          dom.importProgressFile.value = "";
+        }
+      });
+
       dom.searchRandomButton.addEventListener("click", () => {
         dom.search.value = "";
         filterDictionaryItems();
