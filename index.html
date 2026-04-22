@@ -338,6 +338,58 @@
       letter-spacing: -0.02em;
     }
 
+    .study-control-panel {
+      padding: 18px 22px;
+      gap: 12px;
+    }
+
+    .study-control-panel .panel-header {
+      align-items: center;
+    }
+
+    .study-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .study-controls .toolbar,
+    .study-controls .mode-row {
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .study-controls .toolbar {
+      flex-wrap: nowrap;
+    }
+
+    .study-controls .mode-row {
+      justify-content: flex-start;
+    }
+
+    .study-controls .button-primary,
+    .study-controls .button-secondary,
+    .study-controls .button-ghost,
+    .study-controls .small-button {
+      min-height: 44px;
+      padding: 10px 14px;
+      white-space: nowrap;
+      box-shadow: none;
+    }
+
+    .study-controls .button-primary:hover,
+    .study-controls .button-secondary:hover,
+    .study-controls .button-ghost:hover,
+    .study-controls .small-button:hover {
+      transform: none;
+    }
+
+    .study-control-panel .study-meta {
+      gap: 8px;
+      min-height: 20px;
+    }
+
     .panel-subtitle {
       color: var(--muted);
       font-size: 13px;
@@ -781,7 +833,7 @@
     .study-shell {
       display: grid;
       gap: 18px;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+      grid-template-columns: minmax(0, 1fr);
       align-items: start;
     }
 
@@ -791,6 +843,7 @@
       gap: 18px;
       min-height: 540px;
       align-content: start;
+      scroll-margin-top: 112px;
     }
 
     .study-top {
@@ -821,9 +874,10 @@
       display: grid;
       gap: 10px;
       padding: 20px;
-      background: var(--surface-soft);
+      background: rgba(30, 122, 85, 0.12);
       border-radius: 22px;
-      border: 1px solid rgba(19, 32, 24, 0.07);
+      border: 1px solid rgba(30, 122, 85, 0.24);
+      scroll-margin-top: 112px;
     }
 
     .study-mode {
@@ -835,10 +889,11 @@
     }
 
     .study-question {
-      font-size: clamp(26px, 4.2vw, 40px);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
+      font-size: 18px;
+      line-height: 1.18;
+      letter-spacing: 0;
       word-break: break-word;
+      font-weight: 600;
     }
 
     .choice-list {
@@ -885,11 +940,18 @@
       border: 1px solid rgba(19, 32, 24, 0.08);
       color: #243329;
       line-height: 1.65;
+      scroll-margin-top: 112px;
     }
 
     .feedback.success {
       background: rgba(30, 122, 85, 0.12);
       border-color: rgba(30, 122, 85, 0.18);
+    }
+
+    .feedback-body {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .feedback.error {
@@ -1159,6 +1221,8 @@
 
     .toc-link.level-2 {
       margin-left: 8px;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .toc-link.level-3 {
@@ -1508,6 +1572,28 @@
         width: 100%;
       }
 
+      .study-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .study-controls .toolbar {
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        padding-bottom: 2px;
+      }
+
+      .study-controls .toolbar > * {
+        width: auto;
+        flex: 0 0 auto;
+      }
+
+      .study-controls .mode-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        justify-content: stretch;
+      }
+
       .search-panel input[type="search"],
       .progress-filter input[type="search"],
       .select,
@@ -1561,10 +1647,6 @@
 
       .study-card {
         min-height: auto;
-      }
-
-      .study-question {
-        font-size: clamp(22px, 8vw, 30px);
       }
 
       .feedback,
@@ -1753,6 +1835,7 @@
                 <button id="start-study-primary" class="button-primary">开始今日训练</button>
                 <button id="export-progress-button" class="button-secondary" type="button">导出进度</button>
                 <button id="import-progress-button" class="button-secondary" type="button">导入进度</button>
+                <button id="clear-progress-button" class="button-secondary" type="button">清空学习情况</button>
                 <input id="import-progress-file" type="file" accept="application/json,.json" hidden />
               </div>
               <div class="hero-section">
@@ -1790,7 +1873,6 @@
                 <div class="panel-title">词库配置</div>
                 <div class="panel-subtitle">勾选当前参与训练的词库，左侧列表保持紧凑显示。</div>
               </div>
-              <button id="clear-progress-button" class="button-ghost" type="button">清空学习情况</button>
             </div>
             <div id="source-list" class="source-list"></div>
           </section>
@@ -1860,21 +1942,22 @@
 
       <section id="study-view" class="view" aria-labelledby="study-title">
         <div class="study-layout">
-          <div class="panel">
+          <div class="panel study-control-panel">
             <div class="panel-header">
               <div>
                 <div class="panel-title" id="study-title">背词训练</div>
               </div>
             </div>
-            <div class="toolbar">
-              <button id="study-start-button" class="button-primary">开始本轮训练</button>
-              <button id="study-end-button" class="button-secondary" disabled>结束本轮</button>
-              <button id="study-refresh-button" class="button-ghost">刷新今日任务</button>
-            </div>
-            <div class="mode-row">
-              <button class="small-button active" data-study-mode="today">今日任务</button>
-              <button class="small-button" data-study-mode="wrong">错词重练</button>
-              <button class="small-button" data-study-mode="danger">高风险词</button>
+            <div class="study-controls">
+              <div class="toolbar">
+                <button id="study-start-button" class="button-primary">开始本轮训练</button>
+                <button id="study-refresh-button" class="button-ghost">刷新今日任务</button>
+              </div>
+              <div class="mode-row">
+                <button class="small-button active" data-study-mode="today">今日任务</button>
+                <button class="small-button" data-study-mode="wrong">错词重练</button>
+                <button class="small-button" data-study-mode="danger">高风险词</button>
+              </div>
             </div>
             <div class="study-meta">
               <div id="study-headline">今天还没有开始训练。</div>
@@ -1912,7 +1995,7 @@
                 </div>
               </div>
 
-              <div class="study-prompt">
+              <div class="study-prompt" id="study-prompt">
                 <div class="study-mode" id="study-mode-label">准备开始</div>
                 <div class="study-question" id="study-question">开始训练</div>
               </div>
@@ -1939,49 +2022,6 @@
               </div>
             </article>
 
-            <aside class="panel">
-              <div class="panel-header">
-                <div>
-                  <div class="panel-title">本轮状态</div>
-                </div>
-              </div>
-              <div class="summary-metrics">
-                <div class="chip">
-                  <span class="tiny">连击</span>
-                  <strong id="session-streak">0</strong>
-                </div>
-                <div class="chip">
-                  <span class="tiny">正确率</span>
-                  <strong id="session-accuracy">0%</strong>
-                </div>
-                <div class="chip">
-                  <span class="tiny">已完成</span>
-                  <strong id="session-complete">0</strong>
-                </div>
-                <div class="chip">
-                  <span class="tiny">待回流</span>
-                  <strong id="session-repeats">0</strong>
-                </div>
-              </div>
-              <div class="chip">
-                <span class="tiny">提示</span>
-                <strong id="session-tip">开始训练</strong>
-              </div>
-              <div class="session-banner">
-                <span class="tiny">状态</span>
-                <strong id="session-rhythm">稳定推进中</strong>
-                <span class="tiny" id="session-rhythm-note"></span>
-              </div>
-              <div>
-                <div class="tiny" style="margin-bottom:8px;">最近作答</div>
-                <div id="session-outcome-list" class="session-outcome-list">
-                  <div class="session-outcome-item">
-                    <span>暂无记录</span>
-                  </div>
-                </div>
-              </div>
-              <div id="session-summary-box" class="feedback hidden"></div>
-            </aside>
           </div>
         </div>
       </section>
@@ -2101,7 +2141,6 @@
       importProgressButton: document.getElementById("import-progress-button"),
       importProgressFile: document.getElementById("import-progress-file"),
       studyStartButton: document.getElementById("study-start-button"),
-      studyEndButton: document.getElementById("study-end-button"),
       studyRefreshButton: document.getElementById("study-refresh-button"),
       studyModeButtons: [...document.querySelectorAll("[data-study-mode]")],
       studyHeadline: document.getElementById("study-headline"),
@@ -2121,15 +2160,6 @@
       studyFeedback: document.getElementById("study-feedback"),
       studyProgressText: document.getElementById("study-progress-text"),
       studyProgressFill: document.getElementById("study-progress-fill"),
-      sessionStreak: document.getElementById("session-streak"),
-      sessionAccuracy: document.getElementById("session-accuracy"),
-      sessionComplete: document.getElementById("session-complete"),
-      sessionRepeats: document.getElementById("session-repeats"),
-      sessionTip: document.getElementById("session-tip"),
-      sessionRhythm: document.getElementById("session-rhythm"),
-      sessionRhythmNote: document.getElementById("session-rhythm-note"),
-      sessionOutcomeList: document.getElementById("session-outcome-list"),
-      sessionSummaryBox: document.getElementById("session-summary-box"),
       grammarStatus: document.getElementById("grammar-status"),
       grammarToc: document.getElementById("grammar-toc"),
       grammarContent: document.getElementById("grammar-content"),
@@ -2862,24 +2892,6 @@
       return "学习中";
     }
 
-    function sessionRhythmText(session) {
-      if (!session || !session.answers.length) {
-        return { title: "稳定推进中", note: "" };
-      }
-      const lastThree = session.answers.slice(-3);
-      const wrongCount = lastThree.filter(entry => !entry.correct).length;
-      if (wrongCount >= 2) {
-        return { title: "需要回看", note: "" };
-      }
-      if (session.streak >= 4) {
-        return { title: "连击中", note: "" };
-      }
-      if (lastThree.every(entry => entry.outcome === "fast")) {
-        return { title: "节奏很好", note: "" };
-      }
-      return { title: "进行中", note: "" };
-    }
-
     function outcomeLabel(outcome) {
       if (outcome === "fast") return "答对且快";
       if (outcome === "hesitant") return "答对但慢";
@@ -2890,11 +2902,21 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function scrollStudyFeedbackIntoView() {
-      if (state.currentView !== "study" || !dom.studyFeedback) return;
+    function scrollStudyTargetIntoView(target, block = "start") {
+      if (state.currentView !== "study" || !target) return;
       window.requestAnimationFrame(() => {
-        dom.studyFeedback.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: "smooth", block, inline: "nearest" });
+        });
       });
+    }
+
+    function scrollStudyFeedbackIntoView() {
+      scrollStudyTargetIntoView(dom.studyFeedback, "start");
+    }
+
+    function scrollStudyPromptIntoView() {
+      scrollStudyTargetIntoView(document.getElementById("study-prompt"), "start");
     }
 
     function renderStudyFeedback(title, body, kind = "", details = [], actions = [], panelHtml = "", options = {}) {
@@ -2919,36 +2941,12 @@
       ` : "";
       dom.studyFeedback.innerHTML = `
         <div class="feedback-title">${escapeHtml(title)}</div>
-        <div>${escapeHtml(body)}</div>
+        <div class="feedback-body">${escapeHtml(body)}</div>
         ${detailGrid}
         ${panelHtml}
         ${actionRow}
       `;
       if (autoScroll) scrollStudyFeedbackIntoView();
-    }
-
-    function renderSessionOutcomeList() {
-      if (!state.session || !state.session.answers.length) {
-        dom.sessionOutcomeList.innerHTML = `
-          <div class="session-outcome-item">
-            <span>暂无记录</span>
-          </div>
-        `;
-        return;
-      }
-
-      const recent = state.session.answers.slice(-4).reverse();
-      dom.sessionOutcomeList.innerHTML = recent.map(entry => {
-        const item = state.items.find(word => word.id === entry.itemId);
-        const label = outcomeLabel(entry.outcome);
-        const meta = item ? `${item.word} · ${item.translation || "暂无翻译"}` : "未知词";
-        return `
-          <div class="session-outcome-item">
-            <span>${escapeHtml(meta)}</span>
-            <span class="tiny">${escapeHtml(label)}</span>
-          </div>
-        `;
-      }).join("");
     }
 
     function getSessionSummaryData(answers) {
@@ -3296,20 +3294,10 @@
       );
       dom.studyProgressText.textContent = "未开始";
       dom.studyProgressFill.style.width = "0%";
-      dom.sessionStreak.textContent = "0";
-      dom.sessionAccuracy.textContent = "0%";
-      dom.sessionComplete.textContent = "0";
-      dom.sessionRepeats.textContent = "0";
-      dom.sessionTip.textContent = "开始训练";
-      dom.sessionRhythm.textContent = "稳定推进中";
-      dom.sessionRhythmNote.textContent = "";
       dom.feedbackDueCount.textContent = String(getDashboardStats().due);
       dom.feedbackAccuracy.textContent = "0%";
       dom.feedbackStreak.textContent = "0";
-      renderSessionOutcomeList();
-      dom.sessionSummaryBox.classList.add("hidden");
-      dom.sessionSummaryBox.textContent = "";
-      dom.studyEndButton.disabled = true;
+      updateStudyActionButton();
     }
 
     function getStudyMetaNote(question) {
@@ -3327,6 +3315,15 @@
       }
       if (metaNote) parts.push(metaNote);
       return parts.join(" · ") || "继续练习";
+    }
+
+    function renderChoiceButton(option, label) {
+      return `
+        <button class="choice-button" data-choice="${escapeHtml(option)}">
+          <span>${escapeHtml(option)}</span>
+          <span class="tiny">${escapeHtml(label)}</span>
+        </button>
+      `;
     }
 
     function buildStudyReviewPanel(item, variant = "first-look") {
@@ -3405,12 +3402,11 @@
       dom.studyWordNextNote.textContent = progress.nextReviewAt
         ? ""
         : "";
-      dom.choiceList.innerHTML = question.options.map(option => `
-        <button class="choice-button" data-choice="${escapeHtml(option)}">
-          <span>${escapeHtml(option)}</span>
-          <span class="tiny">${question.mode === "zh-to-word" ? "选词" : "选义"}</span>
-        </button>
-      `).join("");
+      const optionLabel = question.mode === "zh-to-word" ? "选词" : "选义";
+      dom.choiceList.innerHTML = [
+        ...question.options.map(option => renderChoiceButton(option, optionLabel)),
+        renderChoiceButton("不知道", "跳过")
+      ].join("");
       renderStudyFeedback(
         progress.seenCount ? "进入本题" : "新词入场",
         getPreAnswerFeedbackBody(question, progress),
@@ -3425,18 +3421,12 @@
       const completed = state.session.completed;
       dom.studyProgressText.textContent = `第 ${completed + 1} / ${Math.max(total, 1)} 题`;
       dom.studyProgressFill.style.width = `${Math.min(100, (completed / Math.max(total, 1)) * 100)}%`;
-      dom.sessionStreak.textContent = String(state.session.streak);
-      dom.sessionComplete.textContent = String(state.session.completed);
-      dom.sessionRepeats.textContent = String(state.session.repeats.length);
-      const rhythm = sessionRhythmText(state.session);
-      dom.sessionRhythm.textContent = rhythm.title;
-      dom.sessionRhythmNote.textContent = rhythm.note;
-      renderSessionOutcomeList();
-      dom.studyEndButton.disabled = false;
+      updateStudyActionButton();
 
       for (const button of dom.choiceList.querySelectorAll("[data-choice]")) {
         button.addEventListener("click", event => answerCurrentQuestion(event.currentTarget.getAttribute("data-choice")));
       }
+      scrollStudyPromptIntoView();
     }
 
     function getResponseQuality(isCorrect, elapsedMs) {
@@ -3523,6 +3513,7 @@
       const item = question.item;
       const previousProgress = getProgress(question.itemId);
       const wasFirstExposure = previousProgress.seenCount === 0;
+      const isUnknownAnswer = answer === "不知道";
       const isCorrect = answer === question.correctAnswer;
       const elapsedMs = Date.now() - question.startedAt;
       const responseQuality = getResponseQuality(isCorrect, elapsedMs);
@@ -3565,7 +3556,7 @@
         const choice = button.getAttribute("data-choice");
         button.disabled = true;
         if (choice === question.correctAnswer) button.classList.add("correct");
-        if (!isCorrect && choice === answer) button.classList.add("wrong");
+        if (!isCorrect && choice === answer && answer !== "不知道") button.classList.add("wrong");
       }
 
       if (!isCorrect || getProgress(question.itemId).seenCount <= 1) {
@@ -3573,10 +3564,6 @@
       }
 
       const accuracy = state.session.answers.filter(entry => entry.correct).length / Math.max(state.session.answers.length, 1);
-      dom.sessionAccuracy.textContent = `${Math.round(accuracy * 100)}%`;
-      dom.sessionStreak.textContent = String(state.session.streak);
-      dom.sessionComplete.textContent = String(state.session.completed);
-      dom.sessionRepeats.textContent = String(state.session.repeats.length);
       dom.feedbackDueCount.textContent = String(getDashboardStats().due);
       dom.feedbackAccuracy.textContent = `${Math.round(accuracy * 100)}%`;
       dom.feedbackStreak.textContent = String(state.session.streak);
@@ -3585,11 +3572,11 @@
         ? "本词会在今天稍后重新出现。"
         : `下次复习时间约为 ${toDateTime(progress.nextReviewAt)}。`;
       const responseSeconds = `${(elapsedMs / 1000).toFixed(1)}s`;
-      const shouldPauseForReview = !isCorrect || wasFirstExposure;
-      const reviewPanelHtml = shouldPauseForReview
+      const shouldShowReviewPanel = !isCorrect || wasFirstExposure;
+      const reviewPanelHtml = shouldShowReviewPanel
         ? buildStudyReviewPanel(item, !isCorrect ? "mistake" : "first-look")
         : "";
-      const feedbackDetails = shouldPauseForReview
+      const feedbackDetails = shouldShowReviewPanel
         ? [
             { label: question.mode === "zh-to-word" ? "正确词形" : "正确释义", value: question.correctAnswer },
             { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
@@ -3600,19 +3587,25 @@
             { label: "反应时", value: responseSeconds },
             { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
           ];
-
-      renderStudyFeedback(
-        !isCorrect ? "答错了" : (wasFirstExposure ? "首次学习完成" : outcomeLabel(outcome)),
-        !isCorrect
+      const feedbackTitle = isUnknownAnswer
+        ? "先看答案"
+        : (!isCorrect ? "答错了" : (wasFirstExposure ? "首次学习完成" : outcomeLabel(outcome)));
+      const feedbackBody = isUnknownAnswer
+        ? `正确答案是“${question.correctAnswer}”。${item.word} 会在今天稍后重新出现。`
+        : (!isCorrect
           ? `正确答案是“${question.correctAnswer}”。${item.word} 将进入更密集的复习循环。${nextText}`
           : wasFirstExposure
             ? `这是 ${item.word} 的第一次练习，先看一眼答案和释义，再继续。${nextText}`
-            : `${item.word} 的熟练度提升到 ${Math.round(progress.mastery)}。${nextText}`,
+            : `${item.word} 的熟练度提升到 ${Math.round(progress.mastery)}。${nextText}`);
+
+      renderStudyFeedback(
+        feedbackTitle,
+        feedbackBody,
         isCorrect ? "success" : "error",
         feedbackDetails,
-        shouldPauseForReview ? [
+        [
           { id: "study-continue-button", label: "继续下一题", className: "button-primary" }
-        ] : [],
+        ],
         reviewPanelHtml,
         { autoScroll: true }
       );
@@ -3626,29 +3619,13 @@
       dom.studyWordNextReview.textContent = outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt);
       dom.studyWordNextNote.textContent = `本次反应 ${responseSeconds}`;
 
-      dom.sessionTip.textContent = shouldPauseForReview
-        ? (!isCorrect ? "看完再继续" : "首次学习，确认后继续")
-        : (state.session.streak >= 3 ? `连击 ${state.session.streak}` : "继续");
-      const rhythm = sessionRhythmText(state.session);
-      dom.sessionRhythm.textContent = rhythm.title;
-      dom.sessionRhythmNote.textContent = rhythm.note;
-      renderSessionOutcomeList();
-
       state.session.pointer += 1;
       state.session.currentQuestion = null;
       dom.studyProgressFill.style.width = `${Math.min(100, (state.session.completed / Math.max(state.session.queue.length, 1)) * 100)}%`;
 
-      if (shouldPauseForReview) {
-        state.session.awaitingContinue = true;
-        const continueButton = document.getElementById("study-continue-button");
-        if (continueButton) continueButton.addEventListener("click", advanceStudyQueue);
-        return;
-      }
-
-      const delayMs = isCorrect ? 850 : 2000;
-      window.setTimeout(() => {
-        advanceStudyQueue();
-      }, delayMs);
+      state.session.awaitingContinue = true;
+      const continueButton = document.getElementById("study-continue-button");
+      if (continueButton) continueButton.addEventListener("click", advanceStudyQueue);
     }
 
     function queueRepeat(itemId, highPriority) {
@@ -3666,6 +3643,7 @@
       const enabledItems = getEnabledItems();
       if (!enabledItems.length) {
         renderStudyFeedback("无法开始训练", "当前没有启用任何词库，请先在门户首页勾选一个词库。", "error");
+        scrollStudyFeedbackIntoView();
         return;
       }
 
@@ -3676,7 +3654,7 @@
           : state.studyMode === "danger"
             ? "当前没有高风险词。"
             : "今天没有新的练习。";
-        renderStudyFeedback("当前没有练习", emptyText);
+        renderStudyFeedback("当前没有练习", emptyText, "", [], [], "", { autoScroll: true });
         dom.studyQuestion.textContent = "今日任务已完成。";
         dom.studyModeLabel.textContent = "训练结束";
         dom.studyWordStage.textContent = "无待练词";
@@ -3686,19 +3664,18 @@
         dom.studyWordNextReview.textContent = "已清空";
         dom.studyWordNextNote.textContent = "";
         dom.choiceList.innerHTML = "";
-        dom.sessionSummaryBox.classList.remove("hidden");
-        dom.sessionSummaryBox.textContent = "";
+        state.session = null;
+        updateStudyActionButton();
         return;
       }
 
-      dom.sessionSummaryBox.classList.add("hidden");
-      dom.sessionSummaryBox.textContent = "";
       const modeMessage = state.studyMode === "today"
         ? `本轮 ${state.session.queue.length} 题`
         : state.studyMode === "wrong"
           ? `错词重练 ${state.session.queue.length} 题`
           : `高风险词 ${state.session.queue.length} 题`;
       renderStudyHeadline(modeMessage);
+      updateStudyActionButton();
       renderCurrentQuestion();
     }
 
@@ -3741,65 +3718,6 @@
       );
       dom.studyProgressText.textContent = total ? `${total} / ${total} 题` : "0 / 0 题";
       dom.studyProgressFill.style.width = "100%";
-      dom.studyEndButton.disabled = true;
-      dom.sessionSummaryBox.classList.remove("hidden");
-      dom.sessionSummaryBox.innerHTML = `
-        <div class="summary-block">
-          <div class="feedback-title">本轮结果</div>
-          <div class="summary-grid">
-            <div class="summary-stat">
-              <span class="tiny">完成题数</span>
-              <strong>${total}</strong>
-            </div>
-            <div class="summary-stat">
-              <span class="tiny">正确率</span>
-              <strong>${accuracy}%</strong>
-            </div>
-            <div class="summary-stat">
-              <span class="tiny">最长连击</span>
-              <strong>${state.session.maxStreak}</strong>
-            </div>
-            <div class="summary-stat">
-              <span class="tiny">新增掌握</span>
-              <strong>${newMastered}</strong>
-            </div>
-          </div>
-        </div>
-        <div class="summary-block">
-          <div class="feedback-title">记忆结果</div>
-          <div class="summary-grid">
-            <div class="summary-stat">
-              <span class="tiny">实际练习词</span>
-              <strong>${summaryData.uniqueIds.length}</strong>
-            </div>
-            <div class="summary-stat">
-              <span class="tiny">快速答对</span>
-              <strong>${summaryData.fastCount}</strong>
-            </div>
-            <div class="summary-stat">
-              <span class="tiny">答对但慢</span>
-              <strong>${summaryData.slowCorrectCount}</strong>
-            </div>
-            <div class="summary-stat">
-              <span class="tiny">待回看</span>
-              <strong>${summaryData.reviewLaterCount}</strong>
-            </div>
-          </div>
-        </div>
-        <div class="summary-block">
-          <div class="feedback-title">需要回看的词</div>
-          ${weak.length ? `
-            <div class="summary-list">
-              ${weak.map(item => `
-                <div class="summary-item">
-                  <span>${escapeHtml(item)}</span>
-                  <span class="tiny">回看</span>
-                </div>
-              `).join("")}
-            </div>
-          ` : `<div>这一轮没有错词。</div>`}
-        </div>
-      `;
 
       document.getElementById("study-restart-button").addEventListener("click", startSession);
       if (weak.length) {
@@ -3810,14 +3728,13 @@
         });
       }
       document.getElementById("study-back-home-button").addEventListener("click", () => switchView("portal"));
-      dom.sessionRhythm.textContent = weak.length ? "有待回看" : "已完成";
-      dom.sessionRhythmNote.textContent = "";
-      renderSessionOutcomeList();
 
       state.session = null;
+      updateStudyActionButton();
       renderPortal();
       renderProgressView();
       renderStudyHeadline("本轮已结束");
+      scrollStudyFeedbackIntoView();
     }
 
     function getProgressItems() {
@@ -3913,12 +3830,20 @@
       });
     }
 
+    function updateStudyActionButton() {
+      const isRunning = Boolean(state.session);
+      dom.studyStartButton.textContent = isRunning ? "结束本轮" : "开始本轮训练";
+      dom.studyStartButton.classList.toggle("button-primary", !isRunning);
+      dom.studyStartButton.classList.toggle("button-secondary", isRunning);
+    }
+
     function refreshAllViews() {
       renderPortal();
       filterDictionaryItems();
       renderProgressView();
       renderStudyHeadline();
       updateStudyModeButtons();
+      updateStudyActionButton();
     }
 
     function bindEvents() {
@@ -3984,8 +3909,13 @@
         filterDictionaryItems();
       });
       dom.search.addEventListener("input", filterDictionaryItems);
-      dom.studyStartButton.addEventListener("click", startSession);
-      dom.studyEndButton.addEventListener("click", finishSession);
+      dom.studyStartButton.addEventListener("click", () => {
+        if (state.session) {
+          finishSession();
+        } else {
+          startSession();
+        }
+      });
       dom.studyRefreshButton.addEventListener("click", () => {
         renderStudyHeadline("今日任务已刷新");
         if (!state.session) renderStudyIdle();
