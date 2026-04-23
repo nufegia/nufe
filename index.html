@@ -339,48 +339,61 @@
     }
 
     .study-control-panel {
-      padding: 18px 22px;
-      gap: 12px;
+      padding: 22px;
+      gap: 16px;
     }
 
     .study-control-panel .panel-header {
       align-items: center;
+      justify-content: space-between;
     }
 
     .study-controls {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 12px;
       align-items: start;
     }
 
-    .study-controls .toolbar,
     .study-controls .mode-row {
-      gap: 8px;
       min-width: 0;
     }
 
-    .study-controls .toolbar {
-      flex-wrap: nowrap;
-    }
-
     .study-controls .mode-row {
-      justify-content: flex-start;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      padding: 6px;
+      border-radius: 18px;
+      background: var(--surface-soft);
+      border: 1px solid rgba(19, 32, 24, 0.08);
     }
 
-    .study-controls .button-primary,
-    .study-controls .button-secondary,
-    .study-controls .button-ghost,
-    .study-controls .small-button {
+    .study-control-panel .button-primary {
       min-height: 44px;
-      padding: 10px 14px;
+      padding: 10px 16px;
       white-space: nowrap;
       box-shadow: none;
     }
 
-    .study-controls .button-primary:hover,
-    .study-controls .button-secondary:hover,
-    .study-controls .button-ghost:hover,
+    .study-controls .small-button {
+      min-height: 44px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      white-space: nowrap;
+      box-shadow: none;
+      background: transparent;
+      border-color: transparent;
+    }
+
+    .study-controls .small-button.active {
+      background: #fff;
+      color: var(--accent-strong);
+      border-color: rgba(30, 122, 85, 0.18);
+      box-shadow: 0 8px 18px rgba(19, 32, 24, 0.08);
+    }
+
+    .study-control-panel .button-primary:hover,
     .study-controls .small-button:hover {
       transform: none;
     }
@@ -1011,6 +1024,11 @@
       border-color: rgba(216, 165, 66, 0.28);
     }
 
+    .feedback-review.correct {
+      background: linear-gradient(180deg, rgba(77, 135, 94, 0.1), rgba(255, 255, 255, 0.72));
+      border-color: rgba(77, 135, 94, 0.24);
+    }
+
     .feedback-review-label {
       font-size: 12px;
       letter-spacing: 0.08em;
@@ -1576,17 +1594,10 @@
         grid-template-columns: 1fr;
       }
 
-      .study-controls .toolbar {
-        flex-direction: row;
-        align-items: center;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        padding-bottom: 2px;
-      }
-
-      .study-controls .toolbar > * {
-        width: auto;
-        flex: 0 0 auto;
+      .study-control-panel .panel-header .toolbar,
+      .study-control-panel .panel-header .toolbar > *,
+      .study-control-panel .panel-header .button-primary {
+        width: 100%;
       }
 
       .study-controls .mode-row {
@@ -1947,12 +1958,11 @@
               <div>
                 <div class="panel-title" id="study-title">背词训练</div>
               </div>
-            </div>
-            <div class="study-controls">
               <div class="toolbar">
                 <button id="study-start-button" class="button-primary">开始本轮训练</button>
-                <button id="study-refresh-button" class="button-ghost">刷新今日任务</button>
               </div>
+            </div>
+            <div class="study-controls">
               <div class="mode-row">
                 <button class="small-button active" data-study-mode="today">今日任务</button>
                 <button class="small-button" data-study-mode="wrong">错词重练</button>
@@ -2141,7 +2151,6 @@
       importProgressButton: document.getElementById("import-progress-button"),
       importProgressFile: document.getElementById("import-progress-file"),
       studyStartButton: document.getElementById("study-start-button"),
-      studyRefreshButton: document.getElementById("study-refresh-button"),
       studyModeButtons: [...document.querySelectorAll("[data-study-mode]")],
       studyHeadline: document.getElementById("study-headline"),
       studySubline: document.getElementById("study-subline"),
@@ -2800,8 +2809,19 @@
       return "new";
     }
 
+    function getLatestAnswerEntry(progress) {
+      return [...(progress.history || [])].reverse().find(entry => entry.type === "answer") || null;
+    }
+
+    function hasUnresolvedMistake(progress) {
+      const latestAnswer = getLatestAnswerEntry(progress);
+      return latestAnswer ? latestAnswer.outcome === "wrong" : progress.lastOutcome === "wrong";
+    }
+
     function isDangerWord(progress) {
-      return progress.wrongCount >= 2 || (progress.mastery < 40 && progress.seenCount >= 2);
+      if (!progress.seenCount) return false;
+      if (hasUnresolvedMistake(progress)) return true;
+      return progress.seenCount >= 2 && progress.mastery < 40;
     }
 
     function getDashboardStats() {
@@ -2859,7 +2879,7 @@
     function getWrongRetryItems(limit = 20) {
       return getEnabledItems()
         .map(item => ({ item, progress: getProgress(item.id) }))
-        .filter(({ progress }) => progress.wrongCount > 0)
+        .filter(({ progress }) => hasUnresolvedMistake(progress))
         .sort((a, b) => {
           const lastWrongA = [...(a.progress.history || [])].reverse().find(entry => entry.outcome === "wrong")?.at || 0;
           const lastWrongB = [...(b.progress.history || [])].reverse().find(entry => entry.outcome === "wrong")?.at || 0;
@@ -3332,7 +3352,9 @@
         { label: "说明", value: item.note },
         { label: "例句", value: item.example }
       ].filter(field => field.value && String(field.value).trim()).slice(0, 2);
-      const label = variant === "mistake" ? "纠错回看" : "首次认识";
+      const label = variant === "mistake"
+        ? "纠错回看"
+        : (variant === "correct" ? "答对回看" : "首次认识");
 
       return `
         <div class="feedback-review ${escapeHtml(variant)}">
@@ -3572,21 +3594,14 @@
         ? "本词会在今天稍后重新出现。"
         : `下次复习时间约为 ${toDateTime(progress.nextReviewAt)}。`;
       const responseSeconds = `${(elapsedMs / 1000).toFixed(1)}s`;
-      const shouldShowReviewPanel = !isCorrect || wasFirstExposure;
-      const reviewPanelHtml = shouldShowReviewPanel
-        ? buildStudyReviewPanel(item, !isCorrect ? "mistake" : "first-look")
-        : "";
-      const feedbackDetails = shouldShowReviewPanel
-        ? [
-            { label: question.mode === "zh-to-word" ? "正确词形" : "正确释义", value: question.correctAnswer },
-            { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
-          ]
-        : [
-            { label: "当前词", value: item.word },
-            { label: "熟练度", value: String(Math.round(progress.mastery)) },
-            { label: "反应时", value: responseSeconds },
-            { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
-          ];
+      const reviewPanelVariant = !isCorrect ? "mistake" : (wasFirstExposure ? "first-look" : "correct");
+      const reviewPanelHtml = buildStudyReviewPanel(item, reviewPanelVariant);
+      const feedbackDetails = [
+        { label: question.mode === "zh-to-word" ? "正确词形" : "正确释义", value: question.correctAnswer },
+        { label: "熟练度", value: String(Math.round(progress.mastery)) },
+        { label: "反应时", value: responseSeconds },
+        { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
+      ];
       const feedbackTitle = isUnknownAnswer
         ? "先看答案"
         : (!isCorrect ? "答错了" : (wasFirstExposure ? "首次学习完成" : outcomeLabel(outcome)));
@@ -3827,6 +3842,7 @@
     function updateStudyModeButtons() {
       dom.studyModeButtons.forEach(button => {
         button.classList.toggle("active", button.getAttribute("data-study-mode") === state.studyMode);
+        button.disabled = Boolean(state.session);
       });
     }
 
@@ -3916,18 +3932,13 @@
           startSession();
         }
       });
-      dom.studyRefreshButton.addEventListener("click", () => {
-        renderStudyHeadline("今日任务已刷新");
-        if (!state.session) renderStudyIdle();
-      });
       dom.studyModeButtons.forEach(button => {
         button.addEventListener("click", () => {
+          if (state.session) return;
           state.studyMode = button.getAttribute("data-study-mode");
           updateStudyModeButtons();
           renderStudyHeadline();
-          if (!state.session) {
-            renderStudyIdle();
-          }
+          renderStudyIdle();
         });
       });
       dom.progressSearch.addEventListener("input", () => renderProgressView());
