@@ -980,21 +980,26 @@
     .feedback-grid {
       margin-top: 12px;
       display: grid;
-      gap: 10px;
+      gap: 8px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .feedback-pill {
-      padding: 10px 12px;
+      min-width: 0;
+      padding: 8px 10px;
       border-radius: 14px;
       background: var(--surface-muted);
       border: 1px solid rgba(19, 32, 24, 0.08);
       display: grid;
-      gap: 4px;
+      gap: 3px;
     }
 
     .feedback-pill strong {
+      min-width: 0;
       font-size: 15px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .feedback-actions {
@@ -1713,9 +1718,12 @@
       .weekly-grid,
       .summary-metrics,
       .summary-grid,
-      .feedback-grid,
       .study-word-meta {
         grid-template-columns: 1fr;
+      }
+
+      .feedback-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .cards {
@@ -1747,9 +1755,12 @@
       .hero-mini,
       .chip,
       .summary-stat,
-      .meta-tile,
-      .feedback-pill {
+      .meta-tile {
         padding-inline: 14px;
+      }
+
+      .feedback-pill {
+        padding-inline: 8px;
       }
 
       .source-item,
@@ -2942,6 +2953,7 @@
     function renderStudyFeedback(title, body, kind = "", details = [], actions = [], panelHtml = "", options = {}) {
       const { autoScroll = false } = options;
       dom.studyFeedback.className = `feedback${kind ? ` ${kind}` : ""}`;
+      const bodyHtml = body ? `<div class="feedback-body">${escapeHtml(body)}</div>` : "";
       const detailGrid = details.length ? `
         <div class="feedback-grid">
           ${details.map(detail => `
@@ -2961,7 +2973,7 @@
       ` : "";
       dom.studyFeedback.innerHTML = `
         <div class="feedback-title">${escapeHtml(title)}</div>
-        <div class="feedback-body">${escapeHtml(body)}</div>
+        ${bodyHtml}
         ${detailGrid}
         ${panelHtml}
         ${actionRow}
@@ -3590,14 +3602,10 @@
       dom.feedbackAccuracy.textContent = `${Math.round(accuracy * 100)}%`;
       dom.feedbackStreak.textContent = String(state.session.streak);
 
-      const nextText = outcome === "wrong"
-        ? "本词会在今天稍后重新出现。"
-        : `下次复习时间约为 ${toDateTime(progress.nextReviewAt)}。`;
       const responseSeconds = `${(elapsedMs / 1000).toFixed(1)}s`;
       const reviewPanelVariant = !isCorrect ? "mistake" : (wasFirstExposure ? "first-look" : "correct");
       const reviewPanelHtml = buildStudyReviewPanel(item, reviewPanelVariant);
       const feedbackDetails = [
-        { label: question.mode === "zh-to-word" ? "正确词形" : "正确释义", value: question.correctAnswer },
         { label: "熟练度", value: String(Math.round(progress.mastery)) },
         { label: "反应时", value: responseSeconds },
         { label: "下次复习", value: outcome === "wrong" ? "今天稍后" : toDateTime(progress.nextReviewAt) }
@@ -3605,17 +3613,10 @@
       const feedbackTitle = isUnknownAnswer
         ? "先看答案"
         : (!isCorrect ? "答错了" : (wasFirstExposure ? "首次学习完成" : outcomeLabel(outcome)));
-      const feedbackBody = isUnknownAnswer
-        ? `正确答案是“${question.correctAnswer}”。${item.word} 会在今天稍后重新出现。`
-        : (!isCorrect
-          ? `正确答案是“${question.correctAnswer}”。${item.word} 将进入更密集的复习循环。${nextText}`
-          : wasFirstExposure
-            ? `这是 ${item.word} 的第一次练习，先看一眼答案和释义，再继续。${nextText}`
-            : `${item.word} 的熟练度提升到 ${Math.round(progress.mastery)}。${nextText}`);
 
       renderStudyFeedback(
         feedbackTitle,
-        feedbackBody,
+        "",
         isCorrect ? "success" : "error",
         feedbackDetails,
         [
