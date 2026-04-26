@@ -35,17 +35,34 @@ That is:
 consonant + glide + vowel + nasal
 ```
 
-The vowel is required; the other parts are optional. For example:
-
-- `mi`
-- `ti`
-- `pa`
-- `lu`
-- `muo`
-- `liew`
-- `pale`
+The vowel is required; the other parts are optional. For example: `mi`, `ti`, `pa`, `lu`, `muo`, `liew`, `pale`.
 
 Nufe keeps its sound system deliberately simple: 5 basic vowels, 8 diphthongs, a common set of consonants, and a unified nasal form. This makes word shapes easier to control and also helps the language introduce loanwords in a stable way later.
+
+### Pronunciation Overview
+
+Nufe's vowel system includes five simple vowels, eight diphthongs written as glide + vowel, and nasal forms with the ending `-w`. The nasal ending may be realized as [ŋ], [n], or [m], depending on the speaker and sound environment.
+
+| Type | Forms and sounds |
+| --- | --- |
+| Simple vowels | `a` [a], `i` [i], `u` [u], `e` [ɛ], `o` [o] |
+| Diphthongs | `ia` [ja], `ie` [jɛ], `io` [jo], `iu` [ju], `ua` [wa], `ue` [wɛ], `uo` [wo], `ui` [wi] |
+| Nasal simple vowels | `aw` [aŋ/an/am], `iw` [iŋ/in/im], `uw` [uŋ/un/um], `ew` [ɛŋ/ɛn/ɛm], `ow` [oŋ/on/om] |
+| Nasal diphthongs | `iaw` [jaŋ/jan/jam], `iew` [jɛŋ/jɛn/jɛm], `iow` [joŋ/jon/jom], `iuw` [juŋ/jun/jum], `uaw` [waŋ/wan/wam], `uew` [wɛŋ/wɛn/wɛm], `uow` [woŋ/won/wom], `uiw` [wiŋ/win/wim] |
+
+There are 18 basic consonants:
+
+| Group | Letters and sounds |
+| --- | --- |
+| Labial | `p` [pʰ], `b` [b], `m` [m], `f` [f], `v` [v] |
+| Dental/alveolar | `t` [tʰ], `d` [d], `n` [n], `s` [s], `z` [z] |
+| Velar and glottal | `k` [kʰ], `g` [g], `q` [ŋ], `h` [h], `r` [ɦ] |
+| Affricate | `c` [tʃʰ], `j` [dʒ] |
+| Lateral | `l` [l] |
+
+When a syllable has no initial consonant, the full grammar writes an initial `y`, as in `ya`, `yi`, `yu`, `ye`, `yo`. At the beginning of a word, this `y` may be omitted, so `ya` can appear as `a`.
+
+Inside a word, stress and tone are regular: the final syllable is read with a low falling contour, the second-to-last syllable is high and level, and any earlier syllables are low and level. Written words are separated by spaces.
 
 ## Four Word Classes
 

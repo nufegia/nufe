@@ -1,4 +1,0 @@
-interface:
-  display_name: "Nufe 翻译语料构造器"
-  short_description: "生成适合 Nufe 翻译器训练与微调的三语平行语料"
-  default_prompt: "Use $nufe-translation-corpus-builder to create or normalize zh/en/nufe parallel corpus data for Nufe translation model training."

@@ -338,6 +338,23 @@
       letter-spacing: -0.02em;
     }
 
+    .dictionary-header {
+      align-items: center;
+    }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border-radius: 14px;
+      font-size: 18px;
+      line-height: 1;
+    }
+
     .study-control-panel {
       padding: 22px;
       gap: 16px;
@@ -1634,6 +1651,11 @@
         gap: 0;
       }
 
+      #dictionary-view .dictionary-header {
+        flex-direction: row;
+        align-items: center;
+      }
+
       #dictionary-view .search-panel input[type="search"] {
         flex: 0 0 auto;
         min-height: 52px;
@@ -1648,8 +1670,9 @@
         gap: 10px;
       }
 
-      #dictionary-view .button-secondary {
-        min-height: 52px;
+      #dictionary-view .icon-button {
+        width: 42px;
+        min-height: 42px;
       }
 
       .filter-bar {
@@ -1915,21 +1938,19 @@
       <section id="dictionary-view" class="view" aria-labelledby="dictionary-title">
         <div class="search-layout">
           <section class="search-panel">
-            <div class="panel-header">
+            <div class="panel-header dictionary-header">
               <div>
                 <div class="panel-title" id="dictionary-title">NUFE 词典</div>
+                <div class="panel-subtitle" id="status">正在加载词库…</div>
               </div>
+              <button id="search-random-button" class="button-secondary icon-button" type="button" aria-label="随机看看" title="随机看看">
+                🔄
+              </button>
             </div>
             <div class="search-row">
               <input id="search" type="search" placeholder="输入 nufe 词 / 中文 / 翻译 / 例句…" autocomplete="off" />
             </div>
-            <div class="toolbar">
-              <button id="search-random-button" class="button-secondary">随机看看</button>
-            </div>
-            <div class="search-meta">
-              <div id="status">正在加载词库…</div>
-              <div id="count"></div>
-            </div>
+            <div class="search-meta" id="count"></div>
           </section>
 
           <section id="results" class="cards" aria-live="polite"></section>
