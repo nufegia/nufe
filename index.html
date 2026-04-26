@@ -2084,11 +2084,11 @@
   </div>
 
   <script>
-    const GRAMMAR_DOC_PATH = "nufe 语法/nufe 语法.md";
+    const GRAMMAR_DOC_PATH = "grammar/nufe_grammar.md";
     const SOURCE_FILES = [
-      { path: "nufe 词库/主要词库.csv", source: "主要词库", description: "核心词汇", enabledByDefault: true },
-      { path: "nufe 词库/特殊词库.csv", source: "特殊词库", description: "专名与扩展词", enabledByDefault: false },
-      { path: "nufe 词库/数词库.csv", source: "数词库", description: "数制相关词", enabledByDefault: false }
+      { path: "lexicon/main_lexicon.csv", source: "主要词库", description: "核心词汇", enabledByDefault: true },
+      { path: "lexicon/special_lexicon.csv", source: "特殊词库", description: "专名与扩展词", enabledByDefault: false },
+      { path: "lexicon/numeral_lexicon.csv", source: "数词库", description: "数制相关词", enabledByDefault: false }
     ];
     const DEFAULT_ENABLED_SOURCES = SOURCE_FILES.filter(file => file.enabledByDefault).map(file => file.source);
     const COLUMN_ALIASES = {

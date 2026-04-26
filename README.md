@@ -1,39 +1,41 @@
 # Nufe
 
-**Nufe** 是一门正在建设中的人工语言。[点此进入网站](https://nufe-language.vercel.app)。
+English | [中文](README.zh.md)
 
-它不追求模仿某一种自然语言，而是尝试建立一种更清楚、更稳定、更容易被人和 AI 共同理解的表达系统。Nufe 的目标不是把语言变成机器代码，而是让词、句子和意义之间的关系更容易被说明、学习、整理和扩展。
+**Nufe** is a constructed language in active development. [Open the website](https://nufe-language.vercel.app).
 
-你可以把 Nufe 想象成一门“概念结构很清楚”的语言：它可以表达日常动作，也很适合表达存在、关系、世界、意识、行动、判断、因果和抽象概念。
+It is not designed to imitate any particular natural language. Instead, it aims to build a clearer, more stable expression system that can be understood and extended by both humans and AI. Nufe does not try to turn language into machine code; its goal is to make the relationships between words, sentences, and meaning easier to explain, learn, organize, and expand.
 
-## 一眼理解 Nufe
+You can think of Nufe as a language with a clear conceptual structure. It can express everyday actions, and it is also well suited for talking about existence, relations, the world, consciousness, action, judgment, causality, and abstract concepts.
 
-Nufe 有几个很鲜明的设计方向：
+## Nufe at a Glance
 
-- **音节有限**：所有词都由规则音节组成，读写边界清楚。
-- **词类清楚**：词按功能分为实体、动作、性质、功能四类。
-- **语序稳定**：基本句子按“主语 + 谓语 + 宾语”组织。
-- **修饰前置**：修饰语放在被修饰词前面，直接修饰后面紧邻的词。
-- **语法显性**：时态、体态、否定、连接等尽量由明确的功能词表达。
-- **方便扩展**：外来词、专名、数词和抽象词都可以按规则继续扩展。
+Nufe has several defining design directions:
 
-## 声音和书写
+- **Limited syllables**: every word is built from regular syllables with clear reading and writing boundaries.
+- **Clear word classes**: words are grouped by function into entities, actions, properties, and function words.
+- **Stable word order**: basic sentences follow subject + predicate + object.
+- **Preposed modifiers**: modifiers appear before the word they modify and directly modify the nearest following word.
+- **Explicit grammar**: tense, aspect, negation, connection, and similar functions are expressed by clear function words where possible.
+- **Expandable vocabulary**: loanwords, proper names, numerals, and abstract terms can continue to grow by rule.
 
-Nufe 使用拉丁字母书写，词与词之间用空格分隔。
+## Sound and Writing
 
-它的基本音节结构是：
+Nufe is written with Latin letters, with spaces between words.
+
+Its basic syllable structure is:
 
 ```text
 (C)(G)V(N)
 ```
 
-也就是：
+That is:
 
 ```text
-辅音 + 介音 + 元音 + 鼻音
+consonant + glide + vowel + nasal
 ```
 
-其中元音必须出现，其他部分可以省略。比如：
+The vowel is required; the other parts are optional. For example:
 
 - `mi`
 - `ti`
@@ -43,157 +45,157 @@ Nufe 使用拉丁字母书写，词与词之间用空格分隔。
 - `liew`
 - `pale`
 
-Nufe 的声音系统刻意保持简洁：5 个基本元音、8 个双元音、一组常用辅音，以及统一的鼻音形式。这样做的好处是，词形容易控制，也方便之后稳定地引入外来词。
+Nufe keeps its sound system deliberately simple: 5 basic vowels, 8 diphthongs, a common set of consonants, and a unified nasal form. This makes word shapes easier to control and also helps the language introduce loanwords in a stable way later.
 
-## 四类词
+## Four Word Classes
 
-Nufe 最核心的设计，是把词按句法功能分成四类。
+One of Nufe's core design choices is to classify words by syntactic function.
 
-| 词类 | 作用 | 例子 |
+| Word class | Role | Examples |
 | --- | --- | --- |
-| 实体 | 指人、物、地点、概念 | `mi` 我，`ti` 你，`pa` 东西，`gia` 人 |
-| 动作 | 作谓语，表示行为或状态 | `pale` 存在，`muo` 吃，`toli` 说，`da` 在 |
-| 性质 | 修饰实体、动作或性质 | `si` 小的，`ba` 大的，`liew` 明亮的 |
-| 功能 | 表达语法关系 | `na` 不，`aw` 现在，`iw` 过去，`uw` 将来 |
+| Entity | Refers to people, things, places, and concepts | `mi` I, `ti` you, `pa` thing, `gia` person |
+| Action | Functions as a predicate and expresses an action or state | `pale` exist, `muo` eat, `toli` speak, `da` be at |
+| Property | Modifies entities, actions, or other properties | `si` small, `ba` big, `liew` bright |
+| Function | Expresses grammatical relations | `na` not, `aw` present, `iw` past, `uw` future |
 
-这意味着，学习 Nufe 时不用先面对大量复杂变形。你只需要先判断一个词在句子里做什么：它是在指称一个东西、表示一个动作、描述一个性质，还是承担语法功能。
+This means that learners do not have to start with a large system of inflection. The first question is simply what a word is doing in the sentence: is it referring to something, expressing an action, describing a property, or carrying a grammatical function?
 
-## 最基本的造句方法
+## Basic Sentence Building
 
-Nufe 的核心语序是：
+Nufe's core word order is:
 
 ```text
-主语 + 谓语 + 宾语
+subject + predicate + object
 ```
 
-例如：
+For example:
 
-| Nufe | 中文 |
+| Nufe | English |
 | --- | --- |
-| `mi pale.` | 我存在。 |
-| `mi muo.` | 我吃。 |
-| `mi mela ti.` | 我爱你。 |
-| `mi da mife.` | 我在城市。 |
-| `mi qe ti.` | 我知道你。 |
+| `mi pale.` | I exist. |
+| `mi muo.` | I eat. |
+| `mi mela ti.` | I love you. |
+| `mi da mife.` | I am in the city. |
+| `mi qe ti.` | I know you. |
 
-如果动作不需要对象，就可以只有“主语 + 谓语”：
+If an action does not need an object, the sentence can contain only subject + predicate:
 
 ```text
 mi pale.
-我存在。
+I exist.
 ```
 
-如果动作需要对象，就把对象放在动作后面：
+If an action needs an object, the object follows the action:
 
 ```text
 mi mela ti.
-我爱你。
+I love you.
 ```
 
-## 修饰规则
+## Modifier Rules
 
-Nufe 的修饰语放在前面，并且直接修饰后面紧邻的词。
+Nufe places modifiers before the words they modify. A modifier directly modifies the nearest following word.
 
 ```text
 liew ka
-明亮的火
+bright fire
 ```
 
 ```text
 ve gia
-许多人
+many people
 ```
 
 ```text
 mi dili
-我的家 / 我的归属之处
+my home / my place of belonging
 ```
 
-多个同类成分可以用 `e` 连接：
+Multiple elements of the same type can be connected with `e`:
 
 ```text
 mi e ti pale.
-我和你存在。
+You and I exist.
 ```
 
-## 时间和状态
+## Time and State
 
-Nufe 不通过动词变形表达时态，而是在动作词前放功能词。
+Nufe does not express tense through verb inflection. Instead, function words are placed before action words.
 
-| 功能词 | 含义 |
+| Function word | Meaning |
 | --- | --- |
-| `aw` | 现在 |
-| `iw` | 过去 |
-| `uw` | 将来 |
-| `ew` | 完成 |
-| `ow` | 进行 |
+| `aw` | present |
+| `iw` | past |
+| `uw` | future |
+| `ew` | completed |
+| `ow` | ongoing |
 
-例如：
+For example:
 
 ```text
 mi iw muo.
-我过去吃。
+I ate / I used to eat.
 ```
 
 ```text
 mi ow muo.
-我正在吃。
+I am eating.
 ```
 
-时态和体态可以组合成更紧凑的形式：
+Tense and aspect can combine into more compact forms:
 
-| 形式 | 含义 |
+| Form | Meaning |
 | --- | --- |
-| `iaw` | 现在完成 |
-| `uaw` | 现在进行 |
-| `iew` | 过去完成 |
-| `iow` | 过去进行 |
-| `uew` | 将来完成 |
-| `uow` | 将来进行 |
+| `iaw` | present perfect |
+| `uaw` | present progressive |
+| `iew` | past perfect |
+| `iow` | past progressive |
+| `uew` | future perfect |
+| `uow` | future progressive |
 
-例如：
+For example:
 
 ```text
 mi uaw muo.
-我现在正在吃。
+I am eating now.
 ```
 
-## 判断、否定和句子包裹
+## Judgment, Negation, and Sentence Wrapping
 
-Nufe 用动作词 `ne` 表示“是 / 被判断为”：
+Nufe uses the action word `ne` to mean "be / be judged as":
 
 ```text
 mi ne gia.
-我是人。
+I am a person.
 ```
 
-否定可以用功能词 `na`：
+Negation can be expressed with the function word `na`:
 
 ```text
 mi na muo.
-我不吃。
+I do not eat.
 ```
 
-当一个完整句子需要变成“一个东西”来被谈论时，可以用：
+When a full sentence needs to become a thing that can be talked about, it can be wrapped with:
 
 ```text
-i [句子] u
+i [sentence] u
 ```
 
-例如：
+For example:
 
 ```text
 mi qe i ti pale u.
-我知道你存在。
+I know that you exist.
 ```
 
-这里 `ti pale` 是“你存在”，外面加上 `i ... u` 后，整个句子就能作为 `qe`“知道”的对象。
+Here, `ti pale` means "you exist". After being wrapped in `i ... u`, the whole sentence can function as the object of `qe`, "know".
 
-## 数字也按规则生成
+## Numbers Are Generated by Rule
 
-Nufe 的基本数根是：
+Nufe's basic number roots are:
 
-| 数值 | Nufe |
+| Value | Nufe |
 | --- | --- |
 | 1 | `pa` |
 | 2 | `fa` |
@@ -206,32 +208,32 @@ Nufe 的基本数根是：
 | 9 | `qa` |
 | 0 | `la` |
 
-数根可以直接拼合成数元。例如：
+Number roots can be joined directly into a numeral unit. For example:
 
 ```text
 pafama
 123
 ```
 
-在数元后加 `ce`，表示“多少个”；加 `co`，表示“第几个”：
+Adding `ce` after a numeral unit means "how many"; adding `co` means "which ordinal":
 
 ```text
 pace
-一个的
+one / one-count
 ```
 
 ```text
 paco
-第一个的
+first
 ```
 
-## 试着读几句
+## Try Reading a Few Sentences
 
-| Nufe | 中文 |
+| Nufe | English |
 | --- | --- |
-| `mi lew bu mi dili.` | 我想回家。 |
-| `lawpa da zifo.` | 灯在家里。 |
-| `lu da dow iwfa.` | 水在建筑下面。 |
-| `ti so i mi via u.` | 你使我活着。 |
+| `mi lew bu mi dili.` | I want to go home. |
+| `lawpa da zifo.` | The lamp is at home. |
+| `lu da dow iwfa.` | Water is below the building. |
+| `ti so i mi via u.` | You make me live. |
 
-Nufe 仍然在生长中。它已经有了清晰的骨架，也逐渐显露出自己的气质：简洁、可扩展、重视概念结构，并认真考虑未来人与 AI 共同使用语言时，语言本身应该如何被设计。
+Nufe is still growing. It already has a clear skeleton, and it is gradually developing its own character: concise, expandable, focused on conceptual structure, and designed with serious attention to how language itself should work when humans and AI use it together in the future.
