@@ -75,7 +75,7 @@
       position: sticky;
       top: 14px;
       z-index: 20;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .brand {
@@ -111,6 +111,50 @@
       color: var(--muted);
       transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
       white-space: nowrap;
+    }
+
+    .nav-group {
+      position: relative;
+      display: inline-flex;
+      flex: 0 0 auto;
+    }
+
+    .nav-menu-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-menu-caret {
+      font-size: 11px;
+      color: currentColor;
+      transform: translateY(1px);
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 168px;
+      padding: 8px;
+      border-radius: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 42px rgba(19, 32, 24, 0.14);
+      display: none;
+      z-index: 40;
+    }
+
+    .nav-group.open .nav-menu {
+      display: grid;
+      gap: 4px;
+    }
+
+    .nav-menu button {
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      padding: 10px 12px;
     }
 
     .nav button.active,
@@ -650,7 +694,8 @@
 
     .search-layout,
     .study-layout,
-    .progress-layout {
+    .progress-layout,
+    .middle-chinese-layout {
       display: grid;
       gap: 18px;
       grid-template-columns: minmax(0, 1fr);
@@ -755,6 +800,78 @@
 
     #dictionary-view .cards {
       grid-template-columns: 1fr;
+    }
+
+    #middle-chinese-view .cards {
+      grid-template-columns: 1fr;
+    }
+
+    .mc-result-card {
+      gap: 14px;
+    }
+
+    .mc-character {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(30, 122, 85, 0.12);
+      color: var(--accent-strong);
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .mc-title-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mc-title-meta {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .mc-title-meta h3 {
+      font-size: 20px;
+    }
+
+    .mc-reading {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .mc-reading-tile {
+      min-width: 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: var(--surface-soft);
+      border: 1px solid rgba(19, 32, 24, 0.08);
+      display: grid;
+      gap: 5px;
+    }
+
+    .mc-reading-tile strong {
+      min-width: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .mc-definition {
+      max-height: 7.2em;
+      overflow: auto;
+      padding-right: 4px;
+      line-height: 1.7;
+      color: #213027;
     }
 
     .result-card {
@@ -1460,7 +1577,12 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: stretch;
+    }
+
+    .progress-filter .filter-bar {
+      flex: 1 1 100%;
+      width: 100%;
     }
 
     .pill-row {
@@ -1516,7 +1638,6 @@
       }
 
       .hero-strip,
-      .filter-bar,
       .weekly-grid,
       .summary-grid {
         grid-template-columns: 1fr;
@@ -1555,6 +1676,13 @@
       .nav button {
         flex: 0 0 auto;
         padding: 11px 14px;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 86px;
+        right: 26px;
+        left: auto;
       }
 
       .hero-card,
@@ -1645,6 +1773,24 @@
 
       #dictionary-view .search-panel {
         gap: 14px;
+      }
+
+      #middle-chinese-view .search-panel {
+        gap: 14px;
+      }
+
+      #middle-chinese-view .search-row {
+        gap: 0;
+      }
+
+      #middle-chinese-view .search-panel input[type="search"] {
+        flex: 0 0 auto;
+        min-height: 52px;
+        height: 52px;
+        padding: 0 16px;
+        border-radius: 18px;
+        font-size: 16px;
+        line-height: 1.2;
       }
 
       #dictionary-view .search-row {
@@ -1741,7 +1887,8 @@
       .weekly-grid,
       .summary-metrics,
       .summary-grid,
-      .study-word-meta {
+      .study-word-meta,
+      .mc-reading {
         grid-template-columns: 1fr;
       }
 
@@ -1840,6 +1987,12 @@
         <button data-view-target="grammar">语法</button>
         <button data-view-target="study">背词</button>
         <button data-view-target="progress">进度</button>
+        <div class="nav-group" id="foreign-language-menu">
+          <button class="nav-menu-button" id="foreign-language-button" type="button" aria-haspopup="true" aria-expanded="false">外语 <span class="nav-menu-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-menu" role="menu" aria-labelledby="foreign-language-button">
+            <button type="button" role="menuitem" data-view-target="middle-chinese">中古汉语</button>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -1943,9 +2096,6 @@
                 <div class="panel-title" id="dictionary-title">NUFE 词典</div>
                 <div class="panel-subtitle" id="status">正在加载词库…</div>
               </div>
-              <button id="search-random-button" class="button-secondary icon-button" type="button" aria-label="随机看看" title="随机看看">
-                🔄
-              </button>
             </div>
             <div class="search-row">
               <input id="search" type="search" placeholder="输入 nufe 词 / 中文 / 翻译 / 例句…" autocomplete="off" />
@@ -2100,12 +2250,39 @@
           </section>
         </div>
       </section>
+
+      <section id="middle-chinese-view" class="view" aria-labelledby="middle-chinese-title">
+        <div class="middle-chinese-layout">
+          <section class="search-panel">
+            <div class="panel-header dictionary-header">
+              <div>
+                <div class="panel-title" id="middle-chinese-title">中古汉语 · 实验版</div>
+                <div class="panel-subtitle" id="middle-chinese-status">正在加载中古汉语资料…</div>
+              </div>
+            </div>
+            <div class="search-row">
+              <input id="middle-chinese-search" type="search" placeholder="输入汉字，例如：東、中、王…" autocomplete="off" />
+            </div>
+            <div class="search-meta" id="middle-chinese-count"></div>
+          </section>
+
+          <section id="middle-chinese-results" class="cards" aria-live="polite"></section>
+          <div id="middle-chinese-empty" class="empty">输入汉字后显示中古汉语条目、拟音与 nufe 同化发音。</div>
+        </div>
+      </section>
     </main>
 
   </div>
 
   <script>
     const GRAMMAR_DOC_PATH = "grammar/nufe_grammar.md";
+    const MIDDLE_CHINESE_FILES = {
+      characters: "foreign_language/middle_chinese/字表.csv",
+      rhymes: "foreign_language/middle_chinese/小韻表.csv",
+      initials: "foreign_language/middle_chinese/廣韻選音方案-聲.csv",
+      finals: "foreign_language/middle_chinese/廣韻選音方案-韻.csv",
+      simplifiedMap: "foreign_language/middle_chinese/simplified_to_traditional.json"
+    };
     const SOURCE_FILES = [
       { path: "lexicon/main_lexicon.csv", source: "主要词库", description: "核心词汇", enabledByDefault: true },
       { path: "lexicon/special_lexicon.csv", source: "特殊词库", description: "专名与扩展词", enabledByDefault: false },
@@ -2121,7 +2298,48 @@
       note: ["补充", "备注", "附注", "说明"]
     };
 
-    const VIEW_IDS = ["portal", "dictionary", "grammar", "study", "progress"];
+    const VIEW_IDS = ["portal", "dictionary", "grammar", "study", "progress", "middle-chinese"];
+    const MIDDLE_CHINESE_INITIAL_TO_NUFE = {
+      "幫": "p", "滂": "p", "並": "b", "明": "m", "端": "t",
+      "透": "t", "定": "d", "泥": "n", "來": "l", "知": "t",
+      "徹": "t", "澄": "d", "孃": "n", "精": "c", "清": "c",
+      "從": "j", "心": "s", "邪": "z", "莊": "c", "初": "c",
+      "崇": "j", "生": "s", "俟": "z", "章": "c", "昌": "c",
+      "常": "j", "書": "s", "船": "z", "見": "k", "溪": "k",
+      "羣": "g", "疑": "q", "曉": "h", "匣": "r", "影": "",
+      "云": "r", "以": "i", "日": "n"
+    };
+    const MIDDLE_CHINESE_FINAL_TO_NUFE = {
+      "歌": "a", "戈一合": "ua", "戈三開": "ia", "戈三合": "uyia", "寒": "awna",
+      "曷": "ata", "桓": "uawna", "末": "uata", "元開": "iawna", "月開": "iata",
+      "元合": "uyiawna", "月合": "uyiata", "唐開": "awqa", "鐸開": "aka", "唐合": "uawqa",
+      "鐸合": "uaka", "陽開": "iawqa", "藥開": "iaka", "陽合": "uyiawqa", "藥合": "uyiaka",
+      "談": "awma", "盍": "apa", "嚴": "iawma", "業": "iapa", "凡": "uyiawma",
+      "乏": "uyiapa", "夬開": "ayi", "夬合": "uayi", "廢開": "iayi", "廢合": "uyiayi",
+      "豪": "ayu", "麻二開": "a", "麻二合": "ua", "麻三開": "ia", "刪開": "awna",
+      "黠開": "ata", "刪合": "uawna", "黠合": "uata", "庚二開": "awqa", "陌二開": "aka",
+      "庚二合": "uawqa", "陌二合": "uaka", "庚三開": "iawqa", "陌三開": "iaka", "庚三合": "uyiawqa",
+      "陌三合": "uyiaka", "銜": "awma", "狎": "apa", "皆開": "ayi", "皆合": "uayi",
+      "肴": "ayu", "之": "i", "微開": "i", "微合": "ui", "眞開": "iwna",
+      "質開": "ita", "臻": "iwna", "櫛": "ita", "眞合": "uiwna", "質合": "uita",
+      "諄": "uiwna", "術": "uita", "蒸": "iwqa", "職開": "ika", "職合": "uika",
+      "侵": "iwma", "緝": "ipa", "脂開": "ie", "脂合": "uyie", "痕": "ewna",
+      "麧": "eta", "魂": "uewna", "沒": "ueta", "欣": "iewna", "迄": "ieta",
+      "文": "uyiewna", "物": "uyieta", "登開": "ewqa", "德開": "eka", "登合": "uewqa",
+      "德合": "ueka", "覃": "ewma", "合": "epa", "咍": "eyi", "灰": "ueyi",
+      "侯": "eyu", "幽": "ieyu", "魚": "io", "虞": "uyio", "江": "owqa",
+      "覺": "oka", "冬": "uowqa", "沃": "uoka", "鍾": "iowqa", "燭": "ioka",
+      "泰開": "oyi", "泰合": "uoyi", "模": "u", "東一": "uwqa", "屋一": "uka",
+      "東三": "iuwqa", "屋三": "iuka", "尤": "iu", "佳開": "e", "佳合": "ue",
+      "支開": "ie", "支合": "uyie", "山開": "ewna", "鎋開": "eta", "山合": "uewna",
+      "鎋合": "ueta", "仙開": "iewna", "薛開": "ieta", "仙合": "uyiewna", "薛合": "uyieta",
+      "耕開": "ewqa", "麥開": "eka", "耕合": "uewqa", "麥合": "ueka", "清開": "iewqa",
+      "昔開": "ieka", "清合": "uyiewqa", "昔合": "uyieka", "咸": "ewma", "洽": "epa",
+      "鹽": "iewma", "葉": "iepa", "齊開": "eyi", "齊合": "ueyi", "祭開": "ieyi",
+      "祭合": "uyieyi", "先開": "eyiwna", "屑開": "eyita", "先合": "ueyiwna", "屑合": "ueyita",
+      "青開": "eyiwqa", "錫開": "eyika", "青合": "ueyiwqa", "錫合": "ueyika", "添": "eyiwma",
+      "怗": "eyipa", "蕭": "eyu", "宵": "ieyu"
+    };
     const QUESTION_MODES = ["zh-to-word", "word-to-zh"];
     const REVIEW_INTERVALS_MS = [
       8 * 60 * 1000,
@@ -2152,6 +2370,15 @@
       studyMode: "today",
       currentView: "portal",
       progressSourceMode: "enabled",
+      middleChinese: {
+        entries: [],
+        byCharacter: new Map(),
+        rhymeMap: new Map(),
+        initialIpaMap: new Map(),
+        finalIpaMap: new Map(),
+        simplifiedMap: new Map(),
+        ready: false
+      },
       session: null,
       ready: false
     };
@@ -2159,6 +2386,8 @@
     const dom = {
       navButtons: [...document.querySelectorAll("[data-view-target]")],
       views: Object.fromEntries(VIEW_IDS.map(view => [view, document.getElementById(`${view}-view`)])),
+      foreignLanguageMenu: document.getElementById("foreign-language-menu"),
+      foreignLanguageButton: document.getElementById("foreign-language-button"),
       sourceList: document.getElementById("source-list"),
       weakList: document.getElementById("weak-list"),
       weeklyAnswersCount: document.getElementById("weekly-answers-count"),
@@ -2172,7 +2401,6 @@
       statDangerCount: document.getElementById("stat-danger-count"),
       todayBadge: document.getElementById("today-badge"),
       search: document.getElementById("search"),
-      searchRandomButton: document.getElementById("search-random-button"),
       results: document.getElementById("results"),
       status: document.getElementById("status"),
       count: document.getElementById("count"),
@@ -2208,7 +2436,16 @@
       progressStateFilter: document.getElementById("progress-state-filter"),
       progressSourceButtons: [...document.querySelectorAll("[data-progress-source]")],
       wordList: document.getElementById("word-list"),
-      wordEmpty: document.getElementById("word-empty")
+      wordEmpty: document.getElementById("word-empty"),
+      middleChineseSearch: document.getElementById("middle-chinese-search"),
+      middleChineseStatus: document.getElementById("middle-chinese-status"),
+      middleChineseCount: document.getElementById("middle-chinese-count"),
+      middleChineseResults: document.getElementById("middle-chinese-results"),
+      middleChineseEmpty: document.getElementById("middle-chinese-empty"),
+      middleChineseCharCount: document.getElementById("middle-chinese-char-count"),
+      middleChineseUniqueCount: document.getElementById("middle-chinese-unique-count"),
+      middleChineseRhymeCount: document.getElementById("middle-chinese-rhyme-count"),
+      middleChineseRuleCount: document.getElementById("middle-chinese-rule-count")
     };
 
     function parseCSV(text) {
@@ -2309,6 +2546,107 @@
         }
       }
       return items;
+    }
+
+    async function loadCsvObjects(path) {
+      const requestUrl = `${encodeURI(path)}?t=${Date.now()}`;
+      const res = await fetch(requestUrl, { cache: "no-store" });
+      if (!res.ok) throw new Error(`加载失败: ${path}`);
+      const rows = parseCSV(await res.text());
+      const headers = (rows.shift() || []).map(header => header.trim());
+      return rows
+        .filter(row => row.some(cell => String(cell || "").trim()))
+        .map(row => Object.fromEntries(headers.map((header, index) => [header, (row[index] || "").trim()])));
+    }
+
+    async function loadJson(path) {
+      const requestUrl = `${encodeURI(path)}?t=${Date.now()}`;
+      const res = await fetch(requestUrl, { cache: "no-store" });
+      if (!res.ok) throw new Error(`加载失败: ${path}`);
+      return res.json();
+    }
+
+    function normalizeMiddleChineseFinal(finalName) {
+      let value = String(finalName || "").trim();
+      if (!value) return "";
+      value = value.replace(/[AB]/g, "");
+      const aliases = {
+        "眞": "眞開",
+        "質": "質開",
+        "仙": "仙開",
+        "薛": "薛開",
+        "祭": "祭開",
+        "宵": "宵",
+        "侵": "侵",
+        "緝": "緝",
+        "術": "術",
+        "諄": "諄",
+        "清": "清開",
+        "昔": "昔開",
+        "葉": "葉",
+        "鹽": "鹽",
+        "支": "支開",
+        "脂": "脂開"
+      };
+      return aliases[value] || value;
+    }
+
+    function combineMiddleChineseNufe(initialName, finalName) {
+      const initial = MIDDLE_CHINESE_INITIAL_TO_NUFE[initialName];
+      const normalizedFinal = normalizeMiddleChineseFinal(finalName);
+      const final = MIDDLE_CHINESE_FINAL_TO_NUFE[normalizedFinal];
+      if (initial == null || final == null) return "";
+      let body = `${initial}${final}`;
+      if (initial === "i" && final.startsWith("i")) body = final;
+      else if (initial.endsWith("i") && final.startsWith("i")) body = `${initial}${final.slice(1)}`;
+      return body;
+    }
+
+    async function loadMiddleChineseData() {
+      const [characterRows, rhymeRows, initialRows, finalRows, simplifiedMapObject] = await Promise.all([
+        loadCsvObjects(MIDDLE_CHINESE_FILES.characters),
+        loadCsvObjects(MIDDLE_CHINESE_FILES.rhymes),
+        loadCsvObjects(MIDDLE_CHINESE_FILES.initials),
+        loadCsvObjects(MIDDLE_CHINESE_FILES.finals),
+        loadJson(MIDDLE_CHINESE_FILES.simplifiedMap)
+      ]);
+      const rhymeMap = new Map(rhymeRows.map(row => [`${row["次序"]}::${row["小韻"]}`, row]));
+      const initialIpaMap = new Map(initialRows.map(row => [row["聲"], row["IPA"]]));
+      const finalIpaMap = new Map();
+      for (const row of finalRows) {
+        if (row["韻母"]) finalIpaMap.set(row["韻母"], row["IPA"]);
+        if (row["韻母-入声"]) finalIpaMap.set(row["韻母-入声"], row["IPA-入声"]);
+      }
+      const entries = characterRows.map(row => {
+        const rhyme = rhymeMap.get(`${row["小韻次序"]}::${row["小韻"]}`) || null;
+        const nufe = rhyme ? combineMiddleChineseNufe(rhyme["聲母"], rhyme["韻母"]) : "";
+        return {
+          character: row["字"],
+          definition: row["釋"],
+          ipa: row["IPA"],
+          characterOrder: row["字次序"],
+          rhymeOrder: row["小韻次序"],
+          rhymeName: row["小韻"],
+          rhyme,
+          nufe
+        };
+      });
+      const byCharacter = new Map();
+      for (const entry of entries) {
+        if (!byCharacter.has(entry.character)) byCharacter.set(entry.character, []);
+        byCharacter.get(entry.character).push(entry);
+      }
+      state.middleChinese = {
+        entries,
+        byCharacter,
+        rhymeMap,
+        initialIpaMap,
+        finalIpaMap,
+        simplifiedMap: new Map(Object.entries(simplifiedMapObject || {})),
+        ready: true
+      };
+      renderMiddleChineseSummary(rhymeRows.length);
+      filterMiddleChineseEntries();
     }
 
     function tokenize(query) {
@@ -3111,6 +3449,145 @@
       }
     }
 
+    function renderMiddleChineseSummary(rhymeCount = state.middleChinese.rhymeMap.size) {
+      if (!dom.middleChineseCharCount) return;
+      const uniqueCount = state.middleChinese.byCharacter.size;
+      dom.middleChineseCharCount.textContent = String(state.middleChinese.entries.length);
+      dom.middleChineseUniqueCount.textContent = String(uniqueCount);
+      dom.middleChineseRhymeCount.textContent = String(rhymeCount);
+      dom.middleChineseRuleCount.textContent = String(
+        Object.keys(MIDDLE_CHINESE_INITIAL_TO_NUFE).length +
+          Object.keys(MIDDLE_CHINESE_FINAL_TO_NUFE).length
+      );
+    }
+
+    function getMiddleChineseCharacterCandidates(character) {
+      const candidates = [character];
+      const mapped = state.middleChinese.simplifiedMap.get(character) || [];
+      for (const mappedCharacter of mapped) {
+        if (!candidates.includes(mappedCharacter)) candidates.push(mappedCharacter);
+      }
+      return candidates;
+    }
+
+    function getMiddleChineseResultEntries(query) {
+      const raw = query.trim();
+      if (!raw) return [];
+      const seen = new Set();
+      const results = [];
+      for (const character of [...raw].filter(char => !/\s/.test(char))) {
+        for (const candidate of getMiddleChineseCharacterCandidates(character)) {
+          const entries = state.middleChinese.byCharacter.get(candidate) || [];
+          for (const entry of entries) {
+            const key = `${entry.character}::${entry.rhymeOrder}::${entry.characterOrder}`;
+            if (seen.has(key)) continue;
+            seen.add(key);
+            results.push(entry);
+          }
+        }
+      }
+      if (results.length) return results;
+
+      const tokens = tokenize(raw);
+      return state.middleChinese.entries
+        .filter(entry => {
+          const rhyme = entry.rhyme || {};
+          const searchable = [
+            entry.character,
+            entry.rhymeName,
+            entry.ipa,
+            entry.nufe,
+            entry.definition,
+            rhyme["反切"],
+            rhyme["聲母"],
+            rhyme["韻目"],
+            rhyme["韻母"]
+          ].filter(Boolean).join(" ").toLowerCase();
+          return tokens.every(token => searchable.includes(token));
+        })
+        .slice(0, 80);
+    }
+
+    function renderMiddleChineseEntries(entries) {
+      dom.middleChineseResults.innerHTML = "";
+      if (!state.middleChinese.ready) {
+        dom.middleChineseEmpty.classList.remove("hidden");
+        dom.middleChineseEmpty.textContent = "正在加载中古汉语资料…";
+        dom.middleChineseCount.textContent = "";
+        return;
+      }
+      if (!dom.middleChineseSearch.value.trim()) {
+        dom.middleChineseEmpty.classList.remove("hidden");
+        dom.middleChineseEmpty.textContent = "输入汉字后显示中古汉语条目、拟音与 nufe 同化发音。";
+        dom.middleChineseCount.textContent = "";
+        return;
+      }
+      if (!entries.length) {
+        dom.middleChineseEmpty.classList.remove("hidden");
+        dom.middleChineseEmpty.textContent = "暂无匹配结果。";
+        dom.middleChineseCount.textContent = "";
+        return;
+      }
+
+      dom.middleChineseEmpty.classList.add("hidden");
+      const fragment = document.createDocumentFragment();
+      for (const entry of entries.slice(0, 120)) {
+        const rhyme = entry.rhyme || {};
+        const normalizedFinal = normalizeMiddleChineseFinal(rhyme["韻母"]);
+        const initialNufe = MIDDLE_CHINESE_INITIAL_TO_NUFE[rhyme["聲母"]];
+        const finalNufe = MIDDLE_CHINESE_FINAL_TO_NUFE[normalizedFinal];
+        const phonologyClass = [rhyme["聲母"], rhyme["韻母"], rhyme["等"] ? `${rhyme["等"]}等` : "", rhyme["呼"]].filter(Boolean).join(" · ") || "—";
+        const card = document.createElement("article");
+        card.className = "result-card mc-result-card";
+        card.innerHTML = `
+          <div class="result-head">
+            <div class="mc-title-line">
+              <div class="mc-character">${escapeHtml(entry.character)}</div>
+              <div class="mc-title-meta">
+                <h3>${escapeHtml(entry.rhymeName)}小韵</h3>
+                <div>
+                  <span class="word-tag">反切 ${escapeHtml(rhyme["反切"] || "—")}</span>
+                  <span class="word-tag">${escapeHtml(rhyme["聲母"] || "—")}母</span>
+                  <span class="word-tag">${escapeHtml(rhyme["韻目"] || "—")}韵 ${escapeHtml(rhyme["調"] || "—")}声</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mc-reading">
+            <div class="mc-reading-tile">
+              <span class="tiny">音类</span>
+              <strong>${escapeHtml(phonologyClass)}</strong>
+            </div>
+            <div class="mc-reading-tile">
+              <span class="tiny">中古拟音</span>
+              <strong>${escapeHtml(entry.ipa || rhyme["IPA"] || "—")}</strong>
+            </div>
+            <div class="mc-reading-tile">
+              <span class="tiny">nufe 同化</span>
+              <strong>${escapeHtml(entry.nufe || "待补映射")}</strong>
+            </div>
+          </div>
+          <div class="result-meta">
+            ${entry.definition ? `
+              <div class="field">
+                <span>释义</span>
+                <div class="mc-definition">${escapeHtml(entry.definition)}</div>
+              </div>
+            ` : ""}
+          </div>
+        `;
+        fragment.appendChild(card);
+      }
+      dom.middleChineseResults.appendChild(fragment);
+      dom.middleChineseCount.textContent = `共 ${entries.length} 条结果${entries.length > 120 ? "，已显示前 120 条" : ""}`;
+    }
+
+    function filterMiddleChineseEntries() {
+      if (!dom.middleChineseSearch) return;
+      const entries = getMiddleChineseResultEntries(dom.middleChineseSearch.value);
+      renderMiddleChineseEntries(entries);
+    }
+
     function renderDictionary(items) {
       dom.results.innerHTML = "";
       if (!items.length) {
@@ -3855,9 +4332,14 @@
       for (const button of dom.navButtons) {
         button.classList.toggle("active", button.getAttribute("data-view-target") === viewName);
       }
+      dom.foreignLanguageMenu?.classList.remove("open");
+      dom.foreignLanguageButton?.setAttribute("aria-expanded", "false");
+      dom.foreignLanguageButton?.classList.toggle("active", viewName === "middle-chinese");
       scrollPageToTop();
       if (viewName === "dictionary") {
         dom.search.focus({ preventScroll: true });
+      } else if (viewName === "middle-chinese") {
+        dom.middleChineseSearch.focus({ preventScroll: true });
       }
     }
 
@@ -3878,6 +4360,7 @@
     function refreshAllViews() {
       renderPortal();
       filterDictionaryItems();
+      filterMiddleChineseEntries();
       renderProgressView();
       renderStudyHeadline();
       updateStudyModeButtons();
@@ -3889,6 +4372,18 @@
 
       dom.navButtons.forEach(button => {
         button.addEventListener("click", () => switchView(button.getAttribute("data-view-target")));
+      });
+
+      dom.foreignLanguageButton.addEventListener("click", event => {
+        event.stopPropagation();
+        const isOpen = dom.foreignLanguageMenu.classList.toggle("open");
+        dom.foreignLanguageButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      document.addEventListener("click", event => {
+        if (dom.foreignLanguageMenu.contains(event.target)) return;
+        dom.foreignLanguageMenu.classList.remove("open");
+        dom.foreignLanguageButton.setAttribute("aria-expanded", "false");
       });
 
       dom.clearProgressButton.addEventListener("click", async () => {
@@ -3942,11 +4437,8 @@
         }
       });
 
-      dom.searchRandomButton.addEventListener("click", () => {
-        dom.search.value = "";
-        filterDictionaryItems();
-      });
       dom.search.addEventListener("input", filterDictionaryItems);
+      dom.middleChineseSearch.addEventListener("input", filterMiddleChineseEntries);
       dom.studyStartButton.addEventListener("click", () => {
         if (state.session) {
           finishSession();
@@ -3987,12 +4479,24 @@
     async function initialize() {
       bindEvents();
       renderStudyIdle();
+      renderMiddleChineseSummary(0);
+      renderMiddleChineseEntries([]);
       dom.status.textContent = "正在加载词库…";
+      dom.middleChineseStatus.textContent = "正在加载中古汉语资料…";
       dom.grammarStatus.textContent = "正在加载语法文档…";
       dom.grammarStatus.classList.remove("hidden");
 
       try {
-        const [items, savedSettings] = await Promise.all([loadAllWords(), loadSettings()]);
+        const [items, savedSettings, middleChineseLoaded] = await Promise.all([
+          loadAllWords(),
+          loadSettings(),
+          loadMiddleChineseData().then(() => true).catch(error => {
+            console.error(error);
+            dom.middleChineseStatus.textContent = "中古汉语资料加载失败，请确认 CSV 路径。";
+            dom.middleChineseEmpty.textContent = "无法读取 foreign_language/middle_chinese 下的资料。";
+            return false;
+          })
+        ]);
         state.items = items;
         if (savedSettings) {
           state.settings = {
@@ -4006,6 +4510,9 @@
         await loadProgressMap();
         state.ready = true;
         dom.status.textContent = `词库已加载：${items.length} 条`;
+        if (middleChineseLoaded) {
+          dom.middleChineseStatus.textContent = `《广韵》已加载。字表条目 ${state.middleChinese.entries.length} 条，不同汉字 ${state.middleChinese.byCharacter.size} 个，小韵 ${state.middleChinese.rhymeMap.size} 个。`;
+        }
         refreshAllViews();
       } catch (error) {
         dom.status.textContent = "词库加载失败，请确认 CSV 路径和浏览器环境。";
