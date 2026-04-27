@@ -132,9 +132,9 @@
     }
 
     .nav-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
+      position: fixed;
+      top: var(--nav-menu-top, 72px);
+      left: var(--nav-menu-left, 18px);
       width: 168px;
       padding: 8px;
       border-radius: 16px;
@@ -142,10 +142,11 @@
       border: 1px solid var(--line);
       box-shadow: 0 18px 42px rgba(19, 32, 24, 0.14);
       display: none;
-      z-index: 40;
+      z-index: 80;
     }
 
-    .nav-group.open .nav-menu {
+    .nav-group.open .nav-menu,
+    .nav-menu.open {
       display: grid;
       gap: 4px;
     }
@@ -155,10 +156,14 @@
       text-align: left;
       border-radius: 12px;
       padding: 10px 12px;
+      background: transparent;
+      color: var(--muted);
     }
 
     .nav button.active,
-    .nav button:hover {
+    .nav button:hover,
+    .nav-menu button:hover,
+    .nav-menu button:focus-visible {
       background: var(--accent-soft);
       color: var(--accent-strong);
       transform: translateY(-1px);
@@ -1678,13 +1683,6 @@
         padding: 11px 14px;
       }
 
-      .nav-menu {
-        position: fixed;
-        top: 86px;
-        right: 26px;
-        left: auto;
-      }
-
       .hero-card,
       .panel,
       .search-panel,
@@ -2388,6 +2386,7 @@
       views: Object.fromEntries(VIEW_IDS.map(view => [view, document.getElementById(`${view}-view`)])),
       foreignLanguageMenu: document.getElementById("foreign-language-menu"),
       foreignLanguageButton: document.getElementById("foreign-language-button"),
+      foreignLanguagePanel: document.querySelector("#foreign-language-menu .nav-menu"),
       sourceList: document.getElementById("source-list"),
       weakList: document.getElementById("weak-list"),
       weeklyAnswersCount: document.getElementById("weekly-answers-count"),
@@ -4332,8 +4331,7 @@
       for (const button of dom.navButtons) {
         button.classList.toggle("active", button.getAttribute("data-view-target") === viewName);
       }
-      dom.foreignLanguageMenu?.classList.remove("open");
-      dom.foreignLanguageButton?.setAttribute("aria-expanded", "false");
+      closeForeignLanguageMenu();
       dom.foreignLanguageButton?.classList.toggle("active", viewName === "middle-chinese");
       scrollPageToTop();
       if (viewName === "dictionary") {
@@ -4341,6 +4339,34 @@
       } else if (viewName === "middle-chinese") {
         dom.middleChineseSearch.focus({ preventScroll: true });
       }
+    }
+
+    function closeForeignLanguageMenu() {
+      dom.foreignLanguageMenu?.classList.remove("open");
+      dom.foreignLanguagePanel?.classList.remove("open");
+      dom.foreignLanguageButton?.setAttribute("aria-expanded", "false");
+    }
+
+    function positionForeignLanguageMenu() {
+      if (!dom.foreignLanguageButton || !dom.foreignLanguagePanel) return;
+      const buttonRect = dom.foreignLanguageButton.getBoundingClientRect();
+      const panelWidth = dom.foreignLanguagePanel.offsetWidth || 168;
+      const gutter = 12;
+      const left = Math.min(
+        Math.max(gutter, buttonRect.right - panelWidth),
+        window.innerWidth - panelWidth - gutter
+      );
+      const top = buttonRect.bottom + 8;
+      dom.foreignLanguagePanel.style.setProperty("--nav-menu-left", `${left}px`);
+      dom.foreignLanguagePanel.style.setProperty("--nav-menu-top", `${top}px`);
+    }
+
+    function toggleForeignLanguageMenu() {
+      positionForeignLanguageMenu();
+      const isOpen = !dom.foreignLanguagePanel.classList.contains("open");
+      dom.foreignLanguageMenu.classList.toggle("open", isOpen);
+      dom.foreignLanguagePanel.classList.toggle("open", isOpen);
+      dom.foreignLanguageButton.setAttribute("aria-expanded", String(isOpen));
     }
 
     function updateStudyModeButtons() {
@@ -4374,17 +4400,22 @@
         button.addEventListener("click", () => switchView(button.getAttribute("data-view-target")));
       });
 
+      if (dom.foreignLanguagePanel?.parentElement !== document.body) {
+        document.body.appendChild(dom.foreignLanguagePanel);
+      }
+
       dom.foreignLanguageButton.addEventListener("click", event => {
         event.stopPropagation();
-        const isOpen = dom.foreignLanguageMenu.classList.toggle("open");
-        dom.foreignLanguageButton.setAttribute("aria-expanded", String(isOpen));
+        toggleForeignLanguageMenu();
       });
 
       document.addEventListener("click", event => {
-        if (dom.foreignLanguageMenu.contains(event.target)) return;
-        dom.foreignLanguageMenu.classList.remove("open");
-        dom.foreignLanguageButton.setAttribute("aria-expanded", "false");
+        if (dom.foreignLanguageMenu.contains(event.target) || dom.foreignLanguagePanel?.contains(event.target)) return;
+        closeForeignLanguageMenu();
       });
+
+      window.addEventListener("resize", positionForeignLanguageMenu);
+      window.addEventListener("scroll", positionForeignLanguageMenu, true);
 
       dom.clearProgressButton.addEventListener("click", async () => {
         const confirmed = window.confirm("确认清空全部学习情况吗？这会删除当前的学习进度、作答历史和复习安排。");
