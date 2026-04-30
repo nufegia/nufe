@@ -2279,7 +2279,7 @@
       rhymes: "foreign_language/middle_chinese/小韻表.csv",
       initials: "foreign_language/middle_chinese/廣韻選音方案-聲.csv",
       finals: "foreign_language/middle_chinese/廣韻選音方案-韻.csv",
-      simplifiedMap: "foreign_language/middle_chinese/simplified_to_traditional.json"
+      characterAliases: "foreign_language/middle_chinese/character_search_aliases.json"
     };
     const SOURCE_FILES = [
       { path: "lexicon/main_lexicon.csv", source: "主要词库", description: "核心词汇", enabledByDefault: true },
@@ -2374,7 +2374,7 @@
         rhymeMap: new Map(),
         initialIpaMap: new Map(),
         finalIpaMap: new Map(),
-        simplifiedMap: new Map(),
+        characterAliases: new Map(),
         ready: false
       },
       session: null,
@@ -2602,12 +2602,12 @@
     }
 
     async function loadMiddleChineseData() {
-      const [characterRows, rhymeRows, initialRows, finalRows, simplifiedMapObject] = await Promise.all([
+      const [characterRows, rhymeRows, initialRows, finalRows, characterAliasObject] = await Promise.all([
         loadCsvObjects(MIDDLE_CHINESE_FILES.characters),
         loadCsvObjects(MIDDLE_CHINESE_FILES.rhymes),
         loadCsvObjects(MIDDLE_CHINESE_FILES.initials),
         loadCsvObjects(MIDDLE_CHINESE_FILES.finals),
-        loadJson(MIDDLE_CHINESE_FILES.simplifiedMap)
+        loadJson(MIDDLE_CHINESE_FILES.characterAliases)
       ]);
       const rhymeMap = new Map(rhymeRows.map(row => [`${row["次序"]}::${row["小韻"]}`, row]));
       const initialIpaMap = new Map(initialRows.map(row => [row["聲"], row["IPA"]]));
@@ -2641,7 +2641,7 @@
         rhymeMap,
         initialIpaMap,
         finalIpaMap,
-        simplifiedMap: new Map(Object.entries(simplifiedMapObject || {})),
+        characterAliases: new Map(Object.entries(characterAliasObject || {})),
         ready: true
       };
       renderMiddleChineseSummary(rhymeRows.length);
@@ -3462,19 +3462,26 @@
 
     function getMiddleChineseCharacterCandidates(character) {
       const candidates = [character];
-      const mapped = state.middleChinese.simplifiedMap.get(character) || [];
-      for (const mappedCharacter of mapped) {
+      const aliases = state.middleChinese.characterAliases.get(character) || [];
+      for (const mappedCharacter of aliases) {
         if (!candidates.includes(mappedCharacter)) candidates.push(mappedCharacter);
       }
       return candidates;
     }
 
+    function isCjkIdeograph(character) {
+      return /\p{Script=Han}/u.test(character);
+    }
+
     function getMiddleChineseResultEntries(query) {
       const raw = query.trim();
       if (!raw) return [];
+      const queryCharacters = [...raw].filter(char => !/\s/.test(char));
+      const hasCjkQuery = queryCharacters.some(isCjkIdeograph);
       const seen = new Set();
       const results = [];
-      for (const character of [...raw].filter(char => !/\s/.test(char))) {
+      for (const character of queryCharacters) {
+        if (hasCjkQuery && !isCjkIdeograph(character)) continue;
         for (const candidate of getMiddleChineseCharacterCandidates(character)) {
           const entries = state.middleChinese.byCharacter.get(candidate) || [];
           for (const entry of entries) {
@@ -3485,7 +3492,7 @@
           }
         }
       }
-      if (results.length) return results;
+      if (results.length || hasCjkQuery) return results;
 
       const tokens = tokenize(raw);
       return state.middleChinese.entries
