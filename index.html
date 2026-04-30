@@ -949,6 +949,27 @@
       width: fit-content;
     }
 
+    .alias-tag {
+      background: #fff0d6;
+      color: #8a4a04;
+      border: 1px solid rgba(184, 101, 16, 0.28);
+    }
+
+    .conversion-detail {
+      display: grid;
+      gap: 5px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 980px;
+    }
+
+    .conversion-detail div {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
     .field {
       display: grid;
       grid-template-columns: 40px minmax(0, 1fr);
@@ -2256,6 +2277,11 @@
               <div>
                 <div class="panel-title" id="middle-chinese-title">中古汉语</div>
                 <div class="panel-subtitle" id="middle-chinese-status">正在加载中古汉语资料…</div>
+                <div class="conversion-detail" aria-label="现代汉字到广韵字表的检索转换规则">
+                  <div>转换表不是普通繁简表，而是“现代检索字 → 《广韵》字表可查字”的别名索引。</div>
+                  <div>落点顺序：本字直查；规范繁简、异体、古今字；语法功能锚点；有文献或方言读音依据的锚点；最后才用现代形声字的声旁。</div>
+                  <div>不使用普通话自动同音。只保留能解释来源的候选；只剩泛部首时不出结果。例：她→他、们→門、怎→枕、搞→攪、卡→揢（关卡）/渴（卡片 card 音译）、甩→脫/率、拽→抴/曵。</div>
+                </div>
               </div>
             </div>
             <div class="search-row">
@@ -3488,7 +3514,11 @@
             const key = `${entry.character}::${entry.rhymeOrder}::${entry.characterOrder}`;
             if (seen.has(key)) continue;
             seen.add(key);
-            results.push(entry);
+            results.push({
+              ...entry,
+              queryCharacter: character,
+              matchedCharacter: candidate
+            });
           }
         }
       }
@@ -3543,6 +3573,9 @@
         const initialNufe = MIDDLE_CHINESE_INITIAL_TO_NUFE[rhyme["聲母"]];
         const finalNufe = MIDDLE_CHINESE_FINAL_TO_NUFE[normalizedFinal];
         const phonologyClass = [rhyme["聲母"], rhyme["韻母"], rhyme["等"] ? `${rhyme["等"]}等` : "", rhyme["呼"]].filter(Boolean).join(" · ") || "—";
+        const aliasTag = entry.queryCharacter && entry.queryCharacter !== entry.character
+          ? `<span class="word-tag alias-tag" title="由 ${escapeHtml(entry.queryCharacter)} 检索到 ${escapeHtml(entry.character)}">${escapeHtml(entry.queryCharacter)}</span>`
+          : "";
         const card = document.createElement("article");
         card.className = "result-card mc-result-card";
         card.innerHTML = `
@@ -3552,6 +3585,7 @@
               <div class="mc-title-meta">
                 <h3>${escapeHtml(entry.rhymeName)}小韵</h3>
                 <div>
+                  ${aliasTag}
                   <span class="word-tag">反切 ${escapeHtml(rhyme["反切"] || "—")}</span>
                   <span class="word-tag">${escapeHtml(rhyme["聲母"] || "—")}母</span>
                   <span class="word-tag">${escapeHtml(rhyme["韻目"] || "—")}韵 ${escapeHtml(rhyme["調"] || "—")}声</span>
@@ -4549,7 +4583,7 @@
         state.ready = true;
         dom.status.textContent = `词库已加载：${items.length} 条`;
         if (middleChineseLoaded) {
-          dom.middleChineseStatus.textContent = `《广韵》已加载。字表条目 ${state.middleChinese.entries.length} 条，不同汉字 ${state.middleChinese.byCharacter.size} 个，小韵 ${state.middleChinese.rhymeMap.size} 个。`;
+          dom.middleChineseStatus.textContent = `《广韵》已加载。字表条目 ${state.middleChinese.entries.length} 条，不同汉字 ${state.middleChinese.byCharacter.size} 个，小韵 ${state.middleChinese.rhymeMap.size} 个。现代常用字可靠覆盖 6500 个。`;
         }
         refreshAllViews();
       } catch (error) {
