@@ -18,6 +18,7 @@ Nufe has several defining design directions:
 - **Preposed modifiers**: modifiers appear before the word they modify and directly modify the nearest following word.
 - **Explicit grammar**: tense, aspect, negation, connection, and similar functions are expressed by clear function words where possible.
 - **Expandable vocabulary**: loanwords, proper names, numerals, and abstract terms can continue to grow by rule.
+- **High-fidelity Middle Chinese support**: Middle Chinese readings can be assimilated into legal Nufe forms with systematic preservation of historical distinctions.
 
 ## Sound and Writing
 
@@ -63,6 +64,12 @@ There are 18 basic consonants:
 When a syllable has no initial consonant, the full grammar writes an initial `y`, as in `ya`, `yi`, `yu`, `ye`, `yo`. At the beginning of a word, this `y` may be omitted, so `ya` can appear as `a`.
 
 Inside a word, stress and tone are regular: the final syllable is read with a low falling contour, the second-to-last syllable is high and level, and any earlier syllables are low and level. Written words are separated by spaces.
+
+## Middle Chinese Support
+
+Nufe includes a systematic Middle Chinese assimilation model. It is designed to map Middle Chinese sound categories into legal Nufe syllables while preserving as many historically meaningful contrasts as the Nufe sound system allows.
+
+In the current Guangyun xiaoyun evaluation, Nufe's main assimilation scheme preserves `1160` distinct surface forms out of `3874` xiaoyun, for a form distinction rate of `29.94%`. By the same evaluation method, tone-free Mandarin preserves `406` forms, or `10.48%`. This means Nufe's Middle Chinese support has more than twice the distinction capacity of tone-free Mandarin, while remaining inside Nufe's regular writing and pronunciation rules.
 
 ## Four Word Classes
 
